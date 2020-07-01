@@ -13,6 +13,8 @@ script = ExtResource( 2 )
 [node name="Area2D" type="Area2D" parent="." groups=[
 "Enemy",
 ]]
+collision_layer = 8
+collision_mask = 5
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
 texture = ExtResource( 1 )

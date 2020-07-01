@@ -35,29 +35,35 @@ func tower_built(tower_name):
 	
 	match tower_name:
 		"TurretTower1":
-			Global.cash -= 50
+			add_cash(-50)
 	
 	get_tree().call_group("HUD", "sync_cash_label")
 
 
 func buy_button_1():
-	if !building and Global.cash >= 50:
+	if !building:
 		building = true
 		instance = turret_tower_1.instance()
 		add_child(instance)
 
 
+func show_hide_towerbases(is_visible):
+	$TowerBases.visible = is_visible
+
+
 func start_wave():
 	wave_started = true
+	show_hide_towerbases(false)
 	get_tree().call_group("Spawner", "start_wave")
 
 
 func advance_wave():
 	if wave_started:
 		end_wave()
+		show_hide_towerbases(true)
 		Global.wave += 1
 		get_tree().call_group("HUD", "sync_wave_label")
-		get_tree().call_group("HUD", "panel_fade_in")
+		get_tree().call_group("Enemy", "setup_stats")
 
 
 func end_wave():

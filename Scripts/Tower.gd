@@ -1,10 +1,12 @@
 extends Area2D
 
-# BUILDING CODE
+# BUILDING VARS
 
 var building = true
+var selected = false
 var colliding = false
 var can_build = false
+var can_select = false
 
 var tilemap
 var cell_size
@@ -12,9 +14,7 @@ var cell_position
 var cell_id
 var current_tile
 
-# SHOOTING CODE
-
-const RADIUS = 300
+# SHOOTING VARS
 
 var enemy_array = []
 var current_target = null
@@ -24,11 +24,12 @@ var distance_to_target
 var instance
 var projectile = load("res://Scenes/Projectiles/Projectile1.tscn") 
 var shooting = false
-var fire_range = 300
+var fire_range
 
 
 func _ready():
 	add_to_group("Tower")
+	fire_range = $AggroRange/CollisionShape2D.get_shape().radius
 	tilemap = get_parent().get_node("TowerBases")
 	cell_size = tilemap.cell_size
 
@@ -52,7 +53,6 @@ func _physics_process(delta: float):
 				$TurretTowerGun.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
 		if !current_target:
-			distance_to_target = RADIUS + 1
 			current_target = choose_target()
 			
 			if current_target:
@@ -65,8 +65,19 @@ func _physics_process(delta: float):
 				$TurretTowerGun.rotation = (target_position - position).angle() - deg2rad(-90)
 
 
+func _input(event):
+	if event is InputEventMouseButton:
+		if event.button_index == BUTTON_LEFT and event.is_pressed():
+			if can_select and !building:
+				selected = true
+				$CanvasLayer/UpgradesPopup.rect_position.x = get_position().x
+				$CanvasLayer/UpgradesPopup.rect_position.y = get_position().y
+				get_tree().call_group("Upgrades", "_setup_vars")
+				$CanvasLayer/UpgradesPopup.show()
+
+
 func choose_target():
-	var pos = get_global_position()
+	var pos = get_global_transform().origin
 	for enemy in get_tree().get_nodes_in_group("Enemy"):
 		if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
 			if (current_target == null or enemy.get_global_transform().origin.x > 
@@ -120,4 +131,12 @@ func _on_TurretTower1_area_entered(area: Area2D):
 func _on_TurretTower1_area_exited(area: Area2D):
 	if area.is_in_group("Tower"):
 		colliding = false
+
+
+func _on_TurretTower1_mouse_entered():
+	can_select = true
+
+
+func _on_TurretTower1_mouse_exited():
+	can_select = false
 

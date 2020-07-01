@@ -7,10 +7,12 @@ var creeps_spawned : int = 0
 var creeps_alive : int = 0
 var creeps_max : int
 var creeps_per_wave = [10, 15, 20, 25, 30, 40]
+var creeps_wait_time_per_wave = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5]
 
 
 func _ready():
 	add_to_group("Spawner")
+	creep_spawn_time()
 
 
 func start_wave():
@@ -19,6 +21,7 @@ func start_wave():
 
 func _on_WaveTimer_timeout():
 	creeps_max = creeps_per_wave[Global.wave]
+	creep_spawn_time()
 	$CreepTimer.start()
 	$WaveTimer.stop()
 
@@ -28,6 +31,10 @@ func _on_CreepTimer_timeout():
 		creep_spawn()
 	else:
 		$CreepTimer.stop()
+
+
+func creep_spawn_time():
+	$CreepTimer.wait_time = creeps_wait_time_per_wave[Global.wave]
 
 
 func creep_spawn():

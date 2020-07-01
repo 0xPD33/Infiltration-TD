@@ -1,0 +1,89 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/UpgradesPopup.gd" type="Script" id=1]
+
+[node name="UpgradesPopup" type="Popup"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -640.0
+margin_top = -360.0
+margin_right = -640.0
+margin_bottom = -360.0
+mouse_filter = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -64.0
+margin_right = 128.0
+margin_bottom = 64.0
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatsContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 249.0
+margin_bottom = 121.0
+
+[node name="TowerStats" type="Label" parent="PanelContainer/StatsContainer"]
+margin_right = 242.0
+margin_bottom = 14.0
+text = "Tower Stats"
+align = 1
+valign = 1
+
+[node name="FireRateContainer" type="HBoxContainer" parent="PanelContainer/StatsContainer"]
+margin_top = 18.0
+margin_right = 242.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="FireRateDesc" type="Label" parent="PanelContainer/StatsContainer/FireRateContainer"]
+margin_left = 12.0
+margin_top = 3.0
+margin_right = 206.0
+margin_bottom = 17.0
+text = "Fire Rate: 1 projectiles/s (Lv.1)"
+
+[node name="UpgradeButton" type="Button" parent="PanelContainer/StatsContainer/FireRateContainer"]
+margin_left = 210.0
+margin_right = 230.0
+margin_bottom = 20.0
+hint_tooltip = "1 projectiles/s >>> 0.75 projectiles/s"
+focus_mode = 1
+mouse_filter = 1
+enabled_focus_mode = 1
+text = "+"
+
+[node name="ButtonContainer" type="VBoxContainer" parent="PanelContainer"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 249.0
+margin_bottom = 121.0
+alignment = 2
+
+[node name="CloseButton" type="Button" parent="PanelContainer/ButtonContainer"]
+margin_left = 97.0
+margin_top = 94.0
+margin_right = 144.0
+margin_bottom = 114.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Close"
+[connection signal="pressed" from="PanelContainer/StatsContainer/FireRateContainer/UpgradeButton" to="." method="_on_UpgradeButton_pressed"]
+[connection signal="pressed" from="PanelContainer/ButtonContainer/CloseButton" to="." method="_on_CloseButton_pressed"]

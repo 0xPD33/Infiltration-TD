@@ -1,0 +1,56 @@
+extends Node2D
+
+var fire_rate_value = 0
+var fire_rate_lvl = 0
+
+var fire_range_value = 0 
+var fire_range_lvl = 0
+
+var upgrade_cost
+
+var upgrades = {"tower_upgrades":
+	{
+	"fire_rate": 
+		{
+			"levels": [1, 2, 3, 4, 5, 6],
+			"rate_of_fire": [0.175, 0.15, 0.125, 0.1, 0.075, 0.05],
+			"cost": [10, 25, 50, 80, 125]
+		},
+	"fire_range":
+		{
+			"levels": [1, 2, 3, 4, 5, 6],
+			"range_of_fire": [275, 300, 325, 350, 400, 500],
+			"cost": [25, 75, 125, 200, 300]
+		}	
+	}
+}
+
+onready var UpgradesPopup = get_parent().get_node("CanvasLayer/UpgradesPopup")
+
+
+func _ready():
+	add_to_group("Upgrades")
+
+
+func _setup_vars():
+	fire_rate_value = upgrades["tower_upgrades"]["fire_rate"]["rate_of_fire"][0]
+	fire_rate_lvl = upgrades["tower_upgrades"]["fire_rate"]["levels"][0]
+	fire_range_value = upgrades["tower_upgrades"]["fire_range"]["range_of_fire"][0]
+	fire_range_lvl = upgrades["tower_upgrades"]["fire_range"]["levels"][0]
+	
+	UpgradesPopup.set_values(fire_rate_value, fire_rate_lvl,
+							 fire_range_value, fire_range_lvl)
+
+
+func fire_rate_level_up():
+	upgrade_cost = upgrades["tower_upgrades"]["fire_rate"]["cost"][fire_rate_lvl]
+	
+	if fire_rate_lvl <= upgrades["tower_upgrades"]["fire_rate"]["levels"].size():
+		if Global.cash > upgrade_cost:
+			fire_rate_lvl += 1 
+			fire_rate_value += 1
+			get_tree().call_group("Game", "add_cash", -upgrade_cost)
+			
+			UpgradesPopup.set_values(fire_rate_value, fire_rate_lvl,
+									 fire_range_value, fire_range_lvl)
+
