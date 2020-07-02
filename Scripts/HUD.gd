@@ -10,7 +10,7 @@ func _ready():
 
 
 func setup_tooltips():
-	$NinePatchRect/BuyPanel/BuyButton1.set_tooltip("Buy Single Turret Tower. Cost: 50")
+	$BuyRect/BuyPanel/BuyButton1.set_tooltip("Buy Single Turret Tower. Cost: 50")
 
 
 func sync_lives_label():
@@ -23,6 +23,14 @@ func sync_wave_label():
 
 func sync_cash_label():
 	$HBoxContainer/CashLabel.text = "Cash: " + str(Global.cash)
+
+
+func show_upgrades():
+	$BuyRect/UpgradeRect.visible = true
+
+
+func hide_upgrades():
+	$BuyRect/UpgradeRect.visible = false
 
 
 func _on_BuyButton1_pressed():

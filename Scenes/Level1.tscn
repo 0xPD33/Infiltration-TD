@@ -91,6 +91,8 @@ collision_mask = 5
 format = 1
 tile_data = PoolIntArray( 262148, 0, 0, 262150, 0, 0, 262152, 0, 0, 262154, 0, 0, 262156, 0, 0, 262158, 0, 0, 393220, 0, 0, 524292, 0, 0, 655364, 0, 0 )
 
+[node name="Towers" type="Node2D" parent="."]
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -32.2161, -33.1793 )
 curve = SubResource( 3 )

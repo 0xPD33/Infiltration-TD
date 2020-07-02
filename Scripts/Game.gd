@@ -1,6 +1,7 @@
 extends Node2D
 
 var turret_tower_1 = load("res://Scenes/Towers/TurretTower1.tscn")
+var towers = []
 var instance
 
 var building = false
@@ -30,10 +31,10 @@ func lose_live():
 		end_game()
 
 
-func tower_built(tower_name):
+func tower_built(tower):
 	building = false
 	
-	match tower_name:
+	match tower:
 		"TurretTower1":
 			add_cash(-50)
 	
@@ -44,7 +45,7 @@ func buy_button_1():
 	if !building:
 		building = true
 		instance = turret_tower_1.instance()
-		add_child(instance)
+		get_node("Towers").add_child(instance)
 
 
 func show_hide_towerbases(is_visible):
@@ -53,14 +54,12 @@ func show_hide_towerbases(is_visible):
 
 func start_wave():
 	wave_started = true
-	show_hide_towerbases(false)
 	get_tree().call_group("Spawner", "start_wave")
 
 
 func advance_wave():
 	if wave_started:
 		end_wave()
-		show_hide_towerbases(true)
 		Global.wave += 1
 		get_tree().call_group("HUD", "sync_wave_label")
 		get_tree().call_group("Enemy", "setup_stats")

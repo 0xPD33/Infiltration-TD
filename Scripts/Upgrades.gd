@@ -1,12 +1,13 @@
 extends Node2D
 
-var fire_rate_value = 0
-var fire_rate_lvl = 0
+var fire_rate_value : float = 0
+var fire_rate_lvl : int = 0
 
-var fire_range_value = 0 
-var fire_range_lvl = 0
+var fire_range_value : int = 0 
+var fire_range_lvl : int = 0
 
-var upgrade_cost
+var fire_rate_upgrade_cost : int = 0
+var fire_range_upgrade_cost : int = 0
 
 var upgrades = {"tower_upgrades":
 	{
@@ -25,32 +26,26 @@ var upgrades = {"tower_upgrades":
 	}
 }
 
-onready var UpgradesPopup = get_parent().get_node("CanvasLayer/UpgradesPopup")
 
-
-func _ready():
-	add_to_group("Upgrades")
-
-
-func _setup_vars():
+func setup_vars():
 	fire_rate_value = upgrades["tower_upgrades"]["fire_rate"]["rate_of_fire"][0]
 	fire_rate_lvl = upgrades["tower_upgrades"]["fire_rate"]["levels"][0]
+	fire_rate_upgrade_cost = upgrades["tower_upgrades"]["fire_rate"]["cost"][fire_rate_lvl]
 	fire_range_value = upgrades["tower_upgrades"]["fire_range"]["range_of_fire"][0]
 	fire_range_lvl = upgrades["tower_upgrades"]["fire_range"]["levels"][0]
-	
-	UpgradesPopup.set_values(fire_rate_value, fire_rate_lvl,
-							 fire_range_value, fire_range_lvl)
+	fire_range_upgrade_cost = upgrades["tower_upgrades"]["fire_range"]["cost"][fire_rate_lvl]
 
 
 func fire_rate_level_up():
-	upgrade_cost = upgrades["tower_upgrades"]["fire_rate"]["cost"][fire_rate_lvl]
-	
 	if fire_rate_lvl <= upgrades["tower_upgrades"]["fire_rate"]["levels"].size():
-		if Global.cash > upgrade_cost:
-			fire_rate_lvl += 1 
-			fire_rate_value += 1
-			get_tree().call_group("Game", "add_cash", -upgrade_cost)
-			
-			UpgradesPopup.set_values(fire_rate_value, fire_rate_lvl,
-									 fire_range_value, fire_range_lvl)
+		fire_rate_lvl += 1 
+		fire_rate_value = fire_rate_lvl
+		get_tree().call_group("Game", "add_cash", -fire_rate_upgrade_cost)
+
+
+func fire_range_level_up():
+	if fire_range_lvl <= upgrades["tower_upgrades"]["fire_range"]["levels"].size():
+		fire_range_lvl += 1 
+		fire_range_value = fire_range_lvl
+		get_tree().call_group("Game", "add_cash", -fire_range_upgrade_cost)
 
