@@ -45,6 +45,7 @@ func buy_button_1():
 	if !building:
 		building = true
 		instance = turret_tower_1.instance()
+		instance
 		get_node("Towers").add_child(instance)
 
 

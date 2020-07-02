@@ -8,6 +8,7 @@ var colliding = false
 var can_build = false
 var can_select = false
 
+var tower_space
 var tilemap
 var cell_size
 var cell_position
@@ -28,12 +29,12 @@ var shooting = false
 var fire_rate
 var fire_range
 
-var aggro_circle = load("res://Scenes/Towers/AggroCircle.tscn")
+onready var range_circle = $TurretRange
 
 
 func _ready():
 	add_to_group("Tower")
-	fire_range = $AggroRange/CollisionShape2D.get_shape().radius
+	set_stats()
 	tilemap = get_parent().get_parent().get_node("TowerBases")
 	cell_size = tilemap.cell_size
 
@@ -72,52 +73,22 @@ func _physics_process(delta: float):
 			select_tower()
 
 
+func set_stats():
+	fire_rate = Upgrades.fire_rate_value
+	$AggroRange/CollisionShape2D.get_shape().radius = Upgrades.fire_range_value
+	fire_range = $AggroRange/CollisionShape2D.get_shape().radius
+
+
 func select_tower():
 	if can_select and !selected:
 		selected = true
-		create_range_circle(fire_range)
+		Upgrades.set_current_tower(self)
+		show_range_circle(fire_range)
 		get_tree().call_group("HUD", "show_upgrades")
 	elif !can_select and selected:
 		selected = false
 		hide_range_circle()
 		get_tree().call_group("HUD", "hide_upgrades")
-
-
-#func _input(event):
-#	if event is InputEventMouseButton:
-#		if event.button_index == BUTTON_LEFT && event.pressed and event.button_index == BUTTON_LEFT and !building:
-#			if can_select:
-#				selected = true
-#				create_range_circle(fire_range)
-#				get_tree().call_group("HUD", "show_upgrades")
-#			else:
-#				selected = false
-#				hide_range_circle()
-#				get_tree().call_group("HUD", "hide_upgrades")
-
-
-#func _input_event(viewport: Object, event: InputEvent, shape_idx: int):
-#	if Input.is_action_just_pressed("left_click") and !building:
-#		if can_select:
-#			selected = true
-#			create_range_circle(fire_range)
-#			get_tree().call_group("HUD", "show_upgrades")
-#		elif !can_select:
-#			selected = false
-#			hide_range_circle()
-#			get_tree().call_group("HUD", "hide_upgrades")
-
-
-#func _on_TurretTower1_input_event(viewport: Node, event: InputEvent, shape_idx: int):
-#	if (event is InputEventMouseButton && event.pressed and event.button_index == BUTTON_LEFT):
-#		if can_select and !building:
-#			selected = true
-#			create_range_circle(fire_range)
-#			get_tree().call_group("HUD", "show_upgrades")
-#		else:
-#			selected = false
-#			hide_range_circle()
-#			get_tree().call_group("HUD", "hide_upgrades")
 
 
 func choose_target():
@@ -146,15 +117,13 @@ func _follow_mouse():
 		can_build = false
 
 
-func create_range_circle(circle_range):
-	var circle = aggro_circle.instance()
-	circle.position = get_node("AggroRange/CollisionShape2D").position
-	get_node("AggroRange").add_child(circle)
-	circle.draw_aggro_range(circle.position, circle_range, Color(0.1, 0.1, 0.1, 0.33))
+func show_range_circle(turret_range):
+	range_circle.set_scale(Vector2(turret_range/100.0, turret_range/100.0))
+	range_circle.show()
 
 
 func hide_range_circle():
-	get_tree().call_group("AggroCircle", "hide_aggro_range")
+	range_circle.hide()
 
 
 func _on_AggroRange_area_entered(area: Area2D):

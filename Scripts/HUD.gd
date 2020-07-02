@@ -1,5 +1,7 @@
 extends Control
 
+onready var FireRateDesc = $BuyRect/UpgradeRect/UpgradePanel/VBoxContainer/HBoxContainer/FireRateDesc
+
 
 func _ready():
 	add_to_group("HUD")
@@ -25,12 +27,16 @@ func sync_cash_label():
 	$HBoxContainer/CashLabel.text = "Cash: " + str(Global.cash)
 
 
+func sync_fire_rate_desc():
+	FireRateDesc.text = "Fire Rate (Lvl." + str(Upgrades.fire_rate_lvl) + ")" 
+
+
 func show_upgrades():
-	$BuyRect/UpgradeRect.visible = true
+	$BuyRect/UpgradeRect.show()
 
 
 func hide_upgrades():
-	$BuyRect/UpgradeRect.visible = false
+	$BuyRect/UpgradeRect.hide()
 
 
 func _on_BuyButton1_pressed():
@@ -40,4 +46,10 @@ func _on_BuyButton1_pressed():
 
 func _on_StartWaveButton_pressed():
 	get_tree().call_group("Game", "start_wave")
+
+
+func _on_FireRateBtn_pressed():
+	if Upgrades.current_tower != null:
+		Upgrades.fire_rate_level_up()
+		sync_fire_rate_desc()
 

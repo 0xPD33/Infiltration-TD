@@ -9,6 +9,8 @@ var fire_range_lvl : int = 0
 var fire_rate_upgrade_cost : int = 0
 var fire_range_upgrade_cost : int = 0
 
+var current_tower
+
 var upgrades = {"tower_upgrades":
 	{
 	"fire_rate": 
@@ -27,6 +29,10 @@ var upgrades = {"tower_upgrades":
 }
 
 
+func set_current_tower(tower):
+	current_tower = tower
+
+
 func setup_vars():
 	fire_rate_value = upgrades["tower_upgrades"]["fire_rate"]["rate_of_fire"][0]
 	fire_rate_lvl = upgrades["tower_upgrades"]["fire_rate"]["levels"][0]
@@ -37,15 +43,19 @@ func setup_vars():
 
 
 func fire_rate_level_up():
-	if fire_rate_lvl <= upgrades["tower_upgrades"]["fire_rate"]["levels"].size():
-		fire_rate_lvl += 1 
-		fire_rate_value = fire_rate_lvl
-		get_tree().call_group("Game", "add_cash", -fire_rate_upgrade_cost)
+	if current_tower != null:
+		if fire_rate_lvl <= upgrades["tower_upgrades"]["fire_rate"]["levels"].size():
+			fire_rate_lvl += 1 
+			fire_rate_value = fire_rate_lvl
+			current_tower.set_stats()
+			get_tree().call_group("Game", "add_cash", -fire_rate_upgrade_cost)
 
 
 func fire_range_level_up():
-	if fire_range_lvl <= upgrades["tower_upgrades"]["fire_range"]["levels"].size():
-		fire_range_lvl += 1 
-		fire_range_value = fire_range_lvl
-		get_tree().call_group("Game", "add_cash", -fire_range_upgrade_cost)
+	if current_tower != null:
+		if fire_range_lvl <= upgrades["tower_upgrades"]["fire_range"]["levels"].size():
+			fire_range_lvl += 1 
+			fire_range_value = fire_range_lvl
+			current_tower.set_stats()
+			get_tree().call_group("Game", "add_cash", -fire_range_upgrade_cost)
 
