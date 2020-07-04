@@ -23,6 +23,11 @@ func add_cash(num):
 	get_tree().call_group("HUD", "sync_cash_label")
 
 
+func subtract_cash(num):
+	Global.cash -= num
+	get_tree().call_group("HUD", "sync_cash_label")
+
+
 func lose_live():
 	if Global.lives > 0:
 		Global.lives -= 1
@@ -35,7 +40,7 @@ func tower_built(tower):
 	building = false
 	
 	match tower:
-		"TurretTower1":
+		"TurretTower":
 			add_cash(-50)
 	
 	get_tree().call_group("HUD", "sync_cash_label")
@@ -45,8 +50,8 @@ func buy_button_1():
 	if !building:
 		building = true
 		instance = turret_tower_1.instance()
-		instance
 		get_node("Towers").add_child(instance)
+		towers = get_node("Towers").get_children()
 
 
 func show_hide_towerbases(is_visible):

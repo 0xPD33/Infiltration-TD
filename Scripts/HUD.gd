@@ -1,5 +1,7 @@
 extends Control
 
+var current_tower = null
+
 onready var FireRateDesc = $BuyRect/UpgradeRect/UpgradePanel/VBoxContainer/HBoxContainer/FireRateDesc
 
 
@@ -27,8 +29,8 @@ func sync_cash_label():
 	$HBoxContainer/CashLabel.text = "Cash: " + str(Global.cash)
 
 
-func sync_fire_rate_desc():
-	FireRateDesc.text = "Fire Rate (Lvl." + str(Upgrades.fire_rate_lvl) + ")" 
+func sync_fire_rate_desc(fire_rate_lvl):
+	FireRateDesc.text = "Fire Rate (Lvl." + str(fire_rate_lvl) + ")" 
 
 
 func show_upgrades():
@@ -49,7 +51,5 @@ func _on_StartWaveButton_pressed():
 
 
 func _on_FireRateBtn_pressed():
-	if Upgrades.current_tower != null:
-		Upgrades.fire_rate_level_up()
-		sync_fire_rate_desc()
+	get_tree().call_group("Upgrades", "fire_rate_level_up")
 

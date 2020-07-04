@@ -3,7 +3,7 @@ extends Area2D
 # BUILDING VARS
 
 var building = true
-var selected = false
+var selected = false setget set_selected
 var colliding = false
 var can_build = false
 var can_select = false
@@ -29,12 +29,20 @@ var shooting = false
 var fire_rate
 var fire_range
 
+onready var upgrades = $Upgrades
 onready var range_circle = $TurretRange
+
+
+func set_selected(value):
+	if selected != value:
+		selected = value
+		select_tower()
 
 
 func _ready():
 	add_to_group("Tower")
-	set_stats()
+	yield(get_tree(), "idle_frame")
+	fire_range = $AggroRange/CollisionShape2D.get_shape().radius
 	tilemap = get_parent().get_parent().get_node("TowerBases")
 	cell_size = tilemap.cell_size
 
@@ -53,10 +61,12 @@ func _physics_process(delta: float):
 		if Input.is_action_just_pressed("left_click"):
 			if can_build:
 				building = false
-				get_tree().call_group("Game", "tower_built", "TurretTower1")
+				get_tree().call_group("Game", "tower_built", "TurretTower")
+				set_stats()
 				$TurretTowerBase.modulate = Color(1.0, 1.0, 1.0, 1.0)
 				$TurretTowerGun.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
+		
 		if !current_target:
 			current_target = choose_target()
 			
@@ -69,24 +79,24 @@ func _physics_process(delta: float):
 				target_position = current_target.get_global_transform().origin
 				$TurretTowerGun.rotation = (target_position - position).angle() - deg2rad(-90)
 		
-		if Input.is_action_just_pressed("left_click"):
-			select_tower()
+		if Input.is_action_just_pressed("left_click") and can_select:
+			set_selected(true)
+		elif Input.is_action_just_pressed("left_click") and !can_select:
+			set_selected(false)
 
 
 func set_stats():
-	fire_rate = Upgrades.fire_rate_value
-	$AggroRange/CollisionShape2D.get_shape().radius = Upgrades.fire_range_value
-	fire_range = $AggroRange/CollisionShape2D.get_shape().radius
+	fire_rate = upgrades.get_vars("fire_rate_value")
+	$ShootTimer.set_wait_time(fire_rate)
 
 
 func select_tower():
-	if can_select and !selected:
-		selected = true
-		Upgrades.set_current_tower(self)
+	if selected:
+		hide_range_circle()
 		show_range_circle(fire_range)
+		get_tree().call_group("HUD", "hide_upgrades")
 		get_tree().call_group("HUD", "show_upgrades")
-	elif !can_select and selected:
-		selected = false
+	elif !selected:
 		hide_range_circle()
 		get_tree().call_group("HUD", "hide_upgrades")
 
@@ -102,7 +112,9 @@ func choose_target():
 
 
 func _follow_mouse():
+	yield(get_tree().create_timer(0.05), "timeout")
 	position = get_global_mouse_position()
+	
 	cell_position = Vector2(floor(position.x / cell_size.x),
 							floor(position.y / cell_size.y))
 	cell_id = tilemap.get_cellv(cell_position)

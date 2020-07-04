@@ -2,14 +2,13 @@ extends Node2D
 
 var fire_rate_value : float = 0
 var fire_rate_lvl : int = 0
+var fire_rate_upgrade_cost : int = 0
 
 var fire_range_value : int = 0 
 var fire_range_lvl : int = 0
-
-var fire_rate_upgrade_cost : int = 0
 var fire_range_upgrade_cost : int = 0
 
-var current_tower
+var current_lvl = 0
 
 var upgrades = {"tower_upgrades":
 	{
@@ -29,33 +28,49 @@ var upgrades = {"tower_upgrades":
 }
 
 
-func set_current_tower(tower):
-	current_tower = tower
+func _ready():
+	setup_vars(current_lvl)
+	add_to_group("Upgrades")
 
 
-func setup_vars():
-	fire_rate_value = upgrades["tower_upgrades"]["fire_rate"]["rate_of_fire"][0]
-	fire_rate_lvl = upgrades["tower_upgrades"]["fire_rate"]["levels"][0]
-	fire_rate_upgrade_cost = upgrades["tower_upgrades"]["fire_rate"]["cost"][fire_rate_lvl]
-	fire_range_value = upgrades["tower_upgrades"]["fire_range"]["range_of_fire"][0]
-	fire_range_lvl = upgrades["tower_upgrades"]["fire_range"]["levels"][0]
-	fire_range_upgrade_cost = upgrades["tower_upgrades"]["fire_range"]["cost"][fire_rate_lvl]
+func get_vars(value):
+	match value:
+		"fire_rate_value":
+			return fire_rate_value
+		"fire_rate_lvl":
+			return fire_rate_lvl
+		"fire_rate_upgrade_cost":
+			return fire_rate_upgrade_cost
+		"fire_range_value":
+			return fire_range_value
+		"fire_range_lvl":
+			return fire_range_lvl
+		"fire_range_upgrade_cost":
+			return fire_range_upgrade_cost
+
+
+func setup_vars(num):
+	fire_rate_value = upgrades["tower_upgrades"]["fire_rate"]["rate_of_fire"][num]
+	fire_rate_lvl = upgrades["tower_upgrades"]["fire_rate"]["levels"][num]
+	fire_rate_upgrade_cost = upgrades["tower_upgrades"]["fire_rate"]["cost"][num]
+	fire_range_value = upgrades["tower_upgrades"]["fire_range"]["range_of_fire"][num]
+	fire_range_lvl = upgrades["tower_upgrades"]["fire_range"]["levels"][num]
+	fire_range_upgrade_cost = upgrades["tower_upgrades"]["fire_range"]["cost"][num]
 
 
 func fire_rate_level_up():
-	if current_tower != null:
+	if Global.cash >= fire_rate_upgrade_cost:
 		if fire_rate_lvl <= upgrades["tower_upgrades"]["fire_rate"]["levels"].size():
-			fire_rate_lvl += 1 
-			fire_rate_value = fire_rate_lvl
-			current_tower.set_stats()
-			get_tree().call_group("Game", "add_cash", -fire_rate_upgrade_cost)
+			get_tree().call_group("Game", "subtract_cash", fire_rate_upgrade_cost)
+			current_lvl += 1
+			setup_vars(current_lvl)
+			get_tree().call_group("HUD", "sync_fire_rate_desc", fire_rate_lvl)
 
 
 func fire_range_level_up():
-	if current_tower != null:
+	if Global.cash >= fire_range_upgrade_cost:
 		if fire_range_lvl <= upgrades["tower_upgrades"]["fire_range"]["levels"].size():
-			fire_range_lvl += 1 
-			fire_range_value = fire_range_lvl
-			current_tower.set_stats()
-			get_tree().call_group("Game", "add_cash", -fire_range_upgrade_cost)
+			get_tree().call_group("Game", "subtract_cash", fire_range_upgrade_cost)
+			current_lvl += 1
+			setup_vars(current_lvl)
 
