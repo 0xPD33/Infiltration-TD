@@ -10,7 +10,7 @@
 extents = Vector2( 26, 31.3422 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 300.0
+radius = 250.0
 
 [node name="TurretTower1" type="Area2D"]
 collision_layer = 4

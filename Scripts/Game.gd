@@ -38,6 +38,7 @@ func lose_live():
 
 func tower_built(tower):
 	building = false
+	$TowerBases.visible = false
 	
 	match tower:
 		"TurretTower":
@@ -49,13 +50,10 @@ func tower_built(tower):
 func buy_button_1():
 	if !building:
 		building = true
+		$TowerBases.visible = true
 		instance = turret_tower_1.instance()
 		get_node("Towers").add_child(instance)
-		towers = get_node("Towers").get_children()
-
-
-func show_hide_towerbases(is_visible):
-	$TowerBases.visible = is_visible
+		towers.append(instance)
 
 
 func start_wave():

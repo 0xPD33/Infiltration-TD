@@ -24,7 +24,7 @@ var target_position
 var distance_to_target
 
 var instance
-var projectile = load("res://Scenes/Projectiles/Projectile1.tscn") 
+var projectile = null
 var shooting = false
 
 var fire_rate
@@ -90,7 +90,8 @@ func _physics_process(delta: float):
 
 
 func set_stats():
-	fire_rate = upgrades.get_var("fire_rate_value")
+	projectile = upgrades.projectile
+	fire_rate = upgrades.fire_rate_value
 	$ShootTimer.set_wait_time(fire_rate)
 
 

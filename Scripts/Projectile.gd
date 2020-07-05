@@ -1,7 +1,10 @@
 extends Area2D
 
 var target = null
+
+var damage = 1
 var speed = 300
+
 var velocity
 
 
@@ -21,3 +24,4 @@ func _physics_process(delta: float):
 
 func set_target(new_target):
 	target = new_target
+

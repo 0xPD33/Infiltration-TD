@@ -47,6 +47,10 @@ func setup_stats():
 			value = 13
 			hitpoints = 20
 			speed = 135
+		_:
+			value += 2
+			hitpoints += 2
+			speed += 2
 
 
 func creep_move(delta):

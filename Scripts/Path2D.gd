@@ -20,10 +20,11 @@ func start_wave():
 
 
 func _on_WaveTimer_timeout():
-	creeps_max = creeps_per_wave[Global.wave]
-	creep_spawn_time()
-	$CreepTimer.start()
-	$WaveTimer.stop()
+	if Global.wave < creeps_per_wave.size():
+		creeps_max = creeps_per_wave[Global.wave]
+		creep_spawn_time()
+		$CreepTimer.start()
+		$WaveTimer.stop()
 
 
 func _on_CreepTimer_timeout():
@@ -48,5 +49,8 @@ func creep_dead():
 	creeps_alive -= 1
 	if creeps_alive == 0:
 		creeps_spawned = 0
-		get_tree().call_group("Game", "advance_wave")
+		if Global.wave < creeps_per_wave.size():
+			get_tree().call_group("Game", "advance_wave")
+		else:
+			get_tree().call_group("Game", "end_wave")
 

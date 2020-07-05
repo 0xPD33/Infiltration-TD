@@ -1,7 +1,5 @@
 extends Control
 
-onready var FireRateDesc = $BuyRect/UpgradeRect/UpgradePanel/VBoxContainer/HBoxContainer/FireRateDesc
-
 
 func _ready():
 	add_to_group("HUD")
