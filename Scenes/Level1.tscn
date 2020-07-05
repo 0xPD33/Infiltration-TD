@@ -89,7 +89,7 @@ tile_set = SubResource( 2 )
 collision_layer = 2
 collision_mask = 5
 format = 1
-tile_data = PoolIntArray( 524291, 0, 0, 524293, 0, 0, 524295, 0, 0, 524297, 0, 0, 524299, 0, 0, 524301, 0, 0, 524303, 0, 0, 524305, 0, 0 )
+tile_data = PoolIntArray( 262147, 0, 0, 262149, 0, 0, 262151, 0, 0, 262153, 0, 0, 262155, 0, 0, 262157, 0, 0, 262159, 0, 0, 262161, 0, 0, 524291, 0, 0, 524293, 0, 0, 524295, 0, 0, 524297, 0, 0, 524299, 0, 0, 524301, 0, 0, 524303, 0, 0, 524305, 0, 0 )
 
 [node name="Towers" type="Node2D" parent="."]
 
@@ -103,15 +103,15 @@ process_mode = 0
 
 [node name="WaveTimer" type="Timer" parent="Path2D"]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
-mouse_filter = 2
-
-[node name="GameCamera" type="Camera2D" parent="CanvasLayer"]
+[node name="GameCamera" type="Camera2D" parent="."]
 offset = Vector2( 25, 0 )
 anchor_mode = 0
 current = true
 zoom = Vector2( 1.25, 1.25 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
+mouse_filter = 2
 [connection signal="timeout" from="Path2D/CreepTimer" to="Path2D" method="_on_CreepTimer_timeout"]
 [connection signal="timeout" from="Path2D/WaveTimer" to="Path2D" method="_on_WaveTimer_timeout"]

@@ -1,0 +1,88 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/TowerMenu.gd" type="Script" id=1]
+
+[node name="TowerMenu" type="PopupMenu"]
+margin_right = 250.0
+margin_bottom = 225.0
+popup_exclusive = true
+hide_on_item_selection = false
+hide_on_checkable_item_selection = false
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StatsContainer" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -115.0
+margin_top = -102.5
+margin_right = 115.0
+margin_bottom = 67.5
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerStatsLabel" type="Label" parent="StatsContainer"]
+margin_left = 78.0
+margin_right = 151.0
+margin_bottom = 14.0
+size_flags_horizontal = 4
+text = "Tower Stats"
+align = 1
+
+[node name="FireRateContainer" type="HBoxContainer" parent="StatsContainer"]
+margin_top = 18.0
+margin_right = 230.0
+margin_bottom = 38.0
+alignment = 1
+
+[node name="FireRateDesc" type="Label" parent="StatsContainer/FireRateContainer"]
+margin_left = 54.0
+margin_top = 3.0
+margin_right = 152.0
+margin_bottom = 17.0
+size_flags_horizontal = 4
+text = "Fire Rate (Lvl.1)"
+
+[node name="FireRateBtn" type="Button" parent="StatsContainer/FireRateContainer"]
+margin_left = 156.0
+margin_right = 176.0
+margin_bottom = 20.0
+focus_mode = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "+"
+
+[node name="CloseButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -30.0
+margin_top = -30.0
+margin_right = 30.0
+margin_bottom = -10.0
+focus_mode = 1
+size_flags_horizontal = 0
+size_flags_vertical = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CloseLabel" type="Label" parent="CloseButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Close"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_pressed"]
+[connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

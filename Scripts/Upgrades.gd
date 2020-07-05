@@ -15,7 +15,7 @@ var upgrades = {"tower_upgrades":
 	"fire_rate": 
 		{
 			"levels": [1, 2, 3, 4, 5, 6],
-			"rate_of_fire": [0.175, 0.15, 0.125, 0.1, 0.075, 0.05],
+			"rate_of_fire": [0.005, 0.15, 0.125, 0.1, 0.075, 0.05],
 			"cost": [10, 25, 50, 80, 125]
 		},
 	"fire_range":
@@ -33,7 +33,7 @@ func _ready():
 	add_to_group("Upgrades")
 
 
-func get_vars(value):
+func get_var(value):
 	match value:
 		"fire_rate_value":
 			return fire_rate_value
@@ -64,7 +64,7 @@ func fire_rate_level_up():
 			get_tree().call_group("Game", "subtract_cash", fire_rate_upgrade_cost)
 			current_lvl += 1
 			setup_vars(current_lvl)
-			get_tree().call_group("HUD", "sync_fire_rate_desc", fire_rate_lvl)
+			get_parent().set_stats()
 
 
 func fire_range_level_up():

@@ -7,6 +7,7 @@ var selected = false setget set_selected
 var colliding = false
 var can_build = false
 var can_select = false
+var in_menu = false
 
 var tower_space
 var tilemap
@@ -30,13 +31,14 @@ var fire_rate
 var fire_range
 
 onready var upgrades = $Upgrades
+onready var tower_menu = $TowerMenu
 onready var range_circle = $TurretRange
 
 
 func set_selected(value):
 	if selected != value:
 		selected = value
-		select_tower()
+		tower_select_state()
 
 
 func _ready():
@@ -66,14 +68,13 @@ func _physics_process(delta: float):
 				$TurretTowerBase.modulate = Color(1.0, 1.0, 1.0, 1.0)
 				$TurretTowerGun.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
-		
-		if !current_target:
+		if current_target == null:
 			current_target = choose_target()
 			
 			if current_target:
 				$ShootTimer.start()
 		else:
-			if (!current_target):
+			if current_target == null:
 				$ShootTimer.stop()
 			else:
 				target_position = current_target.get_global_transform().origin
@@ -82,28 +83,43 @@ func _physics_process(delta: float):
 		if Input.is_action_just_pressed("left_click") and can_select:
 			set_selected(true)
 		elif Input.is_action_just_pressed("left_click") and !can_select:
-			set_selected(false)
+			if !in_menu:
+				set_selected(false)
+			else:
+				pass
 
 
 func set_stats():
-	fire_rate = upgrades.get_vars("fire_rate_value")
+	fire_rate = upgrades.get_var("fire_rate_value")
 	$ShootTimer.set_wait_time(fire_rate)
 
 
-func select_tower():
+func tower_select_state():
 	if selected:
-		hide_range_circle()
-		show_range_circle(fire_range)
-		get_tree().call_group("HUD", "hide_upgrades")
-		get_tree().call_group("HUD", "show_upgrades")
+		select_tower()
 	elif !selected:
-		hide_range_circle()
-		get_tree().call_group("HUD", "hide_upgrades")
+		deselect_tower()
+
+
+func select_tower():
+	hide_range_circle()
+	show_range_circle(fire_range)
+	set_tower_menu_pos(get_global_transform().origin)
+	tower_menu.popup()
+
+
+func deselect_tower():
+	hide_range_circle()
+
+
+func set_tower_menu_pos(pos):
+	tower_menu.rect_position.x = pos.x - 125
+	tower_menu.rect_position.y = pos.y - 275
 
 
 func choose_target():
 	var pos = get_global_transform().origin
-	for enemy in get_tree().get_nodes_in_group("Enemy"):
+	for enemy in enemy_array:
 		if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
 			if (current_target == null or enemy.get_global_transform().origin.x > 
 				current_target.get_global_transform().origin.x):
@@ -175,4 +191,13 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	can_select = false
+
+
+func _on_TowerMenu_about_to_show():
+	in_menu = true
+
+
+func _on_TowerMenu_closed():
+	in_menu = false
+	set_selected(false)
 
