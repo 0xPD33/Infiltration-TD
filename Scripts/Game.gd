@@ -1,11 +1,12 @@
 extends Node2D
 
-var turret_tower_1 = load("res://Scenes/Towers/TurretTower1.tscn")
-var towers = []
+var single_turret_tower = load("res://Scenes/Towers/TurretTower1.tscn")
+var single_turret_towers = []
 var instance
 
 var building = false
 var wave_started = false
+var fast_forward = false
 
 
 func _ready():
@@ -43,34 +44,41 @@ func tower_built(tower):
 	match tower:
 		"SingleTurretTower":
 			subtract_cash(50)
-	
-	get_tree().call_group("HUD", "sync_cash_label")
 
 
 func buy_button_1():
 	if !building:
 		building = true
 		$TowerBases.visible = true
-		instance = turret_tower_1.instance()
+		instance = single_turret_tower.instance()
+		instance.set_name("SingleTurretTower" + str(single_turret_towers.size()))
 		get_node("Towers").add_child(instance)
-		towers.append(instance)
+		single_turret_towers.append(instance)
+
+
+func fast_forward(value):
+	if value:
+		Engine.time_scale = 2.0
+	else:
+		Engine.time_scale = 1.0
 
 
 func start_wave():
+	Global.wave += 1
+	on_new_wave()
 	wave_started = true
 	get_tree().call_group("Spawner", "start_wave")
 
 
-func advance_wave():
-	if wave_started:
-		end_wave()
-		Global.wave += 1
-		get_tree().call_group("HUD", "sync_wave_label")
-		get_tree().call_group("Enemy", "setup_stats")
+func on_new_wave():
+	get_tree().call_group("HUD", "sync_wave_label")
+	get_tree().call_group("Enemy", "setup_stats")
 
 
 func end_wave():
-	wave_started = false
+	if wave_started:
+		wave_started = false
+		fast_forward(false)
 
 
 func end_game():

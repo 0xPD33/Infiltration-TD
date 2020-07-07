@@ -55,7 +55,6 @@ wait_time = 0.1
 script = ExtResource( 4 )
 
 [node name="TowerMenu" parent="." instance=ExtResource( 5 )]
-visible = false
 margin_left = -125.0
 margin_top = -275.0
 margin_right = 125.0

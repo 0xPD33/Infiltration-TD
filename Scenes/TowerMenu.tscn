@@ -24,7 +24,7 @@ __meta__ = {
 
 [node name="StatsContainer" type="VBoxContainer" parent="MarginContainer"]
 margin_right = 236.0
-margin_bottom = 62.0
+margin_bottom = 86.0
 size_flags_vertical = 0
 alignment = 1
 __meta__ = {
@@ -95,6 +95,34 @@ margin_right = 168.0
 margin_bottom = 17.0
 text = "Cost:"
 
+[node name="ProjectileContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
+margin_top = 66.0
+margin_right = 236.0
+margin_bottom = 86.0
+
+[node name="ProjectileBtn" type="Button" parent="MarginContainer/StatsContainer/ProjectileContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+focus_mode = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+enabled_focus_mode = 1
+text = "+"
+
+[node name="ProjectileDesc" type="Label" parent="MarginContainer/StatsContainer/ProjectileContainer"]
+margin_left = 24.0
+margin_top = 3.0
+margin_right = 127.0
+margin_bottom = 17.0
+text = "Projectile (Lvl.1)"
+
+[node name="ProjectileCostLabel" type="Label" parent="MarginContainer/StatsContainer/ProjectileContainer"]
+margin_left = 131.0
+margin_top = 3.0
+margin_right = 163.0
+margin_bottom = 17.0
+text = "Cost:"
+
 [node name="CloseButton" type="Button" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -123,4 +151,5 @@ __meta__ = {
 }
 [connection signal="pressed" from="MarginContainer/StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_pressed"]
 [connection signal="pressed" from="MarginContainer/StatsContainer/FireRangeContainer/FireRangeBtn" to="." method="_on_FireRangeBtn_pressed"]
+[connection signal="pressed" from="MarginContainer/StatsContainer/ProjectileContainer/ProjectileBtn" to="." method="_on_ProjectileBtn_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
