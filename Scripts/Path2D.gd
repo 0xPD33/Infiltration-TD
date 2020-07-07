@@ -6,15 +6,12 @@ var instance
 var creeps_spawned : int = 0
 var creeps_alive : int = 0
 var creeps_max : int
-var creeps_per_wave = [15, 20, 25, 30, 40, 50, 60]
-var creeps_after_waves = 0
-var creeps_wait_time_per_wave = [0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3]
-var creeps_wait_time_after_wave = 0.3
+var creeps_per_wave = [15, 20, 25, 30, 40, 50, 60, 70]
+var creeps_wait_time_per_wave = [0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3, 0.25]
 
 
 func _ready():
 	add_to_group("Spawner")
-	creep_spawn_time(false)
 
 
 func start_wave():
@@ -22,15 +19,9 @@ func start_wave():
 
 
 func _on_WaveTimer_timeout():
-	if Global.wave <= creeps_per_wave.size():
+	if Global.wave < creeps_per_wave.size():
 		creeps_max = creeps_per_wave[Global.wave]
-		creep_spawn_time(false)
-		$CreepTimer.start()
-		$WaveTimer.stop()
-	else:
-		creeps_after_waves += 5
-		creeps_max = creeps_per_wave.back() + creeps_after_waves
-		creep_spawn_time(true)
+		creep_spawn_time()
 		$CreepTimer.start()
 		$WaveTimer.stop()
 
@@ -42,12 +33,8 @@ func _on_CreepTimer_timeout():
 		$CreepTimer.stop()
 
 
-func creep_spawn_time(main_waves_done):
-	if !main_waves_done:
-		$CreepTimer.wait_time = creeps_wait_time_per_wave[Global.wave]
-	else:
-		creeps_wait_time_after_wave -= 0.2
-		$CreepTimer.wait_time = creeps_wait_time_after_wave
+func creep_spawn_time():
+	$CreepTimer.wait_time = creeps_wait_time_per_wave[Global.wave]
 
 
 func creep_spawn():
@@ -61,6 +48,5 @@ func creep_dead():
 	creeps_alive -= 1
 	if creeps_alive == 0:
 		creeps_spawned = 0
-		if Global.wave < creeps_per_wave.size():
-			get_tree().call_group("Game", "end_wave")
+		get_tree().call_group("Game", "end_wave")
 

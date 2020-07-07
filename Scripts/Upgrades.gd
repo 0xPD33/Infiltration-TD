@@ -10,6 +10,7 @@ var fire_range_upgrade_cost = 0
 
 var projectile1 = load("res://Scenes/Projectiles/Projectile1.tscn")
 var projectile2 = load("res://Scenes/Projectiles/Projectile2.tscn")
+var projectile3 = load("res://Scenes/Projectiles/Projectile3.tscn")
 
 var projectile = null
 var projectile_lvl : int = 0
@@ -32,7 +33,7 @@ var upgrades = {"single_turret_tower":
 	"projectiles":
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
-			"projectile": [projectile1, projectile2, projectile2, projectile2, projectile2, projectile2],
+			"projectile": [projectile1, projectile2, projectile3, projectile3, projectile3, projectile3],
 			"cost": [75, 150, 200, 300, 400, "---"]
 		}
 	}

@@ -2,6 +2,6 @@ extends "res://Scripts/Projectile.gd"
 
 
 func _ready():
-	damage = 2
-	speed = 400
+	damage = 3
+	speed = 500
 
