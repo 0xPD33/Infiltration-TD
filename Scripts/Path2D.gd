@@ -6,8 +6,8 @@ var instance
 var creeps_spawned : int = 0
 var creeps_alive : int = 0
 var creeps_max : int
-var creeps_per_wave = [10, 15, 20, 25, 30, 40]
-var creeps_wait_time_per_wave = [1.0, 0.9, 0.8, 0.7, 0.6, 0.5]
+var creeps_per_wave = [15, 20, 25, 30, 40, 50, 60]
+var creeps_wait_time_per_wave = [0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3]
 
 
 func _ready():

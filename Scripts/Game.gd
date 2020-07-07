@@ -41,8 +41,8 @@ func tower_built(tower):
 	$TowerBases.visible = false
 	
 	match tower:
-		"TurretTower":
-			add_cash(-50)
+		"SingleTurretTower":
+			subtract_cash(50)
 	
 	get_tree().call_group("HUD", "sync_cash_label")
 

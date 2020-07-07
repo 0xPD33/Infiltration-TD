@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/Tower.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Towers/turret_range_circle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/TurretRangeCircle/turret_range_circle.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Upgrades.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/TowerMenu.tscn" type="PackedScene" id=5]
 
@@ -10,7 +10,7 @@
 extents = Vector2( 26, 31.3422 )
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 250.0
+radius = 200.0
 
 [node name="TurretTower1" type="Area2D"]
 collision_layer = 4
@@ -36,10 +36,6 @@ visible = false
 position = Vector2( 0, -5.6 )
 shape = SubResource( 1 )
 
-[node name="TurretRange" type="Sprite" parent="."]
-visible = false
-texture = ExtResource( 3 )
-
 [node name="AggroRange" type="Area2D" parent="."]
 collision_layer = 4
 collision_mask = 8
@@ -48,6 +44,10 @@ collision_mask = 8
 visible = false
 shape = SubResource( 2 )
 
+[node name="TurretRange" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 3 )
+
 [node name="ShootTimer" type="Timer" parent="."]
 wait_time = 0.1
 
@@ -55,6 +55,7 @@ wait_time = 0.1
 script = ExtResource( 4 )
 
 [node name="TowerMenu" parent="." instance=ExtResource( 5 )]
+visible = false
 margin_left = -125.0
 margin_top = -275.0
 margin_right = 125.0

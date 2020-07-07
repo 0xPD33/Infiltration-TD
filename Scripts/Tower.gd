@@ -7,7 +7,6 @@ var selected = false setget set_selected
 var colliding = false
 var can_build = false
 var can_select = false
-var in_menu = false
 
 var tower_space
 var tilemap
@@ -43,8 +42,8 @@ func set_selected(value):
 
 func _ready():
 	add_to_group("Tower")
-	yield(get_tree(), "idle_frame")
 	fire_range = $AggroRange/CollisionShape2D.get_shape().radius
+	yield(get_tree(), "idle_frame")
 	tilemap = get_parent().get_parent().get_node("TowerBases")
 	cell_size = tilemap.cell_size
 
@@ -52,6 +51,7 @@ func _ready():
 func _physics_process(delta: float):
 	if building:
 		_follow_mouse()
+		show_range_circle(fire_range)
 		
 		if can_build:
 			$TurretTowerBase.modulate = Color(0.0, 1.0, 0.0, 0.7)
@@ -63,8 +63,9 @@ func _physics_process(delta: float):
 		if Input.is_action_just_pressed("left_click"):
 			if can_build:
 				building = false
-				get_tree().call_group("Game", "tower_built", "TurretTower")
-				set_stats()
+				get_tree().call_group("Game", "tower_built", "SingleTurretTower")
+				hide_range_circle()
+				set_stats(false)
 				$TurretTowerBase.modulate = Color(1.0, 1.0, 1.0, 1.0)
 				$TurretTowerGun.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
@@ -79,20 +80,26 @@ func _physics_process(delta: float):
 			else:
 				target_position = current_target.get_global_transform().origin
 				$TurretTowerGun.rotation = (target_position - position).angle() - deg2rad(-90)
-		
-		if Input.is_action_just_pressed("left_click") and can_select:
+
+
+func _unhandled_input(event: InputEvent):
+	if event.is_action_pressed("left_click") and can_select:
+		if !building:
 			set_selected(true)
-		elif Input.is_action_just_pressed("left_click") and !can_select:
-			if !in_menu:
-				set_selected(false)
-			else:
-				pass
+	elif event.is_action_pressed("left_click") and !can_select:
+		set_selected(false)
 
 
-func set_stats():
+func set_stats(upgraded):
 	projectile = upgrades.projectile
 	fire_rate = upgrades.fire_rate_value
+	fire_range = upgrades.fire_range_value
 	$ShootTimer.set_wait_time(fire_rate)
+	$AggroRange/CollisionShape2D.get_shape().radius = fire_range
+	
+	if upgraded:
+		hide_range_circle()
+		show_range_circle(fire_range)
 
 
 func tower_select_state():
@@ -106,11 +113,12 @@ func select_tower():
 	hide_range_circle()
 	show_range_circle(fire_range)
 	set_tower_menu_pos(get_global_transform().origin)
-	tower_menu.popup()
+	tower_menu.show()
 
 
 func deselect_tower():
 	hide_range_circle()
+	tower_menu.hide()
 
 
 func set_tower_menu_pos(pos):
@@ -194,11 +202,6 @@ func _on_mouse_exited():
 	can_select = false
 
 
-func _on_TowerMenu_about_to_show():
-	in_menu = true
-
-
 func _on_TowerMenu_closed():
-	in_menu = false
 	set_selected(false)
 

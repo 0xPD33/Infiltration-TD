@@ -13,56 +13,85 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StatsContainer" type="VBoxContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -115.0
-margin_top = -102.5
-margin_right = 115.0
-margin_bottom = 67.5
-size_flags_horizontal = 0
-size_flags_vertical = 0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 243.0
+margin_bottom = 218.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="TowerStatsLabel" type="Label" parent="StatsContainer"]
-margin_left = 78.0
-margin_right = 151.0
+[node name="StatsContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 236.0
+margin_bottom = 62.0
+size_flags_vertical = 0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TowerStatsLabel" type="Label" parent="MarginContainer/StatsContainer"]
+margin_left = 81.0
+margin_right = 154.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 text = "Tower Stats"
 align = 1
 
-[node name="FireRateContainer" type="HBoxContainer" parent="StatsContainer"]
+[node name="FireRateContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
 margin_top = 18.0
-margin_right = 230.0
+margin_right = 236.0
 margin_bottom = 38.0
-alignment = 1
 
-[node name="FireRateDesc" type="Label" parent="StatsContainer/FireRateContainer"]
-margin_left = 36.0
+[node name="FireRateBtn" type="Button" parent="MarginContainer/StatsContainer/FireRateContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+focus_mode = 1
+size_flags_vertical = 4
+enabled_focus_mode = 1
+text = "+"
+
+[node name="FireRateDesc" type="Label" parent="MarginContainer/StatsContainer/FireRateContainer"]
+margin_left = 24.0
 margin_top = 3.0
-margin_right = 134.0
+margin_right = 122.0
 margin_bottom = 17.0
 size_flags_horizontal = 4
 text = "Fire Rate (Lvl.1)"
 
-[node name="FireRateBtn" type="Button" parent="StatsContainer/FireRateContainer"]
-margin_left = 138.0
+[node name="FireRateCostLabel" type="Label" parent="MarginContainer/StatsContainer/FireRateContainer"]
+margin_left = 126.0
+margin_top = 3.0
 margin_right = 158.0
+margin_bottom = 17.0
+text = "Cost:"
+
+[node name="FireRangeContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
+margin_top = 42.0
+margin_right = 236.0
+margin_bottom = 62.0
+
+[node name="FireRangeBtn" type="Button" parent="MarginContainer/StatsContainer/FireRangeContainer"]
+margin_right = 20.0
 margin_bottom = 20.0
 focus_mode = 1
 size_flags_horizontal = 4
 size_flags_vertical = 4
+enabled_focus_mode = 1
 text = "+"
 
-[node name="FireRateCostLabel" type="Label" parent="StatsContainer/FireRateContainer"]
-margin_left = 162.0
+[node name="FireRangeDesc" type="Label" parent="MarginContainer/StatsContainer/FireRangeContainer"]
+margin_left = 24.0
 margin_top = 3.0
-margin_right = 194.0
+margin_right = 132.0
+margin_bottom = 17.0
+text = "Fire Range (Lvl.1)"
+
+[node name="FireRangeCostLabel" type="Label" parent="MarginContainer/StatsContainer/FireRangeContainer"]
+margin_left = 136.0
+margin_top = 3.0
+margin_right = 168.0
 margin_bottom = 17.0
 text = "Cost:"
 
@@ -74,10 +103,11 @@ anchor_bottom = 1.0
 margin_left = -30.0
 margin_top = -30.0
 margin_right = 30.0
-margin_bottom = -10.0
+margin_bottom = -9.99998
 focus_mode = 1
 size_flags_horizontal = 0
 size_flags_vertical = 0
+enabled_focus_mode = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -91,5 +121,6 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_pressed"]
+[connection signal="pressed" from="MarginContainer/StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_pressed"]
+[connection signal="pressed" from="MarginContainer/StatsContainer/FireRangeContainer/FireRangeBtn" to="." method="_on_FireRangeBtn_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]
