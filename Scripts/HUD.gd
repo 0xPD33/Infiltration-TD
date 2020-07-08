@@ -27,6 +27,10 @@ func sync_cash_label():
 	$HBoxContainer/CashLabel.text = "Cash: " + str(Global.cash)
 
 
+func toggle_fast_forward_button():
+	$BuyRect/BuyPanel/HBoxContainer/FastForwardButton.pressed = false
+
+
 func _on_BuyButton1_pressed():
 	if Global.cash >= 50:
 		get_tree().call_group("Game", "buy_button_1")
@@ -36,6 +40,9 @@ func _on_StartWaveButton_pressed():
 	get_tree().call_group("Game", "start_wave")
 
 
-func _on_FastForwardButton_pressed():
-	get_tree().call_group("Game", "fast_forward", true)
+func _on_FastForwardButton_toggled(button_pressed: bool):
+	if button_pressed:
+		get_tree().call_group("Game", "fast_forward", true)
+	else:
+		get_tree().call_group("Game", "fast_forward", false)
 

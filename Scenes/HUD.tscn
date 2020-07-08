@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PNG/Retina/towerDefense_tile249.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/forward.png" type="Texture" id=3]
 [ext_resource path="res://Assets/UI/fastForward.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/fastForward_off.png" type="Texture" id=5]
 
 [node name="HUD" type="Control"]
 anchor_left = 0.5
@@ -120,7 +121,10 @@ margin_right = 116.0
 margin_bottom = 73.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
+toggle_mode = true
 texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
 [connection signal="pressed" from="BuyRect/BuyPanel/BuyButton1" to="." method="_on_BuyButton1_pressed"]
 [connection signal="pressed" from="BuyRect/BuyPanel/HBoxContainer/StartWaveButton" to="." method="_on_StartWaveButton_pressed"]
 [connection signal="pressed" from="BuyRect/BuyPanel/HBoxContainer/FastForwardButton" to="." method="_on_FastForwardButton_pressed"]
+[connection signal="toggled" from="BuyRect/BuyPanel/HBoxContainer/FastForwardButton" to="." method="_on_FastForwardButton_toggled"]
