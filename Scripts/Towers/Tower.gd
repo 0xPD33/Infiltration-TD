@@ -51,7 +51,7 @@ func _ready():
 func _physics_process(delta: float):
 	if building:
 		_follow_mouse()
-		show_range_circle(fire_range)
+		show_range_circle(upgrades.fire_range_value)
 		
 		if can_build:
 			$TurretTowerBase.modulate = Color(0.0, 1.0, 0.0, 0.7)
@@ -64,8 +64,8 @@ func _physics_process(delta: float):
 			if can_build:
 				building = false
 				get_tree().call_group("Game", "tower_built", "SingleTurretTower")
-				hide_range_circle()
 				set_stats(false)
+				hide_range_circle()
 				$TurretTowerBase.modulate = Color(1.0, 1.0, 1.0, 1.0)
 				$TurretTowerGun.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
@@ -130,8 +130,8 @@ func choose_target():
 	var pos = get_global_transform().origin
 	for enemy in enemy_array:
 		if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
-			if (current_target == null or enemy.get_global_transform().origin.x > 
-				current_target.get_global_transform().origin.x):
+			if (current_target == null or enemy.get_global_transform().origin >
+				current_target.get_global_transform().origin):
 					current_target = enemy
 	return current_target
 

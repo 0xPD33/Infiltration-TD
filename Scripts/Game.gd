@@ -1,6 +1,6 @@
 extends Node2D
 
-var single_turret_tower = load("res://Scenes/Towers/TurretTower1.tscn")
+var single_turret_tower = load("res://Scenes/Towers/SingleTurretTower.tscn")
 var single_turret_towers = []
 var instance
 
@@ -42,7 +42,7 @@ func tower_built(tower):
 	
 	match tower:
 		"SingleTurretTower":
-			subtract_cash(50)
+			subtract_cash(150)
 
 
 func buy_button_1():
@@ -65,8 +65,8 @@ func fast_forward(value):
 func start_wave():
 	if !wave_started:
 		Global.wave += 1
-		on_new_wave()
 		wave_started = true
+		on_new_wave()
 		get_tree().call_group("Spawner", "start_wave")
 
 
@@ -76,10 +76,9 @@ func on_new_wave():
 
 
 func end_wave():
-	if wave_started:
-		wave_started = false
-		fast_forward(false)
-		get_tree().call_group("HUD", "toggle_fast_forward_button")
+	wave_started = false
+	fast_forward(false)
+	get_tree().call_group("HUD", "toggle_fast_forward_button")
 
 
 func end_game():

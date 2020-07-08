@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Projectiles/Projectile1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Projectiles/Projectile4.gd" type="Script" id=2]
+
+[node name="Projectile4" instance=ExtResource( 1 )]
+scale = Vector2( 0.5, 0.5 )
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="." index="0"]
+region_rect = Rect2( 1304, 728, 16, 16 )

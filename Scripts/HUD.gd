@@ -12,7 +12,7 @@ func _ready():
 func setup_tooltips():
 	$BuyRect/BuyPanel/HBoxContainer/StartWaveButton.set_tooltip("Start Wave")
 	$BuyRect/BuyPanel/HBoxContainer/FastForwardButton.set_tooltip("Fast Forward (2x)")
-	$BuyRect/BuyPanel/BuyButton1.set_tooltip("Buy Single Turret Tower. Cost: 50")
+	$BuyRect/BuyPanel/BuyButton1.set_tooltip("Buy Single Turret Tower. Cost: 150")
 
 
 func sync_lives_label():
@@ -32,7 +32,7 @@ func toggle_fast_forward_button():
 
 
 func _on_BuyButton1_pressed():
-	if Global.cash >= 50:
+	if Global.cash >= 150:
 		get_tree().call_group("Game", "buy_button_1")
 
 

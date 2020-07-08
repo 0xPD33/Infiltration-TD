@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Creeps/CreepSoldier.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Creeps/CreepUndeadSoldier.gd" type="Script" id=2]
+
+[node name="CreepSoldier" instance=ExtResource( 1 )]
+scale = Vector2( 1, 1 )
+script = ExtResource( 2 )
+
+[node name="Sprite" parent="Area2D" index="0"]
+region_rect = Rect2( 1108, 658, 24, 28 )
+
+[node name="CollisionShape2D" parent="Area2D" index="1"]
+position = Vector2( -0.0413641, 0 )

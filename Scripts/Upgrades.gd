@@ -11,6 +11,7 @@ var fire_range_upgrade_cost = 0
 var projectile1 = load("res://Scenes/Projectiles/Projectile1.tscn")
 var projectile2 = load("res://Scenes/Projectiles/Projectile2.tscn")
 var projectile3 = load("res://Scenes/Projectiles/Projectile3.tscn")
+var projectile4 = load("res://Scenes/Projectiles/Projectile4.tscn")
 
 var projectile = null
 var projectile_lvl : int = 0
@@ -21,20 +22,20 @@ var upgrades = {"single_turret_tower":
 	"fire_rate": 
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
-			"rate_of_fire": [0.15, 0.125, 0.1, 0.075, 0.05, 0.025],
-			"cost": [10, 25, 50, 125, 250, "---"]
+			"rate_of_fire": [0.2, 0.15, 0.1, 0.075, 0.05, 0.033],
+			"cost": [25, 50, 110, 200, 300, "---"]
 		},
 	"fire_range":
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
-			"range_of_fire": [200, 220, 250, 280, 330, 380],
-			"cost": [20, 50, 80, 150, 250, "---"]
+			"range_of_fire": [200, 225, 250, 275, 325, 375],
+			"cost": [50, 125, 180, 300, 450, "---"]
 		},
 	"projectiles":
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
-			"projectile": [projectile1, projectile2, projectile3, projectile3, projectile3, projectile3],
-			"cost": [75, 150, 200, 300, 400, "---"]
+			"projectile": [projectile1, projectile2, projectile3, projectile4, projectile4, projectile4],
+			"cost": [75, 150, 300, "---", "---", "---"]
 		}
 	}
 }

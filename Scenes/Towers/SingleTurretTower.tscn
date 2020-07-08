@@ -1,10 +1,10 @@
 [gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://Scripts/Tower.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Towers/Tower.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=2]
 [ext_resource path="res://Assets/TurretRangeCircle/turret_range_circle.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Upgrades.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/TowerMenu.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Towers/TowerMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26, 31.3422 )
@@ -12,7 +12,7 @@ extents = Vector2( 26, 31.3422 )
 [sub_resource type="CircleShape2D" id=2]
 radius = 200.0
 
-[node name="TurretTower1" type="Area2D"]
+[node name="SingleTurretTower" type="Area2D"]
 collision_layer = 4
 collision_mask = 6
 script = ExtResource( 1 )

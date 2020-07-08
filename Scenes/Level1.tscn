@@ -99,12 +99,14 @@ position = Vector2( -32.2161, -33.1793 )
 curve = SubResource( 3 )
 script = ExtResource( 2 )
 
-[node name="CreepTimer" type="Timer" parent="Path2D"]
+[node name="CreepUndeadSoldierTimer" type="Timer" parent="Path2D"]
+
+[node name="CreepSoldierTimer" type="Timer" parent="Path2D"]
 process_mode = 0
 
 [node name="WaveTimer" type="Timer" parent="Path2D"]
 
-[node name="GameCamera" type="Camera2D" parent="."]
+[node name="LevelCamera" type="Camera2D" parent="."]
 offset = Vector2( 25, 0 )
 anchor_mode = 0
 current = true
@@ -114,5 +116,6 @@ zoom = Vector2( 1.25, 1.25 )
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
 mouse_filter = 2
-[connection signal="timeout" from="Path2D/CreepTimer" to="Path2D" method="_on_CreepTimer_timeout"]
+[connection signal="timeout" from="Path2D/CreepUndeadSoldierTimer" to="Path2D" method="_on_CreepUndeadSoldierTimer_timeout"]
+[connection signal="timeout" from="Path2D/CreepSoldierTimer" to="Path2D" method="_on_CreepSoldierTimer_timeout"]
 [connection signal="timeout" from="Path2D/WaveTimer" to="Path2D" method="_on_WaveTimer_timeout"]
