@@ -1,41 +1,24 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/UI/healtbar_base.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/healthbar_base.png" type="Texture" id=1]
 [ext_resource path="res://Assets/UI/healthbar_outline.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/healthbar_progress.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/HealthBar.gd" type="Script" id=4]
 
-[node name="HealthBar" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-rect_scale = Vector2( 0.6, 0.6 )
+[node name="HealthBar" type="Node2D"]
+scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="HealthUnder" type="TextureProgress" parent="."]
-margin_right = 64.0
-margin_bottom = 20.0
+[node name="HealthBar" type="TextureProgress" parent="."]
+margin_left = -32.0
+margin_top = -48.0
+margin_right = 32.0
+margin_bottom = -28.0
 value = 100.0
 texture_under = ExtResource( 1 )
-texture_progress = ExtResource( 3 )
-tint_progress = Color( 0.439216, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="HealthOver" type="TextureProgress" parent="."]
-margin_right = 64.0
-margin_bottom = 20.0
-value = 100.0
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 3 )
-tint_progress = Color( 0.690196, 0, 0, 1 )
+tint_progress = Color( 0.803922, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="UpdateTween" type="Tween" parent="."]
-repeat = true
-playback/repeat = true

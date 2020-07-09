@@ -1,0 +1,101 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scripts/DevConsole.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.870588 )
+corner_radius_top_right = 4
+
+[sub_resource type="Animation" id=2]
+resource_name = "dev_console_close"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ConsolePanel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 400 ), Vector2( 0, 730 ) ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "dev_console_open"
+length = 0.75
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("ConsolePanel:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.75 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 730 ), Vector2( 0, 400 ) ]
+}
+
+[node name="DevConsole" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConsolePanel" type="Panel" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -320.0
+margin_right = 640.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ConsolePanel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -315.0
+margin_top = 5.0
+margin_right = 320.0
+margin_bottom = 280.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ConsoleLog" type="RichTextLabel" parent="ConsolePanel/VBoxContainer"]
+margin_right = 635.0
+margin_bottom = 290.0
+rect_min_size = Vector2( 635, 290 )
+text = "Hey"
+
+[node name="CommandLine" type="LineEdit" parent="ConsolePanel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -320.0
+margin_top = -24.0
+margin_right = 320.0
+context_menu_enabled = false
+placeholder_text = "enter command..."
+placeholder_alpha = 0.3
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 2.0
+anims/dev_console_close = SubResource( 2 )
+anims/dev_console_open = SubResource( 3 )
+[connection signal="text_entered" from="ConsolePanel/CommandLine" to="." method="_on_CommandLine_text_entered"]

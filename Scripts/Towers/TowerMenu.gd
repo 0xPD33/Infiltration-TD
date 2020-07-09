@@ -16,6 +16,7 @@ signal closed
 
 func _ready():
 	upgrades = get_parent().get_node("Upgrades")
+	setup_tooltips()
 	sync_fire_rate_desc(upgrades.fire_rate_lvl + 1)
 	sync_fire_rate_cost(upgrades.fire_rate_upgrade_cost)
 	sync_fire_range_desc(upgrades.fire_range_lvl + 1)
@@ -25,22 +26,30 @@ func _ready():
 	connect("closed", get_parent(), "_on_TowerMenu_closed")
 
 
+func setup_tooltips():
+	var projectiles_per_s = 1/upgrades.fire_rate_value
+	fire_rate_desc.set_tooltip("Projectiles/s: " + str(projectiles_per_s))
+
+
 func _on_FireRateBtn_pressed():
 	upgrades.fire_rate_level_up()
 	sync_fire_rate_desc(upgrades.fire_rate_lvl + 1)
 	sync_fire_rate_cost(upgrades.fire_rate_upgrade_cost)
+	setup_tooltips()
 
 
 func _on_FireRangeBtn_pressed():
 	upgrades.fire_range_level_up()
 	sync_fire_range_desc(upgrades.fire_range_lvl + 1)
 	sync_fire_range_cost(upgrades.fire_range_upgrade_cost)
+	setup_tooltips()
 
 
 func _on_ProjectileBtn_pressed():
 	upgrades.projectile_level_up()
 	sync_projectile_desc(upgrades.projectile_lvl + 1)
 	sync_projectile_cost(upgrades.projectile_upgrade_cost)
+	setup_tooltips()
 
 
 func sync_fire_rate_desc(fire_rate_lvl):

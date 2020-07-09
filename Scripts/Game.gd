@@ -7,6 +7,8 @@ var instance
 var building = false
 var wave_started = false
 
+onready var dev_console = get_node("CanvasLayer/DevConsole")
+
 
 func _ready():
 	add_to_group("Game")
@@ -16,6 +18,23 @@ func _ready():
 func _input(event: InputEvent):
 	if Input.is_action_just_pressed ("ui_cancel"):
 		end_game()
+	
+	if Input.is_action_just_pressed("dev_console"):
+		toggle_dev_console()
+
+
+func toggle_dev_console():
+	if !dev_console.opened:
+		dev_console.open()
+	elif dev_console.opened:
+		dev_console.close()
+
+
+func fast_forward(value):
+	if value:
+		Engine.time_scale = 2.0
+	else:
+		Engine.time_scale = 1.0
 
 
 func add_cash(num):
@@ -43,6 +62,8 @@ func tower_built(tower):
 	match tower:
 		"SingleTurretTower":
 			subtract_cash(150)
+		"LightBomberTower":
+			subtract_cash(400)
 
 
 func buy_button_1():
@@ -53,13 +74,6 @@ func buy_button_1():
 		instance.set_name("SingleTurretTower" + str(single_turret_towers.size()))
 		get_node("Towers").add_child(instance)
 		single_turret_towers.append(instance)
-
-
-func fast_forward(value):
-	if value:
-		Engine.time_scale = 2.0
-	else:
-		Engine.time_scale = 1.0
 
 
 func start_wave():

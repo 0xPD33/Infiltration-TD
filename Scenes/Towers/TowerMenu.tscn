@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Scripts/Towers/TowerMenu.gd" type="Script" id=1]
 
-
 [node name="TowerMenu" type="PopupMenu"]
 margin_right = 250.0
 margin_bottom = 225.0
@@ -58,6 +57,7 @@ margin_left = 24.0
 margin_top = 3.0
 margin_right = 122.0
 margin_bottom = 17.0
+mouse_filter = 1
 size_flags_horizontal = 4
 text = "Fire Rate (Lvl.1)"
 

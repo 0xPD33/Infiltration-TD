@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=1]
 [ext_resource path="res://Scripts/Path2D.gd" type="Script" id=2]
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/DevConsole.tscn" type="PackedScene" id=5]
 
 [sub_resource type="TileSet" id=1]
 0/name = "towerDefense_tilesheet.png 0"
@@ -116,6 +117,9 @@ zoom = Vector2( 1.25, 1.25 )
 
 [node name="HUD" parent="CanvasLayer" instance=ExtResource( 4 )]
 mouse_filter = 2
+
+[node name="DevConsole" parent="CanvasLayer" instance=ExtResource( 5 )]
+visible = false
 [connection signal="timeout" from="Path2D/CreepUndeadSoldierTimer" to="Path2D" method="_on_CreepUndeadSoldierTimer_timeout"]
 [connection signal="timeout" from="Path2D/CreepSoldierTimer" to="Path2D" method="_on_CreepSoldierTimer_timeout"]
 [connection signal="timeout" from="Path2D/WaveTimer" to="Path2D" method="_on_WaveTimer_timeout"]

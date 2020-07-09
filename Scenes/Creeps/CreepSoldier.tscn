@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/Creeps/CreepSoldier.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 10.4695, 14 )
@@ -24,6 +25,9 @@ region_rect = Rect2( 980, 658, 24, 28 )
 region_filter_clip = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
 position = Vector2( -0.566898, 0 )
 shape = SubResource( 1 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 3 )]
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

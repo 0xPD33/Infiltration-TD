@@ -63,7 +63,11 @@ func _physics_process(delta: float):
 		if Input.is_action_just_pressed("left_click"):
 			if can_build:
 				building = false
-				get_tree().call_group("Game", "tower_built", "SingleTurretTower")
+				if "SingleTurretTower" in name:
+					get_tree().call_group("Game", "tower_built", "SingleTurretTower")
+				elif "LightBomberTower" in name:
+					get_tree().call_group("Game", "tower_built", "LightBomberTower")
+				
 				set_stats(false)
 				hide_range_circle()
 				$TurretTowerBase.modulate = Color(1.0, 1.0, 1.0, 1.0)
