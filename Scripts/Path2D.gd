@@ -13,6 +13,11 @@ var creep_soldiers_wait_time_per_wave = [0.0, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0
 var creep_undead_soldiers_wait_time_per_wave = [0.0, 0.0, 0.0, 3.0, 2.5, 2.2, 1.9, 1.6, 1.3, 1.0]
 
 
+# TODO:
+# - make undead soldier spawning work correctly. currently in wave 3 5 are being spawned instead of 1:
+#	I suppose this happens because of the set_creeps_max() function. I need to figure out another way
+
+
 func _ready():
 	add_to_group("Spawner")
 
@@ -46,7 +51,6 @@ func _on_CreepUndeadSoldierTimer_timeout():
 
 func set_creeps_max():
 	creeps_max = creep_soldiers_per_wave[Global.wave] + creep_undead_soldiers_per_wave[Global.wave]
-	print(creeps_max)
 
 
 func creep_soldier_spawn():
