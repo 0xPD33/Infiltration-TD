@@ -3,6 +3,7 @@
 [ext_resource path="res://Scripts/Towers/TowerMenu.gd" type="Script" id=1]
 
 [node name="TowerMenu" type="PopupMenu"]
+visible = true
 margin_right = 250.0
 margin_bottom = 225.0
 popup_exclusive = true
@@ -39,10 +40,38 @@ size_flags_horizontal = 4
 text = "Tower Stats"
 align = 1
 
-[node name="FireRateContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
+[node name="ProjectileContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
 margin_top = 18.0
 margin_right = 236.0
 margin_bottom = 38.0
+
+[node name="ProjectileBtn" type="Button" parent="MarginContainer/StatsContainer/ProjectileContainer"]
+margin_right = 20.0
+margin_bottom = 20.0
+focus_mode = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+enabled_focus_mode = 1
+text = "+"
+
+[node name="ProjectileDesc" type="Label" parent="MarginContainer/StatsContainer/ProjectileContainer"]
+margin_left = 24.0
+margin_top = 3.0
+margin_right = 127.0
+margin_bottom = 17.0
+text = "Projectile (Lvl.1)"
+
+[node name="ProjectileCostLabel" type="Label" parent="MarginContainer/StatsContainer/ProjectileContainer"]
+margin_left = 131.0
+margin_top = 3.0
+margin_right = 163.0
+margin_bottom = 17.0
+text = "Cost:"
+
+[node name="FireRateContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
+margin_top = 42.0
+margin_right = 236.0
+margin_bottom = 62.0
 
 [node name="FireRateBtn" type="Button" parent="MarginContainer/StatsContainer/FireRateContainer"]
 margin_right = 20.0
@@ -69,9 +98,9 @@ margin_bottom = 17.0
 text = "Cost:"
 
 [node name="FireRangeContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
-margin_top = 42.0
+margin_top = 66.0
 margin_right = 236.0
-margin_bottom = 62.0
+margin_bottom = 86.0
 
 [node name="FireRangeBtn" type="Button" parent="MarginContainer/StatsContainer/FireRangeContainer"]
 margin_right = 20.0
@@ -93,34 +122,6 @@ text = "Fire Range (Lvl.1)"
 margin_left = 136.0
 margin_top = 3.0
 margin_right = 168.0
-margin_bottom = 17.0
-text = "Cost:"
-
-[node name="ProjectileContainer" type="HBoxContainer" parent="MarginContainer/StatsContainer"]
-margin_top = 66.0
-margin_right = 236.0
-margin_bottom = 86.0
-
-[node name="ProjectileBtn" type="Button" parent="MarginContainer/StatsContainer/ProjectileContainer"]
-margin_right = 20.0
-margin_bottom = 20.0
-focus_mode = 1
-size_flags_horizontal = 4
-size_flags_vertical = 4
-enabled_focus_mode = 1
-text = "+"
-
-[node name="ProjectileDesc" type="Label" parent="MarginContainer/StatsContainer/ProjectileContainer"]
-margin_left = 24.0
-margin_top = 3.0
-margin_right = 127.0
-margin_bottom = 17.0
-text = "Projectile (Lvl.1)"
-
-[node name="ProjectileCostLabel" type="Label" parent="MarginContainer/StatsContainer/ProjectileContainer"]
-margin_left = 131.0
-margin_top = 3.0
-margin_right = 163.0
 margin_bottom = 17.0
 text = "Cost:"
 
@@ -150,7 +151,7 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="pressed" from="MarginContainer/StatsContainer/ProjectileContainer/ProjectileBtn" to="." method="_on_ProjectileBtn_pressed"]
 [connection signal="pressed" from="MarginContainer/StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_pressed"]
 [connection signal="pressed" from="MarginContainer/StatsContainer/FireRangeContainer/FireRangeBtn" to="." method="_on_FireRangeBtn_pressed"]
-[connection signal="pressed" from="MarginContainer/StatsContainer/ProjectileContainer/ProjectileBtn" to="." method="_on_ProjectileBtn_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

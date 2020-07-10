@@ -26,5 +26,6 @@ shape = SubResource( 1 )
 [node name="BomberSplashDamage" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BomberSplashDamage"]
+visible = false
 shape = SubResource( 2 )
 [connection signal="area_entered" from="." to="." method="_on_BomberProjectile1_area_entered"]

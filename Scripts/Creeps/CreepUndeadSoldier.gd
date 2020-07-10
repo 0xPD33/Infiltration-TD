@@ -9,19 +9,19 @@ func setup_stats():
 	match Global.wave:
 		3:
 			value = 7
-			max_hitpoints = 16
+			max_hitpoints = 15
 			speed = 45
 		4:
 			value = 9
-			max_hitpoints = 21
+			max_hitpoints = 20
 			speed = 50
 		5:
 			value = 11
-			max_hitpoints = 26
+			max_hitpoints = 25.5
 			speed = 55
 		6:
 			value = 13
-			max_hitpoints = 31.5
+			max_hitpoints = 31
 			speed = 60
 		7:
 			value = 15
