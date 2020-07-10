@@ -29,6 +29,11 @@ var shooting = false
 var fire_rate
 var fire_range
 
+# fire modes don't work as expected as of right now
+
+enum fire_mode {FIRE_MODE_FIRST, FIRE_MODE_LAST, FIRE_MODE_FAR}
+var current_fire_mode
+
 onready var upgrades = $Upgrades
 onready var tower_menu = $TowerMenu
 onready var range_circle = $TurretRange
@@ -87,10 +92,9 @@ func _physics_process(delta: float):
 
 
 func _unhandled_input(event: InputEvent):
-	if event.is_action_pressed("left_click") and can_select:
-		if !building:
-			set_selected(true)
-	elif event.is_action_pressed("left_click") and !can_select:
+	if event.is_action_pressed("left_click") and can_select and !building:
+		set_selected(true)
+	elif event.is_action_pressed("left_click") and !can_select and !building:
 		set_selected(false)
 
 
@@ -104,6 +108,21 @@ func set_stats(upgraded):
 	if upgraded:
 		hide_range_circle()
 		show_range_circle(fire_range)
+	elif !upgraded:
+		set_fire_mode(1)
+
+
+func set_fire_mode(mode):
+	match mode:
+		1:
+			current_fire_mode = fire_mode.FIRE_MODE_FIRST
+			tower_menu.fire_mode_1_button.pressed = true
+		2:
+			current_fire_mode = fire_mode.FIRE_MODE_LAST
+			tower_menu.fire_mode_2_button.pressed = true
+		3:
+			current_fire_mode = fire_mode.FIRE_MODE_FAR
+			tower_menu.fire_mode_3_button.pressed = true
 
 
 func tower_select_state():
@@ -133,10 +152,22 @@ func set_tower_menu_pos(pos):
 func choose_target():
 	var pos = get_global_transform().origin
 	for enemy in enemy_array:
-		if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
-			if (current_target == null or enemy.get_global_transform().origin >
-				current_target.get_global_transform().origin):
-					current_target = enemy
+		if current_fire_mode == fire_mode.FIRE_MODE_FIRST:
+			if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
+				if (current_target == null or enemy.get_global_transform().origin >
+					current_target.get_global_transform().origin):
+						current_target = enemy
+		
+		elif current_fire_mode == fire_mode.FIRE_MODE_LAST:
+			if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
+				current_target = enemy_array.back()
+		
+		elif current_fire_mode == fire_mode.FIRE_MODE_FAR:
+			if pos.distance_to(enemy.get_global_transform().origin) >= fire_range:
+				if (current_target == null or enemy.get_global_transform().origin >
+					current_target.get_global_transform().origin):
+						current_target = enemy
+	
 	return current_target
 
 
@@ -177,7 +208,6 @@ func _on_AggroRange_area_exited(area: Area2D):
 		enemy_array.erase(area.get_parent())
 		if area.get_parent() == current_target:
 			current_target = null
-			$ShootTimer.stop()
 
 
 func _on_ShootTimer_timeout():

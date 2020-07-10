@@ -2,6 +2,10 @@ extends Node2D
 
 var single_turret_tower = load("res://Scenes/Towers/SingleTurretTower.tscn")
 var single_turret_towers = []
+
+var light_bomber_tower = load("res://Scenes/Towers/LightBomberTower.tscn")
+var light_bomber_towers = []
+
 var instance
 
 var building = false
@@ -74,6 +78,16 @@ func buy_button_1():
 		instance.set_name("SingleTurretTower" + str(single_turret_towers.size()))
 		get_node("Towers").add_child(instance)
 		single_turret_towers.append(instance)
+
+
+func buy_button_2():
+	if !building:
+		building = true
+		$TowerBases.visible = true
+		instance = light_bomber_tower.instance()
+		instance.set_name("LightBomberTower" + str(single_turret_towers.size()))
+		get_node("Towers").add_child(instance)
+		light_bomber_towers.append(instance)
 
 
 func start_wave():

@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PNG/Retina/towerDefense_tile249.png" type="Texture" id=2]
 [ext_resource path="res://Assets/UI/forward.png" type="Texture" id=3]
 [ext_resource path="res://Assets/UI/fastForward.png" type="Texture" id=4]
 [ext_resource path="res://Assets/UI/fastForward_off.png" type="Texture" id=5]
+[ext_resource path="res://Assets/PNG/Retina/towerDefense_tile226.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.870588 )
@@ -98,6 +99,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BuyButton2" type="TextureButton" parent="BuyRect/BuyPanel"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -128.0
+margin_top = 12.0
+margin_bottom = 140.0
+rect_min_size = Vector2( 128, 128 )
+hint_tooltip = "{TOOLTIP}"
+texture_normal = ExtResource( 6 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HBoxContainer" type="HBoxContainer" parent="BuyRect/BuyPanel"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -133,5 +148,6 @@ toggle_mode = true
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
 [connection signal="pressed" from="BuyRect/BuyPanel/BuyButton1" to="." method="_on_BuyButton1_pressed"]
+[connection signal="pressed" from="BuyRect/BuyPanel/BuyButton2" to="." method="_on_BuyButton2_pressed"]
 [connection signal="pressed" from="BuyRect/BuyPanel/HBoxContainer/StartWaveButton" to="." method="_on_StartWaveButton_pressed"]
 [connection signal="toggled" from="BuyRect/BuyPanel/HBoxContainer/FastForwardButton" to="." method="_on_FastForwardButton_toggled"]

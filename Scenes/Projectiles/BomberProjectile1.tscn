@@ -7,7 +7,7 @@
 radius = 9.51144
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 19.6071
+radius = 45.6347
 
 [node name="BomberProjectile1" type="Area2D"]
 scale = Vector2( 2, 2 )
@@ -26,6 +26,5 @@ shape = SubResource( 1 )
 [node name="BomberSplashDamage" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BomberSplashDamage"]
-visible = false
 shape = SubResource( 2 )
-[connection signal="area_entered" from="." to="." method="_on_BomberProjectile1_area_entered"]
+[connection signal="area_entered" from="BomberSplashDamage" to="." method="_on_BomberSplashDamage_area_entered"]

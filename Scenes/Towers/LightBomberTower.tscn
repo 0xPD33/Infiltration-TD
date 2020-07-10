@@ -14,3 +14,6 @@ region_rect = Rect2( 1216, 576, 64, 64 )
 
 [node name="ShotPosition" parent="TurretTowerGun" index="0"]
 position = Vector2( 0, -33.3 )
+
+[node name="ShootTimer" parent="." index="5"]
+wait_time = 1.0

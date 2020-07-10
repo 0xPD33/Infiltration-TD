@@ -1,9 +1,11 @@
 extends Area2D
 
 var target = null
+var exploding = false
 
-var damage : float = 8.0
-var speed = 100
+var damage : float = 10.0
+var splash_damage : float = 2.0
+var speed = 150
 
 var velocity
 
@@ -25,7 +27,24 @@ func set_target(new_target):
 	target = new_target
 
 
-func _on_BomberProjectile1_area_entered(area):
+func _on_BomberSplashDamage_area_entered(area):
 	if area.is_in_group("Enemy"):
-		pass
+		area.get_parent().receive_splash_damage(splash_damage)
+
+
+#func explode():
+#	$Explosion.global_position = get_global_position()
+#	$Explosion/MainExplosion.emitting = true
+#	$Explosion/MainExplosion/Shards.emitting = true
+#	$Explosion/MainExplosion/Smoke.emitting = true
+#	$Explosion/MainExplosion/Smoke2.emitting = true
+#	exploding = is_exploding()
+#	if !exploding:
+#		pass
+
+
+#func is_exploding():
+#	if $Explosion/MainExplosion.emitting:
+#		exploding = true
+#		return exploding
 

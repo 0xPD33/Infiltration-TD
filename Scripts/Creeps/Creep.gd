@@ -31,6 +31,10 @@ func creep_move(delta):
 	offset += speed * delta
 
 
+func receive_splash_damage(dmg):
+	hitpoints -= dmg
+
+
 func _on_Area2D_area_entered(area: Area2D):
 	if area.is_in_group("Projectile"):
 		hitpoints -= area.damage
