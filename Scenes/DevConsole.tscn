@@ -75,7 +75,8 @@ __meta__ = {
 margin_right = 635.0
 margin_bottom = 290.0
 rect_min_size = Vector2( 635, 290 )
-text = "Hey"
+text = "
+"
 
 [node name="CommandLine" type="LineEdit" parent="ConsolePanel"]
 anchor_left = 0.5

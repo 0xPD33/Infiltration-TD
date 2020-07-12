@@ -109,4 +109,3 @@ func _on_CloseButton_pressed():
 	hide()
 	emit_signal("closed")
 
-

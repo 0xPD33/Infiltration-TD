@@ -172,7 +172,7 @@ func choose_target():
 
 
 func _follow_mouse():
-	yield(get_tree().create_timer(0.05), "timeout")
+	yield(get_tree().create_timer(0.03), "timeout")
 	position = get_global_mouse_position()
 	
 	cell_position = Vector2(floor(position.x / cell_size.x),
