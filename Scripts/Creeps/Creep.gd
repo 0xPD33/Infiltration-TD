@@ -47,6 +47,7 @@ func _on_Area2D_area_entered(area: Area2D):
 		hitpoints -= area.damage
 		emit_signal("hurt", hitpoints)
 		check_hitpoints()
+		area.queue_free()
 	
 	elif area.is_in_group("BomberProjectile"):
 		hitpoints -= area.damage

@@ -12,6 +12,8 @@ var speed = 150
 
 var velocity
 
+var exploded = false
+
 
 func _ready():
 	add_to_group("BomberProjectile")
@@ -23,7 +25,8 @@ func _physics_process(delta: float):
 		position += (velocity * speed) * delta
 		rotation = velocity.angle()
 	else:
-		queue_free()
+		if exploded:
+			queue_free()
 
 
 func set_target(new_target):

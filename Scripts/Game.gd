@@ -11,6 +11,8 @@ var instance
 var building = false
 var wave_started = false
 
+var cash_per_wave = [0, 10, 25, 50, 100, 125, 150, 175, 200, 250]
+
 onready var dev_console = get_node("CanvasLayer/DevConsole")
 
 
@@ -104,6 +106,7 @@ func on_new_wave():
 
 
 func end_wave():
+	add_cash(cash_per_wave[Global.wave])
 	wave_started = false
 	fast_forward(false)
 	get_tree().call_group("HUD", "toggle_fast_forward_button")

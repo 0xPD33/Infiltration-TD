@@ -1,7 +1,7 @@
 extends Area2D
 
 var damage : float = 0
-var damage_delay : float = 0.1
+var damage_delay : float = 0.05
 
 
 func _ready():
