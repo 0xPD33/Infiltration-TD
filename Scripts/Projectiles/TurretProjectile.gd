@@ -9,7 +9,7 @@ var velocity
 
 
 func _ready():
-	add_to_group("Projectile")
+	add_to_group("TurretProjectile")
 
 
 func _physics_process(delta: float):

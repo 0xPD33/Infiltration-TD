@@ -31,18 +31,20 @@ func creep_move(delta):
 	offset += speed * delta
 
 
-func receive_splash_damage(dmg):
-	hitpoints -= dmg
+func check_hitpoints():
+	if hitpoints <= 0:
+		dead = true
+		get_parent().creep_dead()
+		get_tree().call_group("Game", "add_cash", value)
+		queue_free()
 
 
 func _on_Area2D_area_entered(area: Area2D):
-	if area.is_in_group("Projectile"):
+	if area.is_in_group("TurretProjectile"):
 		hitpoints -= area.damage
 		emit_signal("hurt", hitpoints)
-		area.queue_free()
-		if hitpoints <= 0:
-			dead = true
-			get_parent().creep_dead()
-			get_tree().call_group("Game", "add_cash", value)
-			queue_free()
-
+		check_hitpoints()
+	elif area.is_in_group("BomberProjectile"):
+		hitpoints -= area.damage
+		emit_signal("hurt", hitpoints)
+		check_hitpoints()
