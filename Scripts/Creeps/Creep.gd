@@ -42,16 +42,19 @@ func check_hitpoints():
 		queue_free()
 
 
+func receive_damage(dmg):
+	hitpoints -= dmg
+
+
 func _on_Area2D_area_entered(area: Area2D):
 	if area.is_in_group("TurretProjectile"):
-		hitpoints -= area.damage
+		receive_damage(area.damage)
 		emit_signal("hurt", hitpoints)
 		check_hitpoints()
 		area.queue_free()
 	
 	elif area.is_in_group("BomberProjectile"):
-		hitpoints -= area.damage
-		area.explode(get_global_transform().origin)
+		receive_damage(area.damage)
 		emit_signal("hurt", hitpoints)
 		check_hitpoints()
 

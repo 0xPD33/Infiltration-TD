@@ -22,7 +22,7 @@ var current_target = null
 var target_position
 var distance_to_target
 
-var instance
+var projectile_instance
 var projectile = null
 var shooting = false
 
@@ -212,10 +212,10 @@ func _on_AggroRange_area_exited(area: Area2D):
 
 func _on_ShootTimer_timeout():
 	if current_target:
-		instance = projectile.instance()
-		instance.set_target(current_target)
-		instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin
-		get_parent().add_child(instance)
+		projectile_instance = projectile.instance()
+		projectile_instance.set_target(current_target)
+		projectile_instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin
+		get_parent().add_child(projectile_instance)
 
 
 func _on_TurretTower1_area_entered(area: Area2D):

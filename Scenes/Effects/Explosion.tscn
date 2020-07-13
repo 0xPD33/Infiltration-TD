@@ -28,13 +28,26 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1.1, 1.4, 3, 4, 4.4, 4.8, 5, 5.2, 5.5, 6 ),
+"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1.2, 1.5, 3.2, 4, 4.4, 4.8, 5, 5.2, 5.5, 6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 18.0, 28.0, 42.0276, 52.2474, 58.5873, 58.5873, 62.2693, 62.9252, 62.9252, 66.6145, 66.6145, 64.9273, 64.2647, 59.9179, 54.2589, 51.241, 48.5719, 18.0 ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3.5, 5.9, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="Explosion" type="Area2D"]
+modulate = Color( 1, 1, 1, 0.958333 )
 collision_layer = 16
 collision_mask = 8
 script = ExtResource( 1 )
@@ -49,5 +62,6 @@ frame = 1
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 4.0
+playback_speed = 6.0
 anims/explode = SubResource( 2 )
+[connection signal="area_entered" from="." to="." method="_on_Explosion_area_entered"]

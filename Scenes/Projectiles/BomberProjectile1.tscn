@@ -20,3 +20,4 @@ region_rect = Rect2( 1408, 704, 64, 64 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+[connection signal="area_entered" from="." to="." method="_on_BomberProjectile1_area_entered"]
