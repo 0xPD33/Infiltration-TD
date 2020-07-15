@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Projectiles/SniperProjectile1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Projectiles/SniperProjectile2.gd" type="Script" id=2]
+
+[node name="SniperProjectile2" instance=ExtResource( 1 )]
+modulate = Color( 0.294118, 0.443137, 0.54902, 1 )
+scale = Vector2( 0.3, 0.3 )
+script = ExtResource( 2 )

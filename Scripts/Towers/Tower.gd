@@ -2,6 +2,8 @@ extends Area2D
 
 # BUILDING VARS
 
+var tower_cost
+
 var building = true
 var selected = false setget set_selected
 var colliding = false
@@ -69,9 +71,14 @@ func _physics_process(delta: float):
 			if can_build:
 				building = false
 				if "SingleTurretTower" in name:
-					get_tree().call_group("Game", "tower_built", "SingleTurretTower")
+					tower_cost = 150
+					get_tree().call_group("Game", "tower_built", "SingleTurretTower", tower_cost)
 				elif "LightBomberTower" in name:
-					get_tree().call_group("Game", "tower_built", "LightBomberTower")
+					tower_cost = 400
+					get_tree().call_group("Game", "tower_built", "LightBomberTower", tower_cost)
+				elif "SniperTower" in name:
+					tower_cost = 250
+					get_tree().call_group("Game", "tower_built", "SniperTower", tower_cost)
 				
 				set_stats(false)
 				hide_range_circle()

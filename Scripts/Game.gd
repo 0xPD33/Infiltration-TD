@@ -6,6 +6,9 @@ var single_turret_towers = []
 var light_bomber_tower = load("res://Scenes/Towers/LightBomberTower.tscn")
 var light_bomber_towers = []
 
+var sniper_tower = load("res://Scenes/Towers/SniperTower.tscn")
+var sniper_towers = []
+
 var instance
 
 var building = false
@@ -24,7 +27,6 @@ func _ready():
 func _input(event: InputEvent):
 	if Input.is_action_just_pressed ("ui_cancel"):
 		end_game()
-	
 	if Input.is_action_just_pressed("dev_console"):
 		toggle_dev_console()
 
@@ -61,15 +63,17 @@ func lose_live():
 		end_game()
 
 
-func tower_built(tower):
+func tower_built(tower, cost):
 	building = false
 	$TowerBases.visible = false
 	
 	match tower:
 		"SingleTurretTower":
-			subtract_cash(150)
+			subtract_cash(cost)
 		"LightBomberTower":
-			subtract_cash(400)
+			subtract_cash(cost)
+		"SniperTower":
+			subtract_cash(cost)
 
 
 func buy_button_1():
@@ -90,6 +94,16 @@ func buy_button_2():
 		instance.set_name("LightBomberTower" + str(single_turret_towers.size()))
 		get_node("Towers").add_child(instance)
 		light_bomber_towers.append(instance)
+
+
+func buy_button_3():
+	if !building:
+		building = true
+		$TowerBases.visible = true
+		instance = sniper_tower.instance()
+		instance.set_name("SniperTower" + str(sniper_towers.size()))
+		get_node("Towers").add_child(instance)
+		sniper_towers.append(instance)
 
 
 func start_wave():

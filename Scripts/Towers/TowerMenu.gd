@@ -111,5 +111,7 @@ func _on_CloseButton_pressed():
 
 
 func _on_SellTowerBtn_pressed():
+	var sell_value = get_parent().tower_cost / 2
+	get_tree().call_group("Game", "add_cash", sell_value)
 	get_parent().queue_free()
 

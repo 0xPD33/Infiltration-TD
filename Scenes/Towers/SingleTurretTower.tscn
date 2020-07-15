@@ -7,7 +7,7 @@
 [ext_resource path="res://Scenes/Towers/TowerMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 26, 31.3422 )
+extents = Vector2( 26.5, 31.5 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 200.0
@@ -32,7 +32,6 @@ region_rect = Rect2( 1216, 640, 64, 64 )
 position = Vector2( 0, -37.0412 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2( 0, -5.6 )
 shape = SubResource( 1 )
 
@@ -55,7 +54,6 @@ wait_time = 0.1
 script = ExtResource( 4 )
 
 [node name="TowerMenu" parent="." instance=ExtResource( 5 )]
-visible = false
 margin_left = -125.0
 margin_top = -275.0
 margin_right = 125.0

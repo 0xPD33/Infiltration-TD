@@ -52,9 +52,13 @@ func _on_Area2D_area_entered(area: Area2D):
 		emit_signal("hurt", hitpoints)
 		check_hitpoints()
 		area.queue_free()
-	
 	elif area.is_in_group("BomberProjectile"):
 		receive_damage(area.damage)
 		emit_signal("hurt", hitpoints)
 		check_hitpoints()
+	elif area.is_in_group("SniperProjectile"):
+		receive_damage(area.damage)
+		emit_signal("hurt", hitpoints)
+		check_hitpoints()
+		area.queue_free()
 

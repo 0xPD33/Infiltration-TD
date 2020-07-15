@@ -113,6 +113,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BuyButton3" type="TextureButton" parent="BuyRect/BuyPanel"]
+self_modulate = Color( 1, 0, 0, 1 )
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -64.0
+margin_right = 128.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 128, 128 )
+hint_tooltip = "{TOOLTIP}"
+texture_normal = ExtResource( 2 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="HBoxContainer" type="HBoxContainer" parent="BuyRect/BuyPanel"]
 anchor_left = 0.5
 anchor_top = 1.0
@@ -149,5 +164,6 @@ texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
 [connection signal="pressed" from="BuyRect/BuyPanel/BuyButton1" to="." method="_on_BuyButton1_pressed"]
 [connection signal="pressed" from="BuyRect/BuyPanel/BuyButton2" to="." method="_on_BuyButton2_pressed"]
+[connection signal="pressed" from="BuyRect/BuyPanel/BuyButton3" to="." method="_on_BuyButton3_pressed"]
 [connection signal="pressed" from="BuyRect/BuyPanel/HBoxContainer/StartWaveButton" to="." method="_on_StartWaveButton_pressed"]
 [connection signal="toggled" from="BuyRect/BuyPanel/HBoxContainer/FastForwardButton" to="." method="_on_FastForwardButton_toggled"]

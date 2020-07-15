@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Towers/SingleTurretTower.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Assets/PNG/Retina/towerDefense_tile273.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22, 29.75 )
+
+[node name="SniperTower" instance=ExtResource( 1 )]
+position = Vector2( 93.8636, 112.273 )
+
+[node name="TurretTowerBase" parent="." index="0"]
+rotation = 0.781907
+scale = Vector2( 1.1, 1.1 )
+region_rect = Rect2( 1408, 448, 64, 64 )
+
+[node name="TurretTowerGun" parent="." index="1"]
+self_modulate = Color( 1, 0, 0, 1 )
+scale = Vector2( 0.65, 0.9 )
+offset = Vector2( 0, -13 )
+
+[node name="ShotPosition" parent="TurretTowerGun" index="0"]
+position = Vector2( 0, -40.2287 )
+
+[node name="SniperTowerDeco" type="Sprite" parent="." index="2"]
+self_modulate = Color( 0.576471, 0, 0, 1 )
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 2 )
+
+[node name="CollisionShape2D" parent="." index="3"]
+visible = false
+position = Vector2( 0, -7.63819 )
+shape = SubResource( 1 )
