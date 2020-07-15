@@ -109,3 +109,7 @@ func _on_CloseButton_pressed():
 	hide()
 	emit_signal("closed")
 
+
+func _on_SellTowerBtn_pressed():
+	get_parent().queue_free()
+
