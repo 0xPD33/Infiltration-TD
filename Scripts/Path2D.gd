@@ -10,7 +10,7 @@ var creeps_alive : int = 0
 
 var creep_soldiers_spawned = 0
 var creep_soldiers_per_wave = [0, 20, 25, 30, 40, 50, 60, 70, 80, 90]
-var creep_soldiers_wait_time_per_wave = [0.0, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4, 0.35, 0.3]
+var creep_soldiers_wait_time_per_wave = [0.0, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4]
 
 var creep_undead_soldiers_spawned = 0
 var creep_undead_soldiers_per_wave = [0, 0, 0, 1, 3, 5, 7, 9, 12, 15]

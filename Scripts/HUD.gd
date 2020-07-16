@@ -13,8 +13,8 @@ func setup_tooltips():
 	$BuyRect/BuyPanel/HBoxContainer/StartWaveButton.set_tooltip("Start Wave")
 	$BuyRect/BuyPanel/HBoxContainer/FastForwardButton.set_tooltip("Fast Forward (2x)")
 	$BuyRect/BuyPanel/BuyButton1.set_tooltip("Buy Single Turret Tower Cost: 150")
-	$BuyRect/BuyPanel/BuyButton2.set_tooltip("Buy Light Bomber Tower Cost: 400")
-	$BuyRect/BuyPanel/BuyButton3.set_tooltip("Buy Sniper Tower Cost: 250")
+	$BuyRect/BuyPanel/BuyButton2.set_tooltip("Buy Light Bomber Tower Cost: 500")
+	$BuyRect/BuyPanel/BuyButton3.set_tooltip("Buy Sniper Tower Cost: 300")
 
 
 func sync_lives_label():
@@ -39,12 +39,12 @@ func _on_BuyButton1_pressed():
 
 
 func _on_BuyButton2_pressed():
-	if Global.cash >= 400:
+	if Global.cash >= 500:
 		get_tree().call_group("Game", "buy_button_2")
 
 
 func _on_BuyButton3_pressed():
-	if Global.cash >= 250:
+	if Global.cash >= 300:
 		get_tree().call_group("Game", "buy_button_3")
 
 
@@ -57,5 +57,4 @@ func _on_FastForwardButton_toggled(button_pressed: bool):
 		get_tree().call_group("Game", "fast_forward", true)
 	else:
 		get_tree().call_group("Game", "fast_forward", false)
-
 

@@ -2,8 +2,8 @@ extends Area2D
 
 var target = null
 
-var damage : float = 15.0
-var speed = 500
+var damage : float
+var speed : float
 
 var velocity
 

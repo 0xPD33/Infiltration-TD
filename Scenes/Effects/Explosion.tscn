@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Effects/Explosion_001_Tile_8x8_256x256.png" type="Texture" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 18.0
+radius = 63.0079
 
 [sub_resource type="Animation" id=2]
 resource_name = "explode"
@@ -22,32 +22,20 @@ tracks/0/keys = {
 "values": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("CollisionShape2D:shape:radius")
+tracks/1/path = NodePath(".:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.9, 1.2, 1.5, 3.2, 4, 4.4, 4.8, 5, 5.2, 5.5, 6 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 18.0, 28.0, 42.0276, 52.2474, 58.5873, 58.5873, 62.2693, 62.9252, 62.9252, 66.6145, 66.6145, 64.9273, 64.2647, 59.9179, 54.2589, 51.241, 48.5719, 18.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath(".:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 3.5, 5.9, 6 ),
+"times": PoolRealArray( 5.5, 5.9, 6 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ), Color( 1, 1, 1, 1 ) ]
 }
 
 [node name="Explosion" type="Area2D"]
-modulate = Color( 1, 1, 1, 0.958333 )
+scale = Vector2( 0.6, 0.6 )
 collision_layer = 16
 collision_mask = 8
 script = ExtResource( 1 )
@@ -56,12 +44,12 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 8
 hframes = 8
-frame = 1
+frame = 60
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-playback_speed = 6.0
+playback_process_mode = 0
+playback_speed = 7.5
 anims/explode = SubResource( 2 )
-[connection signal="area_entered" from="." to="." method="_on_Explosion_area_entered"]

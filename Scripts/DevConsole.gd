@@ -1,9 +1,13 @@
 extends Control
 
-const DEV_COMMANDS = ["help", "cash"]
+const DEV_COMMANDS = ["help", "cash", "wave"]
 
-var cash_amount_entered
 var cash_amount
+var current_wave
+
+var entering_cash
+var entering_wave
+var value_entered
 
 var opened = false
 
@@ -31,6 +35,10 @@ func close():
 	visible = false
 
 
+func error():
+	update_log("\nSomething went wrong.\n")
+
+
 func show_help():
 	update_log("This is a development console used for testing purposes. Available commands:\n")
 	for command in DEV_COMMANDS:
@@ -40,12 +48,27 @@ func show_help():
 
 
 func cash():
-	cash_amount_entered = false
+	value_entered = false
+	entering_cash = true
 	update_log("Enter amount: ")
 	yield(command_line, "text_entered")
-	cash_amount_entered = true
+	entering_cash = false
+	value_entered = true
 	update_log(cash_amount + "\n")
 	get_tree().call_group("Game", "add_cash", int(cash_amount))
+
+
+func wave():
+	value_entered = false
+	entering_wave = true
+	update_log("Attention: the wave increments by 1 after pressing play.\n")
+	update_log("Enter wave: ")
+	yield(command_line, "text_entered")
+	entering_wave = false
+	value_entered = true
+	update_log(current_wave + "\n")
+	Global.wave = current_wave
+	get_tree().call_group("HUD", "sync_wave_label")
 
 
 func update_log(text):
@@ -60,9 +83,14 @@ func _on_CommandLine_text_entered(command):
 				show_help()
 			"cash":
 				cash()
+			"wave":
+				wave()
 	
-	if !cash_amount_entered:
-		cash_amount = command
+	if !value_entered:
+		if entering_cash:
+			cash_amount = command
+		elif entering_wave:
+			current_wave = command
 	
 	command_line.text = ""
 

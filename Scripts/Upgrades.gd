@@ -2,6 +2,9 @@ extends Node2D
 
 # need a better solution for this whole script but it works fine for now
 
+var offensive_tower
+var defensive_tower
+
 var fire_rate_value : float = 0
 var fire_rate_lvl : int = 0
 var fire_rate_upgrade_cost = 0
@@ -35,7 +38,7 @@ var upgrades = {"single_turret_tower":
 	"fire_range":
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
-			"range_of_fire": [200, 225, 250, 300, 330, 375],
+			"range_of_fire": [200, 250, 300, 350, 420, 500],
 			"cost": [45, 90, 150, 225, 350, "---"]
 		},
 	"projectiles":
@@ -99,20 +102,24 @@ func setup_vars():
 	
 	if "SingleTurretTower" in get_parent().name:
 		parent_tower_string = "single_turret_tower"
+		offensive_tower = true
 	elif "LightBomberTower" in get_parent().name:
 		parent_tower_string = "light_bomber_tower"
+		offensive_tower = true
 	elif "SniperTower" in get_parent().name:
 		parent_tower_string = "sniper_tower"
+		offensive_tower = true
 	
-	fire_rate_value = upgrades[parent_tower_string]["fire_rate"]["rate_of_fire"][0]
-	fire_rate_lvl = upgrades[parent_tower_string]["fire_rate"]["levels"][0]
-	fire_rate_upgrade_cost = upgrades[parent_tower_string]["fire_rate"]["cost"][0]
-	fire_range_value = upgrades[parent_tower_string]["fire_range"]["range_of_fire"][0]
-	fire_range_lvl = upgrades[parent_tower_string]["fire_range"]["levels"][0]
-	fire_range_upgrade_cost = upgrades[parent_tower_string]["fire_range"]["cost"][0]
-	projectile = upgrades[parent_tower_string]["projectiles"]["projectile"][0]
-	projectile_lvl = upgrades[parent_tower_string]["projectiles"]["levels"][0]
-	projectile_upgrade_cost = upgrades[parent_tower_string]["projectiles"]["cost"][0]
+	if offensive_tower:
+		fire_rate_value = upgrades[parent_tower_string]["fire_rate"]["rate_of_fire"][0]
+		fire_rate_lvl = upgrades[parent_tower_string]["fire_rate"]["levels"][0]
+		fire_rate_upgrade_cost = upgrades[parent_tower_string]["fire_rate"]["cost"][0]
+		fire_range_value = upgrades[parent_tower_string]["fire_range"]["range_of_fire"][0]
+		fire_range_lvl = upgrades[parent_tower_string]["fire_range"]["levels"][0]
+		fire_range_upgrade_cost = upgrades[parent_tower_string]["fire_range"]["cost"][0]
+		projectile = upgrades[parent_tower_string]["projectiles"]["projectile"][0]
+		projectile_lvl = upgrades[parent_tower_string]["projectiles"]["levels"][0]
+		projectile_upgrade_cost = upgrades[parent_tower_string]["projectiles"]["cost"][0]
 
 
 func set_fire_rate(tower_string, num):

@@ -74,10 +74,10 @@ func _physics_process(delta: float):
 					tower_cost = 150
 					get_tree().call_group("Game", "tower_built", "SingleTurretTower", tower_cost)
 				elif "LightBomberTower" in name:
-					tower_cost = 400
+					tower_cost = 500
 					get_tree().call_group("Game", "tower_built", "LightBomberTower", tower_cost)
 				elif "SniperTower" in name:
-					tower_cost = 250
+					tower_cost = 300
 					get_tree().call_group("Game", "tower_built", "SniperTower", tower_cost)
 				
 				set_stats(false)

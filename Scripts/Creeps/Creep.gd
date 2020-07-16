@@ -1,10 +1,11 @@
 extends PathFollow2D
 
 var dead = false
+
 var speed : float
 var hitpoints : float
 var max_hitpoints : float
-var value
+var value : int
 
 signal hurt
 
@@ -42,23 +43,21 @@ func check_hitpoints():
 		queue_free()
 
 
-func receive_damage(dmg):
+func _on_damage(dmg):
 	hitpoints -= dmg
+	emit_signal("hurt", hitpoints)
+	check_hitpoints()
 
 
 func _on_Area2D_area_entered(area: Area2D):
 	if area.is_in_group("TurretProjectile"):
-		receive_damage(area.damage)
-		emit_signal("hurt", hitpoints)
-		check_hitpoints()
+		_on_damage(area.damage)
 		area.queue_free()
 	elif area.is_in_group("BomberProjectile"):
-		receive_damage(area.damage)
-		emit_signal("hurt", hitpoints)
-		check_hitpoints()
+		_on_damage(area.damage)
 	elif area.is_in_group("SniperProjectile"):
-		receive_damage(area.damage)
-		emit_signal("hurt", hitpoints)
-		check_hitpoints()
+		_on_damage(area.damage)
 		area.queue_free()
+	elif area.is_in_group("Explosion"):
+		_on_damage(area.damage)
 

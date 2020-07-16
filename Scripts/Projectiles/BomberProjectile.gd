@@ -1,14 +1,14 @@
 extends Area2D
 
 var explosion = preload("res://Scenes/Effects/Explosion.tscn")
-var explosion_instance
-
-var exploded = false
 
 var target = null
 
-var damage : float = 10.0
-var splash_damage : float = 7.5
+var damage : float = 1.5
+
+var explosion_damage : float = 5
+var explosion_playback_speed : float = 7.5
+var explosion_scale = Vector2(0.5, 0.5)
 
 var speed = 150
 
@@ -25,8 +25,7 @@ func _physics_process(delta: float):
 		position += (velocity * speed) * delta
 		rotation = velocity.angle()
 	else:
-		if exploded:
-			queue_free()
+		queue_free()
 
 
 func set_target(new_target):
@@ -34,21 +33,14 @@ func set_target(new_target):
 
 
 func explode(creep_pos):
-	explosion_instance = explosion.instance()
+	var explosion_instance = explosion.instance()
 	explosion_instance.position = creep_pos
-	explosion_instance.set_damage(splash_damage)
-	explosion_instance.set_projectile(self)
+	explosion_instance.set_damage(explosion_damage)
+	explosion_instance.set_speed(explosion_playback_speed)
+	explosion_instance.set_scale(explosion_scale) 
 	
-	# still getting area_set_shape_disabled error.
-	# I think this happens because the projectile gets freed from the game too fast.
-	# I need to add the explosion as a child to the bomber projectile,
-	# hide the main projectile on collision with an enemy,
-	# then let the explosion play and hopefully the explosion collision works then.
-	get_parent().add_child(explosion_instance)
-
-
-func explosion_done():
-	exploded = true
+	get_parent().call_deferred("add_child", explosion_instance)
+	queue_free()
 
 
 func _on_BomberProjectile1_area_entered(area: Area2D):
