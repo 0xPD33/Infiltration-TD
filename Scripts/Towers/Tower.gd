@@ -222,7 +222,7 @@ func _on_ShootTimer_timeout():
 		projectile_instance = projectile.instance()
 		projectile_instance.set_target(current_target)
 		projectile_instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin
-		get_parent().add_child(projectile_instance)
+		get_parent().get_parent().add_child(projectile_instance)
 
 
 func _on_TurretTower1_area_entered(area: Area2D):

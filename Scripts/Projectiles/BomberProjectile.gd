@@ -39,7 +39,7 @@ func explode(creep_pos):
 	explosion_instance.set_speed(explosion_playback_speed)
 	explosion_instance.set_scale(explosion_scale) 
 	
-	get_parent().call_deferred("add_child", explosion_instance)
+	get_parent().get_parent().call_deferred("add_child", explosion_instance)
 	queue_free()
 
 

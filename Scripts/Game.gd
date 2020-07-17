@@ -14,7 +14,7 @@ var instance
 var building = false
 var wave_started = false
 
-var cash_per_wave = [0, 10, 25, 50, 100, 125, 150, 175, 200, 250]
+var cash_per_wave : int
 
 onready var dev_console = get_node("CanvasLayer/DevConsole")
 
@@ -27,6 +27,10 @@ func _ready():
 func _input(event: InputEvent):
 	if Input.is_action_just_pressed ("ui_cancel"):
 		end_game()
+		
+	if Input.is_action_just_pressed("reload_level"):
+		reload_game()
+	
 	if Input.is_action_just_pressed("dev_console"):
 		toggle_dev_console()
 
@@ -120,10 +124,17 @@ func on_new_wave():
 
 
 func end_wave():
-	add_cash(cash_per_wave[Global.wave])
-	wave_started = false
-	fast_forward(false)
-	get_tree().call_group("HUD", "toggle_fast_forward_button")
+	if wave_started:
+		cash_per_wave = Global.wave * 25
+		add_cash(cash_per_wave)
+		wave_started = false
+		fast_forward(false)
+		get_tree().call_group("HUD", "toggle_fast_forward_button")
+
+
+func reload_game():
+	Global.reset()
+	get_tree().reload_current_scene()
 
 
 func end_game():
