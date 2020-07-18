@@ -2,9 +2,10 @@
 
 [ext_resource path="res://Scripts/Towers/Tower.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=2]
-[ext_resource path="res://Assets/TurretRangeCircle/turret_range_circle.png" type="Texture" id=3]
+[ext_resource path="res://Assets/RangeCircle/turret_range_circle.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/Upgrades.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Towers/TowerMenu.tscn" type="PackedScene" id=5]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 26.5, 31.5 )

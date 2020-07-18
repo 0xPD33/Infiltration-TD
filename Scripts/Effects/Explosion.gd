@@ -18,6 +18,7 @@ func set_damage(dmg):
 
 func explode():
 	$AnimationPlayer.play("explode")
+	get_tree().call_group("LevelCamera", "screen_shake")
 	yield($AnimationPlayer, "animation_finished")
 	yield(get_tree().create_timer(0.1), "timeout")
 	queue_free()

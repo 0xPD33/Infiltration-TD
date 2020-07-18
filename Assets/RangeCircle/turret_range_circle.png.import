@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/turret_range_circle.png-e8a7c6bf7bb74db85fd78902310f8876.stex"
+path="res://.import/turret_range_circle.png-aa592a27e984f5b56237759292603963.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/TurretRangeCircle/turret_range_circle.png"
-dest_files=[ "res://.import/turret_range_circle.png-e8a7c6bf7bb74db85fd78902310f8876.stex" ]
+source_file="res://Assets/RangeCircle/turret_range_circle.png"
+dest_files=[ "res://.import/turret_range_circle.png-aa592a27e984f5b56237759292603963.stex" ]
 
 [params]
 
