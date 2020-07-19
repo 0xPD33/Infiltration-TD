@@ -1,0 +1,49 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scripts/Tooltip.gd" type="Script" id=1]
+
+[node name="TooltipUpgradeCost" type="Control"]
+margin_right = 80.0
+margin_bottom = 20.0
+mouse_filter = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 80.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 80, 20 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TooltipPanel" type="Panel" parent="CenterContainer"]
+self_modulate = Color( 1, 1, 1, 0.870588 )
+margin_right = 80.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 80, 20 )
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CostLabel" type="Label" parent="CenterContainer/TooltipPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -40.0
+margin_top = -10.0
+margin_right = 40.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 80, 20 )
+size_flags_vertical = 1
+text = "Cost: {000}"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

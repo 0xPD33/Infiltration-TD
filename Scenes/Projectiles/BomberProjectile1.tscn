@@ -1,23 +1,24 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=1]
-[ext_resource path="res://Scripts/Projectiles/BomberProjectile.gd" type="Script" id=2]
+[ext_resource path="res://Scripts/Projectiles/LightBomberProjectile1.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 9.74122
 
 [node name="BomberProjectile1" type="Area2D"]
-scale = Vector2( 2, 2 )
+scale = Vector2( 1.5, 1.5 )
 collision_layer = 16
 collision_mask = 8
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.105882, 0.113725, 0.137255, 1 )
+modulate = Color( 0.117647, 0.12549, 0.145098, 1 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 1408, 704, 64, 64 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 shape = SubResource( 1 )
 [connection signal="area_entered" from="." to="." method="_on_BomberProjectile1_area_entered"]

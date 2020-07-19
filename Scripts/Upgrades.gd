@@ -2,6 +2,8 @@ extends Node2D
 
 # need a better solution for this whole script but it works fine for now
 
+var parent_tower_string
+
 var offensive_tower
 var defensive_tower
 
@@ -19,11 +21,13 @@ var single_turret_projectile_3 = load("res://Scenes/Projectiles/SingleTurretProj
 var single_turret_projectile_4 = load("res://Scenes/Projectiles/SingleTurretProjectile4.tscn")
 
 var light_bomber_projectile_1 = load("res://Scenes/Projectiles/BomberProjectile1.tscn")
+var light_bomber_projectile_2 = load("res://Scenes/Projectiles/BomberProjectile2.tscn")
 
 var sniper_projectile_1 = load("res://Scenes/Projectiles/SniperProjectile1.tscn")
 var sniper_projectile_2 = load("res://Scenes/Projectiles/SniperProjectile2.tscn")
 
 var projectile = null
+var projectile_dmg
 var projectile_lvl : int = 0
 var projectile_upgrade_cost = 0
 
@@ -64,9 +68,9 @@ var upgrades = {"single_turret_tower":
 		},
 	"projectiles":
 		{
-			"levels": [0],
-			"projectile": [light_bomber_projectile_1],
-			"cost": ["---"]
+			"levels": [0, 1],
+			"projectile": [light_bomber_projectile_1, light_bomber_projectile_2],
+			"cost": [150, "---"]
 		}
 	},
 	"sniper_tower":
@@ -98,8 +102,6 @@ func _ready():
 
 
 func setup_vars():
-	var parent_tower_string
-	
 	if "SingleTurretTower" in get_parent().name:
 		parent_tower_string = "single_turret_tower"
 		offensive_tower = true

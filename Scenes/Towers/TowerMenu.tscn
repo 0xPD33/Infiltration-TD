@@ -3,8 +3,9 @@
 [ext_resource path="res://Scripts/Towers/TowerMenu.gd" type="Script" id=1]
 
 [node name="TowerMenu" type="PopupMenu"]
-margin_right = 250.0
-margin_bottom = 225.0
+visible = true
+margin_right = 300.0
+margin_bottom = 250.0
 popup_exclusive = true
 hide_on_item_selection = false
 hide_on_checkable_item_selection = false
@@ -14,20 +15,24 @@ __meta__ = {
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 243.0
-margin_bottom = 218.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -137.5
+margin_top = -112.5
+margin_right = 137.5
+margin_bottom = 112.5
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MainContainer" type="VBoxContainer" parent="MarginContainer"]
-margin_right = 236.0
-margin_bottom = 211.0
+margin_right = 275.0
+margin_bottom = 225.0
 
 [node name="StatsContainer" type="VBoxContainer" parent="MarginContainer/MainContainer"]
-margin_right = 236.0
+margin_right = 275.0
 margin_bottom = 89.0
 size_flags_vertical = 0
 custom_constants/separation = 5
@@ -37,8 +42,8 @@ __meta__ = {
 }
 
 [node name="TowerStatsLabel" type="Label" parent="MarginContainer/MainContainer/StatsContainer"]
-margin_left = 81.0
-margin_right = 154.0
+margin_left = 101.0
+margin_right = 174.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 text = "Tower Stats"
@@ -46,7 +51,7 @@ align = 1
 
 [node name="FireRateContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/StatsContainer"]
 margin_top = 19.0
-margin_right = 236.0
+margin_right = 275.0
 margin_bottom = 39.0
 
 [node name="FireRateBtn" type="Button" parent="MarginContainer/MainContainer/StatsContainer/FireRateContainer"]
@@ -66,16 +71,9 @@ mouse_filter = 1
 size_flags_horizontal = 4
 text = "Fire Rate (Lvl.1)"
 
-[node name="FireRateCostLabel" type="Label" parent="MarginContainer/MainContainer/StatsContainer/FireRateContainer"]
-margin_left = 126.0
-margin_top = 3.0
-margin_right = 158.0
-margin_bottom = 17.0
-text = "Cost:"
-
 [node name="FireRangeContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/StatsContainer"]
 margin_top = 44.0
-margin_right = 236.0
+margin_right = 275.0
 margin_bottom = 64.0
 
 [node name="FireRangeBtn" type="Button" parent="MarginContainer/MainContainer/StatsContainer/FireRangeContainer"]
@@ -94,16 +92,9 @@ margin_right = 132.0
 margin_bottom = 17.0
 text = "Fire Range (Lvl.1)"
 
-[node name="FireRangeCostLabel" type="Label" parent="MarginContainer/MainContainer/StatsContainer/FireRangeContainer"]
-margin_left = 136.0
-margin_top = 3.0
-margin_right = 168.0
-margin_bottom = 17.0
-text = "Cost:"
-
 [node name="ProjectileContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/StatsContainer"]
 margin_top = 69.0
-margin_right = 236.0
+margin_right = 275.0
 margin_bottom = 89.0
 
 [node name="ProjectileBtn" type="Button" parent="MarginContainer/MainContainer/StatsContainer/ProjectileContainer"]
@@ -122,24 +113,17 @@ margin_right = 127.0
 margin_bottom = 17.0
 text = "Projectile (Lvl.1)"
 
-[node name="ProjectileCostLabel" type="Label" parent="MarginContainer/MainContainer/StatsContainer/ProjectileContainer"]
-margin_left = 131.0
-margin_top = 3.0
-margin_right = 163.0
-margin_bottom = 17.0
-text = "Cost:"
-
 [node name="SettingsContainer" type="VBoxContainer" parent="MarginContainer/MainContainer"]
 margin_top = 93.0
-margin_right = 236.0
+margin_right = 275.0
 margin_bottom = 157.0
 size_flags_vertical = 4
 custom_constants/separation = 5
 alignment = 1
 
 [node name="TowerSettingsLabel" type="Label" parent="MarginContainer/MainContainer/SettingsContainer"]
-margin_left = 71.0
-margin_right = 164.0
+margin_left = 91.0
+margin_right = 184.0
 margin_bottom = 14.0
 size_flags_horizontal = 4
 text = "Tower Settings"
@@ -147,7 +131,7 @@ align = 1
 
 [node name="FireModeContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/SettingsContainer"]
 margin_top = 19.0
-margin_right = 236.0
+margin_right = 275.0
 margin_bottom = 39.0
 
 [node name="FireModeLabel" type="Label" parent="MarginContainer/MainContainer/SettingsContainer/FireModeContainer"]
@@ -182,7 +166,7 @@ text = "3"
 
 [node name="SellTowerBtn" type="Button" parent="MarginContainer/MainContainer/SettingsContainer"]
 margin_top = 44.0
-margin_right = 236.0
+margin_right = 275.0
 margin_bottom = 64.0
 text = "Sell Tower"
 
@@ -212,8 +196,14 @@ valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="mouse_entered" from="MarginContainer/MainContainer/StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MainContainer/StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/MainContainer/StatsContainer/FireRateContainer/FireRateBtn" to="." method="_on_FireRateBtn_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/MainContainer/StatsContainer/FireRangeContainer/FireRangeBtn" to="." method="_on_FireRangeBtn_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MainContainer/StatsContainer/FireRangeContainer/FireRangeBtn" to="." method="_on_FireRangeBtn_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/MainContainer/StatsContainer/FireRangeContainer/FireRangeBtn" to="." method="_on_FireRangeBtn_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/MainContainer/StatsContainer/ProjectileContainer/ProjectileBtn" to="." method="_on_ProjectileBtn_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/MainContainer/StatsContainer/ProjectileContainer/ProjectileBtn" to="." method="_on_ProjectileBtn_mouse_exited"]
 [connection signal="pressed" from="MarginContainer/MainContainer/StatsContainer/ProjectileContainer/ProjectileBtn" to="." method="_on_ProjectileBtn_pressed"]
 [connection signal="toggled" from="MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode1Btn" to="." method="_on_FireMode1Btn_toggled"]
 [connection signal="toggled" from="MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode2Btn" to="." method="_on_FireMode2Btn_toggled"]

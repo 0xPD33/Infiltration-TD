@@ -152,8 +152,8 @@ func deselect_tower():
 
 
 func set_tower_menu_pos(pos):
-	tower_menu.rect_position.x = pos.x - 125
-	tower_menu.rect_position.y = pos.y - 275
+	tower_menu.rect_position.x = pos.x - 150
+	tower_menu.rect_position.y = pos.y - 300
 
 
 func choose_target():
