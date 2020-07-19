@@ -51,4 +51,12 @@ func setup_stats():
 			value = 20
 			max_hitpoints = 30
 			speed = 100
+		11:
+			value = 24
+			max_hitpoints = 37
+			speed = 107
+		12:
+			value = 29
+			max_hitpoints = 45
+			speed = 115
 

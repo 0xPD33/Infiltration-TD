@@ -79,6 +79,9 @@ func _physics_process(delta: float):
 				elif "SniperTower" in name:
 					tower_cost = 300
 					get_tree().call_group("Game", "tower_built", "SniperTower", tower_cost)
+				elif "DoubleTurretTower" in name:
+					tower_cost = 650
+					get_tree().call_group("Game", "tower_built", "DoubleTurretTower", tower_cost)
 				
 				set_stats(false)
 				hide_range_circle()
@@ -152,8 +155,12 @@ func deselect_tower():
 
 
 func set_tower_menu_pos(pos):
-	tower_menu.rect_position.x = pos.x - 150
-	tower_menu.rect_position.y = pos.y - 300
+	if get_global_transform().origin.x < get_parent().get_parent().get_node("MidPosition").global_transform.origin.x:
+		tower_menu.rect_position.x = pos.x + 50
+		tower_menu.rect_position.y = pos.y - 150
+	else:
+		tower_menu.rect_position.x = pos.x - 350
+		tower_menu.rect_position.y = pos.y - 150
 
 
 func choose_target():
@@ -219,10 +226,21 @@ func _on_AggroRange_area_exited(area: Area2D):
 
 func _on_ShootTimer_timeout():
 	if current_target:
-		projectile_instance = projectile.instance()
-		projectile_instance.set_target(current_target)
-		projectile_instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin
-		get_parent().get_parent().add_child(projectile_instance)
+		if "DoubleTurretTower" in name:
+			projectile_instance = projectile.instance()
+			projectile_instance.set_target(current_target)
+			projectile_instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin
+			get_parent().get_parent().add_child(projectile_instance)
+			
+			var projectile_instance_2 = projectile.instance()
+			projectile_instance_2.set_target(current_target)
+			projectile_instance_2.position = $TurretTowerGun/ShotPosition2.get_global_transform().origin
+			get_parent().get_parent().add_child(projectile_instance_2)
+		else:
+			projectile_instance = projectile.instance()
+			projectile_instance.set_target(current_target)
+			projectile_instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin
+			get_parent().get_parent().add_child(projectile_instance)
 
 
 func _on_TurretTower1_area_entered(area: Area2D):

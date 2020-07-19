@@ -97,6 +97,9 @@ tile_data = PoolIntArray( 262147, 0, 0, 262149, 0, 0, 262151, 0, 0, 262153, 0, 0
 
 [node name="Towers" type="Node2D" parent="."]
 
+[node name="MidPosition" type="Position2D" parent="."]
+position = Vector2( 640, 360 )
+
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -32.2161, -33.1793 )
 curve = SubResource( 3 )
@@ -114,6 +117,7 @@ position = Vector2( 20, 20 )
 anchor_mode = 0
 current = true
 zoom = Vector2( 1.25, 1.25 )
+editor_draw_screen = false
 script = ExtResource( 6 )
 
 [node name="ScreenShake" parent="LevelCamera" instance=ExtResource( 7 )]

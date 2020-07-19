@@ -46,6 +46,9 @@ func sync_descriptions():
 
 func sync_fire_rate_desc(fire_rate_lvl):
 	var projectiles_per_s = 1/upgrades.fire_rate_value
+	if "DoubleTurretTower" in get_parent().name:
+		projectiles_per_s = 2/upgrades.fire_rate_value
+	
 	fire_rate_desc.text = "Fire Rate (Lvl." + str(fire_rate_lvl) + ") - Projectiles/s: " + str(stepify(projectiles_per_s, 0.01)) 
 
 

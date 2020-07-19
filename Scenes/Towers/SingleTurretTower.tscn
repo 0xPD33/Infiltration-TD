@@ -7,7 +7,7 @@
 [ext_resource path="res://Scenes/Towers/TowerMenu.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 26.5, 31.5 )
+extents = Vector2( 26.3953, 32.3158 )
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 200.0
@@ -54,10 +54,14 @@ wait_time = 0.1
 script = ExtResource( 4 )
 
 [node name="TowerMenu" parent="." instance=ExtResource( 5 )]
-margin_left = -125.0
-margin_top = -275.0
-margin_right = 175.0
-margin_bottom = -25.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -150.0
+margin_top = -125.0
+margin_right = 150.0
+margin_bottom = 125.0
 [connection signal="area_entered" from="." to="." method="_on_TurretTower1_area_entered"]
 [connection signal="area_exited" from="." to="." method="_on_TurretTower1_area_exited"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

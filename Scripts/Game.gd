@@ -9,6 +9,9 @@ var light_bomber_towers = []
 var sniper_tower = load("res://Scenes/Towers/SniperTower.tscn")
 var sniper_towers = []
 
+var double_turret_tower = load("res://Scenes/Towers/DoubleTurretTower.tscn")
+var double_turret_towers = []
+
 var instance
 
 var building = false
@@ -21,6 +24,7 @@ onready var dev_console = get_node("CanvasLayer/DevConsole")
 
 func _ready():
 	add_to_group("Game")
+	$MidPosition.global_transform.origin = $LevelCamera.get_camera_screen_center()
 	yield(get_tree(), "idle_frame")
 
 
@@ -78,6 +82,8 @@ func tower_built(tower, cost):
 			subtract_cash(cost)
 		"SniperTower":
 			subtract_cash(cost)
+		"DoubleTurretTower":
+			subtract_cash(cost)
 
 
 func buy_button_1():
@@ -108,6 +114,16 @@ func buy_button_3():
 		instance.set_name("SniperTower" + str(sniper_towers.size()))
 		get_node("Towers").add_child(instance)
 		sniper_towers.append(instance)
+
+
+func buy_button_4():
+	if !building:
+		building = true
+		$TowerBases.visible = true
+		instance = double_turret_tower.instance()
+		instance.set_name("DoubleTurretTower" + str(sniper_towers.size()))
+		get_node("Towers").add_child(instance)
+		double_turret_towers.append(instance)
 
 
 func start_wave():
