@@ -157,10 +157,10 @@ func deselect_tower():
 func set_tower_menu_pos(pos):
 	if get_global_transform().origin.x < get_parent().get_parent().get_node("MidPosition").global_transform.origin.x:
 		tower_menu.rect_position.x = pos.x + 50
-		tower_menu.rect_position.y = pos.y - 150
+		tower_menu.rect_position.y = pos.y - 125
 	else:
 		tower_menu.rect_position.x = pos.x - 350
-		tower_menu.rect_position.y = pos.y - 150
+		tower_menu.rect_position.y = pos.y - 125
 
 
 func choose_target():

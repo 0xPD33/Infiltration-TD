@@ -4,13 +4,13 @@ var explosion = preload("res://Scenes/Effects/Explosion.tscn")
 
 var target = null
 
-var damage : float = 1.5
+var damage : float
 
-var explosion_damage : float = 5
-var explosion_playback_speed : float = 7.5
-var explosion_scale = Vector2(0.5, 0.5)
+var explosion_damage : float
+var explosion_playback_speed : float
+var explosion_scale = Vector2()
 
-var speed = 150
+var speed
 
 var velocity
 
