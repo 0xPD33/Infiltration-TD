@@ -58,6 +58,11 @@ func add_cash(num):
 	get_tree().call_group("HUD", "sync_cash_label")
 
 
+func add_cash_per_wave():
+	cash_per_wave = (Global.wave) * 25
+	add_cash(cash_per_wave)
+
+
 func subtract_cash(num):
 	Global.cash -= num
 	get_tree().call_group("HUD", "sync_cash_label")
@@ -130,19 +135,20 @@ func start_wave():
 	if !wave_started:
 		Global.wave += 1
 		wave_started = true
-		on_new_wave()
-		get_tree().call_group("Spawner", "start_wave")
+		_on_start_wave()
 
 
-func on_new_wave():
+func _on_start_wave():
 	get_tree().call_group("HUD", "sync_wave_label")
 	get_tree().call_group("Enemy", "setup_stats")
+	get_tree().call_group("Spawner", "start_wave")
 
 
 func end_wave():
 	if wave_started:
-		cash_per_wave = Global.wave * 25
-		add_cash(cash_per_wave)
+		if Global.wave > 0:
+			add_cash_per_wave()
+		
 		wave_started = false
 		fast_forward(false)
 		get_tree().call_group("HUD", "toggle_fast_forward_button")

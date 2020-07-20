@@ -9,12 +9,12 @@ var creeps_alive : int = 0
 # need a better solution for this:
 
 var creep_soldiers_spawned = 0
-var creep_soldiers_per_wave = [0, 20, 25, 30, 40, 50, 60, 70, 80, 90]
-var creep_soldiers_wait_time_per_wave = [0.0, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4]
+var creep_soldiers_per_wave = [0, 20, 25, 30, 40, 50, 55, 60, 70, 80, 90, 100]
+var creep_soldiers_wait_time_per_wave = [0.0, 0.8, 0.75, 0.7, 0.65, 0.6, 0.55, 0.5, 0.45, 0.4, 0.39, 0.38]
 
 var creep_undead_soldiers_spawned = 0
-var creep_undead_soldiers_per_wave = [0, 0, 0, 1, 3, 5, 7, 9, 12, 15]
-var creep_undead_soldiers_wait_time_per_wave = [0.0, 0.0, 0.0, 3.0, 2.5, 2.2, 1.9, 1.6, 1.3, 1.0]
+var creep_undead_soldiers_per_wave = [0, 0, 0, 1, 3, 5, 7, 9, 12, 15, 18, 21]
+var creep_undead_soldiers_wait_time_per_wave = [0.0, 0.0, 0.0, 3.0, 2.5, 2.2, 1.9, 1.6, 1.3, 1.0, 0.9, 0.8]
 
 
 func _ready():
@@ -62,7 +62,8 @@ func creep_undead_soldier_spawn():
 func creep_dead():
 	creeps_alive = get_tree().get_nodes_in_group("Enemy").size()
 	creeps_alive -= 1
-	if creeps_alive == 0 :
+	
+	if creeps_alive == 0:
 		creep_soldiers_spawned = 0
 		creep_undead_soldiers_spawned = 0
 		get_tree().call_group("Game", "end_wave")

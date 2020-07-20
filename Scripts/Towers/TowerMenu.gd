@@ -3,6 +3,8 @@ extends PopupMenu
 var upgrades
 var tooltip
 
+var tower_sell_value 
+
 onready var fire_rate_desc = $MarginContainer/MainContainer/StatsContainer/FireRateContainer/FireRateDesc
 onready var fire_rate_btn = $MarginContainer/MainContainer/StatsContainer/FireRateContainer/FireRateBtn
 
@@ -15,6 +17,8 @@ onready var projectile_btn = $MarginContainer/MainContainer/StatsContainer/Proje
 onready var fire_mode_1_button = $MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode1Btn
 onready var fire_mode_2_button = $MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode2Btn
 onready var fire_mode_3_button = $MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode3Btn
+
+onready var sell_tower_button = $MarginContainer/MainContainer/SettingsContainer/SellTowerBtn
 
 signal closed
 
@@ -75,6 +79,11 @@ func sync_projectile_cost(projectile_cost):
 	upgrade_cost_label.text = "Cost: " + str(projectile_cost)
 
 
+func set_sell_value(value):
+	tower_sell_value = value / 2
+	sell_tower_button.text = "Sell Tower for " + str(tower_sell_value)
+
+
 func _on_FireRateBtn_pressed():
 	upgrades.fire_rate_level_up()
 	sync_fire_rate_desc(upgrades.fire_rate_lvl + 1)
@@ -120,8 +129,7 @@ func _on_CloseButton_pressed():
 
 
 func _on_SellTowerBtn_pressed():
-	var sell_value = get_parent().tower_cost / 2
-	get_tree().call_group("Game", "add_cash", sell_value)
+	get_tree().call_group("Game", "add_cash", tower_sell_value)
 	get_parent().queue_free()
 
 

@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Scenes/TooltipUpgradeCost.tscn" type="PackedScene" id=1]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.0588235, 0.0588235, 0.0588235, 0.862745 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_blend = true
 
 [node name="TooltipTowerCost" instance=ExtResource( 1 )]
 margin_right = 256.0
@@ -22,6 +29,7 @@ margin_bottom = 40.0
 rect_min_size = Vector2( 256, 40 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
 
 [node name="CostLabel" parent="CenterContainer/TooltipPanel" index="0"]
 anchor_left = 0.0

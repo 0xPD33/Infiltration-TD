@@ -106,6 +106,7 @@ curve = SubResource( 3 )
 script = ExtResource( 2 )
 
 [node name="CreepUndeadSoldierTimer" type="Timer" parent="Path2D"]
+process_mode = 0
 
 [node name="CreepSoldierTimer" type="Timer" parent="Path2D"]
 process_mode = 0

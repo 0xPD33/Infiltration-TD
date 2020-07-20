@@ -83,6 +83,7 @@ func _physics_process(delta: float):
 					tower_cost = 650
 					get_tree().call_group("Game", "tower_built", "DoubleTurretTower", tower_cost)
 				
+				tower_menu.set_sell_value(tower_cost)
 				set_stats(false)
 				hide_range_circle()
 				$TurretTowerBase.modulate = Color(1.0, 1.0, 1.0, 1.0)
@@ -231,6 +232,8 @@ func _on_ShootTimer_timeout():
 			projectile_instance.set_target(current_target)
 			projectile_instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin
 			get_parent().get_parent().add_child(projectile_instance)
+			
+			yield(get_tree().create_timer(0.1), "timeout")
 			
 			var projectile_instance_2 = projectile.instance()
 			projectile_instance_2.set_target(current_target)
