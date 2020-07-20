@@ -59,9 +59,9 @@ var upgrades = {"single_turret_tower":
 	{
 	"fire_rate": 
 		{
-			"levels": [0, 1, 2, 3, 4],
-			"rate_of_fire": [1.5, 1.25, 1.0, 0.75, 0.5],
-			"cost": [40, 80, 160, 320, "---"]
+			"levels": [0, 1, 2, 3],
+			"rate_of_fire": [2, 1.75, 1.5, 1],
+			"cost": [40, 80, 240, "---"]
 		},
 	"fire_range":
 		{
