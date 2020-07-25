@@ -47,6 +47,9 @@ margin_bottom = 14.0
 size_flags_horizontal = 4
 text = "Tower Stats"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FireRateContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/StatsContainer"]
 margin_top = 19.0
