@@ -2,6 +2,6 @@ extends "res://Scripts/Projectiles/TurretProjectile.gd"
 
 
 func _ready():
-	damage = 10
-	speed = 550
+	damage = 6
+	speed = 500
 

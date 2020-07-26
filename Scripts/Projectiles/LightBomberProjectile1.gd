@@ -2,9 +2,9 @@ extends "res://Scripts/Projectiles/BomberProjectile.gd"
 
 
 func _ready():
-	damage = 1.5
+	damage = 1
 
-	explosion_damage = 5
+	explosion_damage = 8
 	explosion_playback_speed = 9
 	explosion_scale = Vector2(0.5, 0.5)
 

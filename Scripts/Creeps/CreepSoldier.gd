@@ -17,7 +17,7 @@ func setup_stats():
 			speed = 60
 		2:
 			value = 3
-			max_hitpoints = 3.5
+			max_hitpoints = 3
 			speed = 63
 		3:
 			value = 4
@@ -33,30 +33,42 @@ func setup_stats():
 			speed = 75
 		6:
 			value = 10
-			max_hitpoints = 12.5
+			max_hitpoints = 11
 			speed = 80
 		7:
 			value = 12
-			max_hitpoints = 15
+			max_hitpoints = 13
 			speed = 85
 		8:
 			value = 14
-			max_hitpoints = 18
+			max_hitpoints = 15
 			speed = 90
 		9:
 			value = 17
-			max_hitpoints = 22
+			max_hitpoints = 17
 			speed = 95
 		10:
 			value = 20
-			max_hitpoints = 27
+			max_hitpoints = 20
 			speed = 100
 		11:
-			value = 24
-			max_hitpoints = 33
-			speed = 107
+			value = 23
+			max_hitpoints = 23
+			speed = 105
 		12:
-			value = 29
-			max_hitpoints = 40
-			speed = 115
+			value = 26
+			max_hitpoints = 26
+			speed = 110
+		13:
+			value = 28
+			max_hitpoints = 28
+			speed = 110
+		14:
+			value = 30
+			max_hitpoints = 30
+			speed = 110
+		15:
+			value = 30
+			max_hitpoints = 30
+			speed = 110
 

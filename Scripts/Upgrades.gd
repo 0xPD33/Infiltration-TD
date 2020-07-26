@@ -25,9 +25,11 @@ var light_bomber_projectile_2 = load("res://Scenes/Projectiles/BomberProjectile2
 
 var sniper_projectile_1 = load("res://Scenes/Projectiles/SniperProjectile1.tscn")
 var sniper_projectile_2 = load("res://Scenes/Projectiles/SniperProjectile2.tscn")
+var sniper_projectile_3 = load("res://Scenes/Projectiles/SniperProjectile3.tscn")
 
 var double_turret_projectile_1 = load("res://Scenes/Projectiles/DoubleTurretProjectile1.tscn")
 var double_turret_projectile_2 = load("res://Scenes/Projectiles/DoubleTurretProjectile2.tscn")
+var double_turret_projectile_3 = load("res://Scenes/Projectiles/DoubleTurretProjectile3.tscn")
 
 var projectile = null
 var projectile_dmg
@@ -38,30 +40,30 @@ var upgrades = {"single_turret_tower":
 	{
 	"fire_rate": 
 		{
-			"levels": [0, 1, 2, 3, 4, 5, 6],
-			"rate_of_fire": [0.3, 0.25, 0.2, 0.135, 0.1, 0.07, 0.05],
-			"cost": [25, 50, 135, 225, 350, 450, "---"]
+			"levels": [0, 1, 2, 3, 4, 5, 6, 7],
+			"rate_of_fire": [0.33, 0.3, 0.25, 0.2, 0.15, 0.1, 0.075, 0.05],
+			"cost": [25, 50, 150, 250, 400, 750, "---"]
 		},
 	"fire_range":
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
-			"range_of_fire": [200, 250, 300, 350, 420, 500],
-			"cost": [45, 90, 150, 225, 350, "---"]
+			"range_of_fire": [200, 250, 300, 350, 420, 550],
+			"cost": [45, 90, 150, 275, 550, "---"]
 		},
 	"projectiles":
 		{
 			"levels": [0, 1, 2, 3],
 			"projectile": [single_turret_projectile_1, single_turret_projectile_2, single_turret_projectile_3, single_turret_projectile_4],
-			"cost": [75, 200, 350, "---"]
+			"cost": [75, 200, 400, "---"]
 		}
 	},
 	"light_bomber_tower":
 	{
 	"fire_rate": 
 		{
-			"levels": [0, 1, 2, 3],
-			"rate_of_fire": [2, 1.75, 1.5, 1],
-			"cost": [40, 80, 240, "---"]
+			"levels": [0, 1, 2, 3, 4],
+			"rate_of_fire": [1.7, 1.5, 1.3, 1.1, 0.8],
+			"cost": [40, 80, 160, 350, "---"]
 		},
 	"fire_range":
 		{
@@ -73,7 +75,7 @@ var upgrades = {"single_turret_tower":
 		{
 			"levels": [0, 1],
 			"projectile": [light_bomber_projectile_1, light_bomber_projectile_2],
-			"cost": [150, "---"]
+			"cost": [200, "---"]
 		}
 	},
 	"sniper_tower":
@@ -82,19 +84,19 @@ var upgrades = {"single_turret_tower":
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
 			"rate_of_fire": [3, 2.7, 2.4, 2.1, 1.6, 1.25],
-			"cost": [30, 60, 90, 180, 300, "---"]
+			"cost": [30, 60, 90, 175, 350, "---"]
 		},
 		"fire_range":
 		{
-			"levels": [0, 1, 2, 3, 4],
-			"range_of_fire": [600, 650, 700, 775, 900],
-			"cost": [40, 80, 200, 400, "---"]
+			"levels": [0, 1, 2, 3],
+			"range_of_fire": [650, 700, 750, 900],
+			"cost": [50, 100, 250, "---"]
 		},
 		"projectiles":
 		{
-			"levels": [0, 1],
-			"projectile": [sniper_projectile_1, sniper_projectile_2],
-			"cost": [150, "---"]
+			"levels": [0, 1, 2],
+			"projectile": [sniper_projectile_1, sniper_projectile_2, sniper_projectile_3],
+			"cost": [150, 350, "---"]
 		}
 	},
 	"double_turret_tower":
@@ -102,8 +104,8 @@ var upgrades = {"single_turret_tower":
 	"fire_rate":
 		{
 			"levels": [0, 1, 2, 3, 4],
-			"rate_of_fire": [0.6, 0.55, 0.5, 0.35, 0.2],
-			"cost": [40, 80, 160, 320, "---"]
+			"rate_of_fire": [0.7, 0.6, 0.5, 0.35, 0.2],
+			"cost": [80, 160, 400, 725, "---"]
 		},
 		"fire_range":
 		{
@@ -114,8 +116,8 @@ var upgrades = {"single_turret_tower":
 		"projectiles":
 		{
 			"levels": [0, 1],
-			"projectile": [double_turret_projectile_1, double_turret_projectile_2],
-			"cost": [200, "---"]
+			"projectile": [double_turret_projectile_1, double_turret_projectile_2, double_turret_projectile_3],
+			"cost": [250, 600, "---"]
 		}
 	}
 }

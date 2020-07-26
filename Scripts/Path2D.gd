@@ -50,7 +50,6 @@ func _on_CreepUndeadSoldierTimer_timeout():
 func creep_soldier_spawn():
 	instance = creep_soldier.instance()
 	add_child(instance)
-	print(instance.name)
 	creep_soldiers_spawned += 1
 
 
@@ -65,6 +64,11 @@ func creep_dead():
 	creeps_alive -= 1
 	
 	if creeps_alive == 0:
+		creep_soldiers_spawned = 0
+		creep_undead_soldiers_spawned = 0
+		get_tree().call_group("Game", "end_wave")
+	elif creeps_alive < 0:
+		yield(get_tree().create_timer(3.0), "timeout")
 		creep_soldiers_spawned = 0
 		creep_undead_soldiers_spawned = 0
 		get_tree().call_group("Game", "end_wave")
