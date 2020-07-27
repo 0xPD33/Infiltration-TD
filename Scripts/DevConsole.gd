@@ -1,9 +1,10 @@
 extends Control
 
-const DEV_COMMANDS = ["help", "cash", "wave"]
+const DEV_COMMANDS = ["help", "cash", "wave", "hud"]
 
 var cash_amount
 var current_wave
+var hud_toggled = true
 
 var entering_cash
 var entering_wave
@@ -71,6 +72,17 @@ func wave():
 	get_tree().call_group("HUD", "sync_wave_label")
 
 
+func hud():
+	if hud_toggled:
+		update_log("HUD toggled off.\n")
+		hud_toggled = false
+	else:
+		update_log("HUD toggled on.\n")
+		hud_toggled = true
+	
+	get_tree().call_group("HUD", "hud_toggle", hud_toggled)
+
+
 func update_log(text):
 	console_log.bbcode_text += text 
 
@@ -85,6 +97,8 @@ func _on_CommandLine_text_entered(command):
 				cash()
 			"wave":
 				wave()
+			"hud":
+				hud()
 	
 	if !value_entered:
 		if entering_cash:

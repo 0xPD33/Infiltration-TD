@@ -60,6 +60,13 @@ func toggle_fast_forward_button():
 	$BuyRect/BuyPanel/HBoxContainer/FastForwardButton.pressed = false
 
 
+func hud_toggle(is_visible):
+	if is_visible:
+		visible = true
+	else:
+		visible = false
+
+
 func _on_BuyButton1_pressed():
 	if Global.cash >= 150:
 		get_tree().call_group("Game", "buy_button_1")
