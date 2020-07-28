@@ -43,7 +43,10 @@ func error():
 func show_help():
 	update_log("This is a development console used for testing purposes. Available commands:\n")
 	for command in DEV_COMMANDS:
-		update_log(command + ", ")
+		if command != DEV_COMMANDS.back():
+			update_log(command + ", ")
+		else:
+			update_log(command)
 	
 	update_log("\n")
 

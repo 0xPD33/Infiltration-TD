@@ -2,6 +2,6 @@ extends "res://Scripts/Projectiles/SniperProjectile.gd"
 
 
 func _ready():
-	damage = 15
-	speed = 750
+	damage = 33
+	speed = 999
 

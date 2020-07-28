@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Assets/UI/healthbar_base.png" type="Texture" id=1]
-[ext_resource path="res://Assets/UI/healthbar_outline.png" type="Texture" id=2]
-[ext_resource path="res://Assets/UI/healthbar_progress.png" type="Texture" id=3]
+[ext_resource path="res://Assets/HealthBar/healthbar_base.png" type="Texture" id=1]
+[ext_resource path="res://Assets/HealthBar/healthbar_outline.png" type="Texture" id=2]
+[ext_resource path="res://Assets/HealthBar/healthbar_progress.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/HealthBar.gd" type="Script" id=4]
 
 [node name="HealthBar" type="Node2D"]
@@ -14,12 +14,12 @@ margin_left = -32.0
 margin_top = -48.0
 margin_right = 32.0
 margin_bottom = -28.0
-step = 0.1
+step = 1.0
 value = 100.0
 texture_under = ExtResource( 1 )
 texture_over = ExtResource( 2 )
 texture_progress = ExtResource( 3 )
-tint_progress = Color( 0.803922, 0, 0, 1 )
+tint_progress = Color( 0.756863, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

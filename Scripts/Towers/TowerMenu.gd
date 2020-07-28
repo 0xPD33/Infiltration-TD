@@ -85,19 +85,19 @@ func set_sell_value(value):
 
 
 func _on_FireRateBtn_pressed():
-	upgrades.fire_rate_level_up()
+	upgrades.level_up("FireRate")
 	sync_fire_rate_desc(upgrades.fire_rate_lvl + 1)
 	sync_fire_rate_cost(upgrades.fire_rate_upgrade_cost)
 
 
 func _on_FireRangeBtn_pressed():
-	upgrades.fire_range_level_up()
+	upgrades.level_up("FireRange")
 	sync_fire_range_desc(upgrades.fire_range_lvl + 1)
 	sync_fire_range_cost(upgrades.fire_range_upgrade_cost)
 
 
 func _on_ProjectileBtn_pressed():
-	upgrades.projectile_level_up()
+	upgrades.level_up("Projectile")
 	sync_projectile_desc(upgrades.projectile_lvl + 1)
 	sync_projectile_cost(upgrades.projectile_upgrade_cost)
 

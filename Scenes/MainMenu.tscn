@@ -59,9 +59,10 @@ __meta__ = {
 
 [node name="MenuContainer" type="VBoxContainer" parent="MainContainer"]
 margin_left = 372.0
-margin_top = 70.0
+margin_top = 68.0
 margin_right = 652.0
-margin_bottom = 442.0
+margin_bottom = 443.0
+custom_constants/separation = 5
 alignment = 1
 
 [node name="PlayButton" type="Button" parent="MainContainer/MenuContainer"]
@@ -92,9 +93,9 @@ __meta__ = {
 }
 
 [node name="SettingsButton" type="Button" parent="MainContainer/MenuContainer"]
-margin_top = 94.0
+margin_top = 95.0
 margin_right = 280.0
-margin_bottom = 184.0
+margin_bottom = 185.0
 rect_min_size = Vector2( 280, 90 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -120,9 +121,9 @@ __meta__ = {
 }
 
 [node name="CreditsButton" type="Button" parent="MainContainer/MenuContainer"]
-margin_top = 188.0
+margin_top = 190.0
 margin_right = 280.0
-margin_bottom = 278.0
+margin_bottom = 280.0
 rect_min_size = Vector2( 280, 90 )
 focus_mode = 0
 enabled_focus_mode = 0
@@ -148,9 +149,9 @@ __meta__ = {
 }
 
 [node name="QuitButton" type="Button" parent="MainContainer/MenuContainer"]
-margin_top = 282.0
+margin_top = 285.0
 margin_right = 280.0
-margin_bottom = 372.0
+margin_bottom = 375.0
 rect_min_size = Vector2( 280, 90 )
 focus_mode = 0
 enabled_focus_mode = 0

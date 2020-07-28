@@ -20,12 +20,14 @@ var single_turret_projectile_2 = load("res://Scenes/Projectiles/SingleTurretProj
 var single_turret_projectile_3 = load("res://Scenes/Projectiles/SingleTurretProjectile3.tscn")
 var single_turret_projectile_4 = load("res://Scenes/Projectiles/SingleTurretProjectile4.tscn")
 
-var light_bomber_projectile_1 = load("res://Scenes/Projectiles/BomberProjectile1.tscn")
-var light_bomber_projectile_2 = load("res://Scenes/Projectiles/BomberProjectile2.tscn")
+var light_bomber_projectile_1 = load("res://Scenes/Projectiles/LightBomberProjectile1.tscn")
+var light_bomber_projectile_2 = load("res://Scenes/Projectiles/LightBomberProjectile2.tscn")
+var light_bomber_projectile_3 = load("res://Scenes/Projectiles/LightBomberProjectile3.tscn")
 
 var sniper_projectile_1 = load("res://Scenes/Projectiles/SniperProjectile1.tscn")
 var sniper_projectile_2 = load("res://Scenes/Projectiles/SniperProjectile2.tscn")
 var sniper_projectile_3 = load("res://Scenes/Projectiles/SniperProjectile3.tscn")
+var sniper_projectile_4 = load("res://Scenes/Projectiles/SniperProjectile4.tscn")
 
 var double_turret_projectile_1 = load("res://Scenes/Projectiles/DoubleTurretProjectile1.tscn")
 var double_turret_projectile_2 = load("res://Scenes/Projectiles/DoubleTurretProjectile2.tscn")
@@ -73,9 +75,9 @@ var upgrades = {"single_turret_tower":
 		},
 	"projectiles":
 		{
-			"levels": [0, 1],
-			"projectile": [light_bomber_projectile_1, light_bomber_projectile_2],
-			"cost": [200, "---"]
+			"levels": [0, 1, 2],
+			"projectile": [light_bomber_projectile_1, light_bomber_projectile_2, light_bomber_projectile_3],
+			"cost": [200, 500, "---"]
 		}
 	},
 	"sniper_tower":
@@ -94,9 +96,9 @@ var upgrades = {"single_turret_tower":
 		},
 		"projectiles":
 		{
-			"levels": [0, 1, 2],
-			"projectile": [sniper_projectile_1, sniper_projectile_2, sniper_projectile_3],
-			"cost": [150, 350, "---"]
+			"levels": [0, 1, 2, 3],
+			"projectile": [sniper_projectile_1, sniper_projectile_2, sniper_projectile_3, sniper_projectile_4],
+			"cost": [150, 350, 750, "---"]
 		}
 	},
 	"double_turret_tower":
@@ -115,7 +117,7 @@ var upgrades = {"single_turret_tower":
 		},
 		"projectiles":
 		{
-			"levels": [0, 1],
+			"levels": [0, 1, 2],
 			"projectile": [double_turret_projectile_1, double_turret_projectile_2, double_turret_projectile_3],
 			"cost": [250, 600, "---"]
 		}
@@ -170,107 +172,29 @@ func set_projectile(tower_string, num):
 	projectile_upgrade_cost = upgrades[tower_string]["projectiles"]["cost"][num]
 
 
-func fire_rate_level_up():
-	if typeof(fire_rate_upgrade_cost) == TYPE_INT:
-		if Global.cash >= fire_rate_upgrade_cost:
-			if "SingleTurretTower" in get_parent().name:
-				var max_lvl = upgrades["single_turret_tower"]["fire_rate"]["levels"].size()
-				if fire_rate_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_rate_upgrade_cost)
-					fire_rate_lvl += 1
-					set_fire_rate("single_turret_tower", fire_rate_lvl)
-					get_parent().set_stats(true)
-			elif "LightBomberTower" in get_parent().name:
-				var max_lvl = upgrades["light_bomber_tower"]["fire_rate"]["levels"].size()
-				if fire_rate_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_rate_upgrade_cost)
-					fire_rate_lvl += 1
-					set_fire_rate("light_bomber_tower", fire_rate_lvl)
-					get_parent().set_stats(true)
-			elif "SniperTower" in get_parent().name:
-				var max_lvl = upgrades["sniper_tower"]["fire_rate"]["levels"].size()
-				if fire_rate_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_rate_upgrade_cost)
-					fire_rate_lvl += 1
-					set_fire_rate("sniper_tower", fire_rate_lvl)
-					get_parent().set_stats(true)
-			elif "DoubleTurretTower" in get_parent().name:
-				var max_lvl = upgrades["double_turret_tower"]["fire_rate"]["levels"].size()
-				if fire_rate_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_rate_upgrade_cost)
-					fire_rate_lvl += 1
-					set_fire_rate("double_turret_tower", fire_rate_lvl)
-					get_parent().set_stats(true)
-	else:
-		return
-
-
-func fire_range_level_up():
-	if typeof(fire_range_upgrade_cost) == TYPE_INT:
-		if Global.cash >= fire_range_upgrade_cost:
-			if "SingleTurretTower" in get_parent().name:
-				var max_lvl = upgrades["single_turret_tower"]["fire_range"]["levels"].size()
-				if fire_range_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_range_upgrade_cost)
-					fire_range_lvl += 1
-					set_fire_range("single_turret_tower", fire_range_lvl)
-					get_parent().set_stats(true)
-			elif "LightBomberTower" in get_parent().name:
-				var max_lvl = upgrades["light_bomber_tower"]["fire_range"]["levels"].size()
-				if fire_range_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_range_upgrade_cost)
-					fire_range_lvl += 1
-					set_fire_range("light_bomber_tower", fire_range_lvl)
-					get_parent().set_stats(true)
-			elif "SniperTower" in get_parent().name:
-				var max_lvl = upgrades["sniper_tower"]["fire_range"]["levels"].size()
-				if fire_range_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_range_upgrade_cost)
-					fire_range_lvl += 1
-					set_fire_range("sniper_tower", fire_range_lvl)
-					get_parent().set_stats(true)
-			elif "DoubleTurretTower" in get_parent().name:
-				var max_lvl = upgrades["double_turret_tower"]["fire_range"]["levels"].size()
-				if fire_range_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", fire_range_upgrade_cost)
-					fire_range_lvl += 1
-					set_fire_range("double_turret_tower", fire_range_lvl)
-					get_parent().set_stats(true)
-	else:
-		return
-
-
-func projectile_level_up():
-	if typeof(projectile_upgrade_cost) == TYPE_INT:
-		if Global.cash >= projectile_upgrade_cost:
-			if "SingleTurretTower" in get_parent().name:
-				var max_lvl = upgrades["single_turret_tower"]["projectiles"]["levels"].size()
-				if projectile_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", projectile_upgrade_cost)
-					projectile_lvl += 1
-					set_projectile("single_turret_tower", projectile_lvl)
-					get_parent().set_stats(true)
-			elif "LightBomberTower" in get_parent().name:
-				var max_lvl = upgrades["light_bomber_tower"]["projectiles"]["levels"].size()
-				if projectile_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", projectile_upgrade_cost)
-					projectile_lvl += 1
-					set_projectile("light_bomber_tower", projectile_lvl)
-					get_parent().set_stats(true)
-			elif "SniperTower" in get_parent().name:
-				var max_lvl = upgrades["sniper_tower"]["projectiles"]["levels"].size()
-				if projectile_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", projectile_upgrade_cost)
-					projectile_lvl += 1
-					set_projectile("sniper_tower", projectile_lvl)
-					get_parent().set_stats(true)
-			elif "DoubleTurretTower" in get_parent().name:
-				var max_lvl = upgrades["double_turret_tower"]["projectiles"]["levels"].size()
-				if projectile_lvl < max_lvl:
-					get_tree().call_group("Game", "subtract_cash", projectile_upgrade_cost)
-					projectile_lvl += 1
-					set_projectile("double_turret_tower", projectile_lvl)
-					get_parent().set_stats(true)
-	else:
-		return
+func level_up(stat):
+	if stat == "FireRate":
+		if typeof(fire_rate_upgrade_cost) == TYPE_INT and Global.cash >= fire_rate_upgrade_cost:
+			var max_lvl = upgrades[parent_tower_string]["fire_rate"]["levels"].size()
+			if fire_rate_lvl < max_lvl:
+				get_tree().call_group("Game", "subtract_cash", fire_rate_upgrade_cost)
+				fire_rate_lvl += 1
+				set_fire_rate(parent_tower_string, fire_rate_lvl)
+				get_parent().set_stats(true)
+	elif stat == "FireRange":
+		if typeof(fire_range_upgrade_cost) == TYPE_INT and Global.cash >= fire_range_upgrade_cost:
+			var max_lvl = upgrades[parent_tower_string]["fire_range"]["levels"].size()
+			if fire_range_lvl < max_lvl:
+				get_tree().call_group("Game", "subtract_cash", fire_range_upgrade_cost)
+				fire_range_lvl += 1
+				set_fire_range(parent_tower_string, fire_range_lvl)
+				get_parent().set_stats(true)
+	elif stat == "Projectile":
+		if typeof(projectile_upgrade_cost) == TYPE_INT and Global.cash >= projectile_upgrade_cost:
+			var max_lvl = upgrades[parent_tower_string]["projectiles"]["levels"].size()
+			if projectile_lvl < max_lvl:
+				get_tree().call_group("Game", "subtract_cash", projectile_upgrade_cost)
+				projectile_lvl += 1
+				set_projectile(parent_tower_string, projectile_lvl)
+				get_parent().set_stats(true)	
 

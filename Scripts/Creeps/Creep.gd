@@ -7,6 +7,8 @@ var hitpoints : float
 var max_hitpoints : float
 var value : int
 
+var popup_damage = preload("res://Scenes/PopupDamage.tscn")
+
 signal hurt
 
 
@@ -45,6 +47,12 @@ func check_hitpoints():
 
 func _on_damage(dmg):
 	hitpoints -= dmg
+	
+	var popup_instance = popup_damage.instance()
+	get_parent().add_child(popup_instance)
+	popup_instance.position = position
+	popup_instance.popup_damage(dmg)
+	
 	emit_signal("hurt", hitpoints)
 	check_hitpoints()
 

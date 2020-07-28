@@ -31,9 +31,6 @@ func _ready():
 func _input(event: InputEvent):
 	if Input.is_action_just_pressed ("ui_cancel"):
 		end_game()
-		
-	if Input.is_action_just_pressed("reload_level"):
-		reload_game()
 	
 	if Input.is_action_just_pressed("dev_console"):
 		toggle_dev_console()

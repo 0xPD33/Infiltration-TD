@@ -1,7 +1,8 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Projectiles/BomberProjectile1.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Projectiles/LightBomberProjectile1.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scripts/Projectiles/LightBomberProjectile2.gd" type="Script" id=2]
+
 
 [node name="BomberProjectile2" instance=ExtResource( 1 )]
 scale = Vector2( 1.75, 1.75 )
