@@ -35,7 +35,7 @@ tracks/1/keys = {
 script = ExtResource( 1 )
 
 [node name="DamageLabel" type="Label" parent="."]
-modulate = Color( 1.5, 1.5, 1.5, 1 )
+modulate = Color( 1.17647, 1.17647, 1.17647, 1 )
 margin_top = -6.0
 margin_right = 29.0
 margin_bottom = 8.0

@@ -45,14 +45,18 @@ func check_hitpoints():
 		queue_free()
 
 
+func create_popup_damage(dmg, color, size):
+	var popup_instance = popup_damage.instance()
+	get_parent().get_parent().add_child(popup_instance)
+	popup_instance.modulate = color
+	popup_instance.scale = size
+	popup_instance.position = get_global_transform().origin
+	popup_instance.popup_damage(dmg)
+
+
 func _on_damage(dmg):
 	hitpoints -= dmg
-	
-	var popup_instance = popup_damage.instance()
-	get_parent().add_child(popup_instance)
-	popup_instance.position = position
-	popup_instance.popup_damage(dmg)
-	
+	get_node("AnimationPlayer").play("creep_hurt")
 	emit_signal("hurt", hitpoints)
 	check_hitpoints()
 
@@ -60,12 +64,16 @@ func _on_damage(dmg):
 func _on_Area2D_area_entered(area: Area2D):
 	if area.is_in_group("TurretProjectile"):
 		_on_damage(area.damage)
+		create_popup_damage(area.damage, Color.white, Vector2(1.0, 1.0))
 		area.queue_free()
 	elif area.is_in_group("BomberProjectile"):
 		_on_damage(area.damage)
+		create_popup_damage(area.damage, Color.gray, Vector2(1.25, 1.25))
 	elif area.is_in_group("SniperProjectile"):
 		_on_damage(area.damage)
+		create_popup_damage(area.damage, Color.red, Vector2(1.25, 1.25))
 		area.queue_free()
 	elif area.is_in_group("Explosion"):
 		_on_damage(area.damage)
+		create_popup_damage(area.damage, Color.darkred, Vector2(1.5, 1.5))
 
