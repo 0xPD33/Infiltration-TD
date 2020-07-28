@@ -1,16 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/Font/Gontserrat-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/Font/Gontserrat-Light.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Scripts/Settings.gd" type="Script" id=3]
+[ext_resource path="res://Assets/UI/return.png" type="Texture" id=4]
+[ext_resource path="res://Assets/UI/checkmark.png" type="Texture" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=2]
 
-[sub_resource type="StyleBoxFlat" id=8]
+[sub_resource type="StyleBoxFlat" id=3]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 5.0
@@ -23,7 +26,7 @@ border_width_bottom = 3
 border_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=7]
+[sub_resource type="StyleBoxFlat" id=4]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 5.0
@@ -36,7 +39,7 @@ border_width_bottom = 3
 border_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=5]
 content_margin_left = 10.0
 content_margin_right = 10.0
 content_margin_top = 5.0
@@ -49,10 +52,10 @@ border_width_bottom = 3
 border_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_blend = true
 
-[sub_resource type="StyleBoxLine" id=11]
+[sub_resource type="StyleBoxLine" id=6]
 color = Color( 1, 1, 1, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.568627, 0.568627, 0.568627, 0.498039 )
 border_width_left = 2
 border_width_top = 2
@@ -64,7 +67,7 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=8]
 content_margin_left = 20.0
 content_margin_right = 20.0
 content_margin_top = 5.0
@@ -73,7 +76,7 @@ bg_color = Color( 0.282353, 0.282353, 0.282353, 0.705882 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=9]
 content_margin_left = 20.0
 content_margin_right = 20.0
 content_margin_top = 5.0
@@ -82,12 +85,12 @@ bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=10]
 use_filter = true
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=3]
-default_font = SubResource( 2 )
+[sub_resource type="Theme" id=11]
+default_font = SubResource( 10 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -237,7 +240,7 @@ ItemList/constants/icon_margin = 4
 ItemList/constants/line_separation = 2
 ItemList/constants/vseparation = 2
 ItemList/fonts/font = null
-ItemList/styles/bg = SubResource( 9 )
+ItemList/styles/bg = SubResource( 2 )
 ItemList/styles/bg_focus = null
 ItemList/styles/cursor = null
 ItemList/styles/cursor_unfocused = null
@@ -294,11 +297,11 @@ OptionButton/constants/arrow_margin = 2
 OptionButton/constants/hseparation = 2
 OptionButton/fonts/font = null
 OptionButton/icons/arrow = null
-OptionButton/styles/disabled = SubResource( 8 )
-OptionButton/styles/focus = SubResource( 8 )
-OptionButton/styles/hover = SubResource( 7 )
-OptionButton/styles/normal = SubResource( 7 )
-OptionButton/styles/pressed = SubResource( 7 )
+OptionButton/styles/disabled = SubResource( 3 )
+OptionButton/styles/focus = SubResource( 3 )
+OptionButton/styles/hover = SubResource( 4 )
+OptionButton/styles/normal = SubResource( 4 )
+OptionButton/styles/pressed = SubResource( 4 )
 Panel/styles/panel = null
 PanelContainer/styles/panel = null
 PopupDialog/styles/panel = null
@@ -317,9 +320,9 @@ PopupMenu/icons/unchecked = null
 PopupMenu/styles/hover = null
 PopupMenu/styles/labeled_separator_left = null
 PopupMenu/styles/labeled_separator_right = null
-PopupMenu/styles/panel = SubResource( 10 )
+PopupMenu/styles/panel = SubResource( 5 )
 PopupMenu/styles/panel_disabled = null
-PopupMenu/styles/separator = SubResource( 11 )
+PopupMenu/styles/separator = SubResource( 6 )
 PopupPanel/styles/panel = null
 ProgressBar/colors/font_color = Color( 0, 0, 0, 1 )
 ProgressBar/colors/font_color_shadow = Color( 0, 0, 0, 1 )
@@ -360,10 +363,10 @@ TabContainer/icons/increment = null
 TabContainer/icons/increment_highlight = null
 TabContainer/icons/menu = null
 TabContainer/icons/menu_highlight = null
-TabContainer/styles/panel = SubResource( 4 )
-TabContainer/styles/tab_bg = SubResource( 5 )
+TabContainer/styles/panel = SubResource( 7 )
+TabContainer/styles/tab_bg = SubResource( 8 )
 TabContainer/styles/tab_disabled = null
-TabContainer/styles/tab_fg = SubResource( 6 )
+TabContainer/styles/tab_fg = SubResource( 9 )
 Tabs/colors/font_color_bg = Color( 0.592157, 0.592157, 0.592157, 1 )
 Tabs/colors/font_color_disabled = Color( 0.345098, 0.345098, 0.345098, 0.862745 )
 Tabs/colors/font_color_fg = Color( 1, 1, 1, 1 )
@@ -511,6 +514,7 @@ WindowDialog/styles/panel = null
 [node name="Settings" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -528,10 +532,11 @@ text = "SETTINGS"
 align = 1
 valign = 1
 __meta__ = {
+"_edit_use_anchors_": false,
 "_editor_description_": ""
 }
 
-[node name="SettingsTabContainer" type="TabContainer" parent="."]
+[node name="MainContainer" type="VBoxContainer" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -540,12 +545,20 @@ margin_left = -200.0
 margin_top = -200.0
 margin_right = 200.0
 margin_bottom = 200.0
-theme = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Graphics" type="Tabs" parent="SettingsTabContainer"]
+[node name="SettingsTabContainer" type="TabContainer" parent="MainContainer"]
+margin_right = 400.0
+margin_bottom = 346.0
+size_flags_vertical = 3
+theme = SubResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Graphics" type="Tabs" parent="MainContainer/SettingsTabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 2.0
@@ -553,7 +566,7 @@ margin_top = 33.0
 margin_right = -2.0
 margin_bottom = -2.0
 
-[node name="GraphicsContainer1" type="VBoxContainer" parent="SettingsTabContainer/Graphics"]
+[node name="GraphicsContainer" type="VBoxContainer" parent="MainContainer/SettingsTabContainer/Graphics"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 custom_constants/separation = 5
@@ -562,23 +575,23 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationsContainer" type="HBoxContainer" parent="SettingsTabContainer/Graphics/GraphicsContainer1"]
-margin_top = 133.0
+[node name="AnimationsContainer" type="HBoxContainer" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer"]
+margin_top = 106.0
 margin_right = 396.0
-margin_bottom = 164.0
+margin_bottom = 137.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AnimationsLabel" type="Label" parent="SettingsTabContainer/Graphics/GraphicsContainer1/AnimationsContainer"]
+[node name="AnimationsLabel" type="Label" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/AnimationsContainer"]
 margin_left = 123.0
 margin_top = 5.0
 margin_right = 211.0
 margin_bottom = 26.0
 text = "Animations"
 
-[node name="OptionButton" type="OptionButton" parent="SettingsTabContainer/Graphics/GraphicsContainer1/AnimationsContainer"]
+[node name="AnimationsOptionButton" type="OptionButton" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/AnimationsContainer"]
 margin_left = 215.0
 margin_right = 272.0
 margin_bottom = 31.0
@@ -588,12 +601,12 @@ text = "On"
 items = [ "On", null, false, 0, null, "Off", null, false, 1, null ]
 selected = 0
 
-[node name="CheckBoxContainer" type="VBoxContainer" parent="SettingsTabContainer/Graphics/GraphicsContainer1"]
-margin_top = 169.0
+[node name="CheckBoxContainer" type="VBoxContainer" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer"]
+margin_top = 142.0
 margin_right = 396.0
-margin_bottom = 231.0
+margin_bottom = 204.0
 
-[node name="HealthBarCheckBox" type="CheckBox" parent="SettingsTabContainer/Graphics/GraphicsContainer1/CheckBoxContainer"]
+[node name="HealthBarCheckBox" type="CheckBox" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer"]
 margin_right = 396.0
 margin_bottom = 29.0
 focus_mode = 0
@@ -601,7 +614,7 @@ enabled_focus_mode = 0
 text = "Show Healthbar"
 align = 1
 
-[node name="DamageNumbersCheckBox" type="CheckBox" parent="SettingsTabContainer/Graphics/GraphicsContainer1/CheckBoxContainer"]
+[node name="DamageNumbersCheckBox" type="CheckBox" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer"]
 margin_top = 33.0
 margin_right = 396.0
 margin_bottom = 62.0
@@ -610,11 +623,40 @@ enabled_focus_mode = 0
 text = "Show Damage Numbers"
 align = 1
 
-[node name="Audio" type="Tabs" parent="SettingsTabContainer"]
+[node name="Audio" type="Tabs" parent="MainContainer/SettingsTabContainer"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 5.0
-margin_top = 29.0
-margin_right = -5.0
-margin_bottom = -5.0
+margin_left = 2.0
+margin_top = 33.0
+margin_right = -2.0
+margin_bottom = -2.0
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MainContainer"]
+margin_top = 350.0
+margin_right = 400.0
+margin_bottom = 400.0
+alignment = 1
+
+[node name="CancelButton" type="TextureButton" parent="MainContainer/ButtonContainer"]
+margin_left = 148.0
+margin_right = 198.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 4 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="ApplyButton" type="TextureButton" parent="MainContainer/ButtonContainer"]
+margin_left = 202.0
+margin_right = 252.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 5 )
+__meta__ = {
+"_editor_description_": ""
+}
+[connection signal="item_selected" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/AnimationsContainer/AnimationsOptionButton" to="." method="_on_AnimationsOptionButton_item_selected"]
+[connection signal="toggled" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/HealthBarCheckBox" to="." method="_on_HealthBarCheckBox_toggled"]
+[connection signal="toggled" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/DamageNumbersCheckBox" to="." method="_on_DamageNumbersCheckBox_toggled"]
+[connection signal="pressed" from="MainContainer/ButtonContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
+[connection signal="pressed" from="MainContainer/ButtonContainer/ApplyButton" to="." method="_on_ApplyButton_pressed"]

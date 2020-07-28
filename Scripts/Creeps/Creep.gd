@@ -14,8 +14,11 @@ signal hurt
 
 func _ready():
 	yield(get_tree(), "idle_frame")
-	get_node("HealthBar").set_max_health(max_hitpoints)
-	connect("hurt", get_node("HealthBar"), "_on_creep_hurt")
+	
+	if Global.healthbar_enabled:
+		get_node("HealthBar").set_max_health(max_hitpoints)
+		connect("hurt", get_node("HealthBar"), "_on_creep_hurt")
+	
 	hitpoints = max_hitpoints
 
 
@@ -45,19 +48,37 @@ func check_hitpoints():
 		queue_free()
 
 
+func creep_hurt_anim():
+	if Global.animations:
+		get_node("AnimationPlayer").play("creep_hurt")
+	else:
+		pass
+
+
 func create_popup_damage(dmg, color, size):
-	var popup_instance = popup_damage.instance()
-	get_parent().get_parent().add_child(popup_instance)
-	popup_instance.modulate = color
-	popup_instance.scale = size
-	popup_instance.position = get_global_transform().origin
-	popup_instance.popup_damage(dmg)
+	if Global.damage_numbers_enabled:
+		var popup_instance = popup_damage.instance()
+		get_parent().get_parent().add_child(popup_instance)
+		popup_instance.modulate = color
+		popup_instance.scale = size
+		popup_instance.position = get_global_transform().origin
+		popup_instance.popup_damage(dmg)
+	else:
+		pass
+
+
+func call_healthbar():
+	if Global.healthbar_enabled:
+		emit_signal("hurt", hitpoints)
+	else:
+		pass
 
 
 func _on_damage(dmg):
 	hitpoints -= dmg
-	get_node("AnimationPlayer").play("creep_hurt")
-	emit_signal("hurt", hitpoints)
+	creep_hurt_anim()
+	call_healthbar()
+	
 	check_hitpoints()
 
 
