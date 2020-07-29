@@ -1,7 +1,9 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Assets/Font/Gontserrat-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/PauseMenu.gd" type="Script" id=2]
+[ext_resource path="res://Assets/UI/checkmark.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/cross.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 40.0
@@ -12,6 +14,13 @@ bg_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.705882 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.137255, 0.137255, 0.137255, 0.705882 )
+expand_margin_left = 5.0
+expand_margin_right = 5.0
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
 
 [sub_resource type="DynamicFont" id=3]
 use_filter = true
@@ -232,7 +241,7 @@ OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
 Panel/styles/panel = SubResource( 2 )
 PanelContainer/styles/panel = null
-PopupDialog/styles/panel = null
+PopupDialog/styles/panel = SubResource( 6 )
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_accel = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -511,6 +520,70 @@ margin_top = 188.0
 margin_right = 250.0
 margin_bottom = 229.0
 text = "QUIT TO MENU"
+
+[node name="SaveGameDialog" type="PopupDialog" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -50.0
+margin_right = 100.0
+margin_bottom = 50.0
+popup_exclusive = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveGameLabel" type="Label" parent="SaveGameDialog"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -100.0
+margin_right = 100.0
+margin_bottom = 50.0
+text = "Save game before exiting to Menu?"
+align = 1
+valign = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonContainer" type="HBoxContainer" parent="SaveGameDialog"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -100.0
+margin_top = -50.0
+margin_right = 100.0
+custom_constants/separation = 10
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NoButton" type="TextureButton" parent="SaveGameDialog/ButtonContainer"]
+margin_left = 45.0
+margin_right = 95.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 4 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YesButton" type="TextureButton" parent="SaveGameDialog/ButtonContainer"]
+margin_left = 105.0
+margin_right = 155.0
+margin_bottom = 50.0
+texture_normal = ExtResource( 3 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Panel/MenuContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
 [connection signal="pressed" from="Panel/MenuContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="Panel/MenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
+[connection signal="pressed" from="SaveGameDialog/ButtonContainer/NoButton" to="." method="_on_NoButton_pressed"]
+[connection signal="pressed" from="SaveGameDialog/ButtonContainer/YesButton" to="." method="_on_YesButton_pressed"]

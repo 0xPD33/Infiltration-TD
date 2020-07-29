@@ -20,7 +20,6 @@ var wave_started = false
 var cash_per_wave : int
 
 var in_pause_menu = false
-var game_paused = false
 
 onready var pause_menu = get_node("CanvasLayer/PauseMenu")
 onready var dev_console = get_node("CanvasLayer/DevConsole")
@@ -34,10 +33,7 @@ func _ready():
 
 func _input(event: InputEvent):
 	if Input.is_action_just_pressed ("ui_cancel"):
-		if !in_pause_menu:
-			show_pause_menu()
-		else:
-			hide_pause_menu()
+		show_pause_menu()
 	
 	if Input.is_action_just_pressed("dev_console"):
 		toggle_dev_console()
@@ -45,10 +41,6 @@ func _input(event: InputEvent):
 
 func show_pause_menu():
 	pause_menu.pause_game()
-
-
-func hide_pause_menu():
-	pause_menu.unpause_game()
 
 
 func toggle_dev_console():
@@ -164,6 +156,16 @@ func end_wave():
 		wave_started = false
 		fast_forward(false)
 		get_tree().call_group("HUD", "toggle_fast_forward_button")
+
+
+# need to save the towers too lmao
+func save_progress():
+	var save_dict = {
+		"Cash": Global.cash,
+		"Wave": Global.wave,
+		"Lives": Global.lives,
+	}
+	return save_dict
 
 
 func reload_game():

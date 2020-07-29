@@ -1,27 +1,52 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Assets/Font/Gontserrat-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/forward.png" type="Texture" id=2]
 [ext_resource path="res://Assets/LevelImages/level1.png" type="Texture" id=3]
-[ext_resource path="res://Assets/Font/Gontserrat-Regular.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Scripts/LevelSelector.gd" type="Script" id=5]
-[ext_resource path="res://Assets/UI/return.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/plus.png" type="Texture" id=6]
+[ext_resource path="res://Assets/UI/exitLeft.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Font/Gontserrat-Light.ttf" type="DynamicFontData" id=8]
 
-[sub_resource type="DynamicFont" id=1]
-size = 72
-use_filter = true
-font_data = ExtResource( 1 )
+[sub_resource type="StyleBoxFlat" id=15]
+draw_center = false
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 1, 1, 1, 0.498039 )
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.568627, 0.568627, 0.568627, 1 )
+bg_color = Color( 0.490196, 0.490196, 0.490196, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.866667, 0.866667, 0.866667, 1 )
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.6, 0.6, 0.6, 0.498039 )
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0.392157, 0.392157, 0.392157, 0.870588 )
 
-[sub_resource type="Theme" id=5]
+[sub_resource type="StyleBoxFlat" id=12]
+content_margin_left = 0.0
+content_margin_right = 0.0
+content_margin_top = 5.0
+content_margin_bottom = 5.0
+bg_color = Color( 0, 0, 0, 0.392157 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=8]
+size = 24
+use_filter = true
+font_data = ExtResource( 8 )
+
+[sub_resource type="Theme" id=7]
+default_font = SubResource( 8 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -29,7 +54,7 @@ Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/disabled = null
-Button/styles/focus = null
+Button/styles/focus = SubResource( 15 )
 Button/styles/hover = null
 Button/styles/normal = null
 Button/styles/pressed = null
@@ -145,9 +170,9 @@ HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
 HScrollBar/styles/grabber = SubResource( 2 )
-HScrollBar/styles/grabber_highlight = SubResource( 3 )
-HScrollBar/styles/grabber_pressed = SubResource( 4 )
-HScrollBar/styles/scroll = null
+HScrollBar/styles/grabber_highlight = SubResource( 9 )
+HScrollBar/styles/grabber_pressed = SubResource( 10 )
+HScrollBar/styles/scroll = SubResource( 12 )
 HScrollBar/styles/scroll_focus = null
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
@@ -182,8 +207,8 @@ Label/colors/font_color_shadow = Color( 0, 0, 0, 1 )
 Label/colors/font_outline_modulate = Color( 0, 0, 0, 1 )
 Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
-Label/constants/shadow_offset_x = 1
-Label/constants/shadow_offset_y = 1
+Label/constants/shadow_offset_x = 0
+Label/constants/shadow_offset_y = 0
 Label/fonts/font = null
 Label/styles/normal = null
 LineEdit/colors/clear_button_color = Color( 0, 0, 0, 1 )
@@ -233,7 +258,7 @@ OptionButton/styles/focus = null
 OptionButton/styles/hover = null
 OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
-Panel/styles/panel = null
+Panel/styles/panel = SubResource( 11 )
 PanelContainer/styles/panel = null
 PopupDialog/styles/panel = null
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
@@ -442,14 +467,31 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="DynamicFont" id=6]
-size = 24
+[sub_resource type="DynamicFont" id=1]
+size = 72
 use_filter = true
-font_data = ExtResource( 4 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=13]
+bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color( 0.568627, 0.568627, 0.568627, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=14]
+bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.568627, 0.568627, 0.568627, 1 )
+border_blend = true
 
 [node name="LevelSelector" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+theme = SubResource( 7 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -476,16 +518,16 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -400.0
-margin_top = -156.0
-margin_right = 400.0
-margin_bottom = 156.0
-rect_min_size = Vector2( 800, 312 )
+margin_left = -425.0
+margin_top = -160.0
+margin_right = 425.0
+margin_bottom = 160.0
+custom_styles/panel = SubResource( 13 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ScrollContainer" type="ScrollContainer" parent="BackgroundPanel"]
+[node name="LevelSelectorPanel" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -495,25 +537,38 @@ margin_top = -156.0
 margin_right = 400.0
 margin_bottom = 156.0
 rect_min_size = Vector2( 800, 312 )
-theme = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ScrollContainer" type="ScrollContainer" parent="LevelSelectorPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -400.0
+margin_top = -156.0
+margin_right = 400.0
+margin_bottom = 156.0
+rect_min_size = Vector2( 800, 312 )
 scroll_vertical_enabled = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelContainer" type="HBoxContainer" parent="BackgroundPanel/ScrollContainer"]
+[node name="LevelContainer" type="HBoxContainer" parent="LevelSelectorPanel/ScrollContainer"]
 margin_right = 1500.0
 margin_bottom = 300.0
 rect_min_size = Vector2( 1500, 300 )
 
-[node name="Level1Button" type="Button" parent="BackgroundPanel/ScrollContainer/LevelContainer"]
-margin_right = 400.0
+[node name="Level1Button" type="Button" parent="LevelSelectorPanel/ScrollContainer/LevelContainer"]
+margin_right = 425.0
 margin_bottom = 300.0
-rect_min_size = Vector2( 400, 300 )
+rect_min_size = Vector2( 425, 300 )
 toggle_mode = true
 flat = true
 
-[node name="LevelPicture" type="TextureRect" parent="BackgroundPanel/ScrollContainer/LevelContainer/Level1Button"]
+[node name="LevelPicture" type="TextureRect" parent="LevelSelectorPanel/ScrollContainer/LevelContainer/Level1Button"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -522,19 +577,19 @@ margin_left = -200.0
 margin_top = -150.0
 margin_right = 200.0
 margin_bottom = 150.0
+rect_min_size = Vector2( 400, 300 )
 texture = ExtResource( 3 )
 stretch_mode = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="LevelLabel" type="Label" parent="BackgroundPanel/ScrollContainer/LevelContainer/Level1Button"]
+[node name="LevelLabel" type="Label" parent="LevelSelectorPanel/ScrollContainer/LevelContainer/Level1Button"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -50.0
 margin_right = 50.0
 margin_bottom = 40.0
-custom_fonts/font = SubResource( 6 )
 text = "Level 1"
 align = 1
 valign = 1
@@ -542,32 +597,61 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonContainer" type="HBoxContainer" parent="."]
+[node name="ButtonPanel" type="Panel" parent="LevelSelectorPanel"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -52.0
-margin_top = -170.0
-margin_right = 52.0
-margin_bottom = -120.0
+margin_left = -425.0
+margin_right = 425.0
+margin_bottom = 50.0
+custom_styles/panel = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ReturnButton" type="TextureButton" parent="ButtonContainer"]
+[node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectorPanel/ButtonPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -79.0
+margin_top = -25.0
+margin_right = 79.0
+margin_bottom = 25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ReturnButton" type="TextureButton" parent="LevelSelectorPanel/ButtonPanel/ButtonContainer"]
 margin_right = 50.0
 margin_bottom = 50.0
-texture_normal = ExtResource( 6 )
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 7 )
 
-[node name="PlayLevelButton" type="TextureButton" parent="ButtonContainer"]
+[node name="NewGameButton" type="TextureButton" parent="LevelSelectorPanel/ButtonPanel/ButtonContainer"]
 margin_left = 54.0
 margin_right = 104.0
 margin_bottom = 50.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueGameButton" type="TextureButton" parent="LevelSelectorPanel/ButtonPanel/ButtonContainer"]
+margin_left = 108.0
+margin_right = 158.0
+margin_bottom = 50.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 texture_normal = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="toggled" from="BackgroundPanel/ScrollContainer/LevelContainer/Level1Button" to="." method="_on_Level1Button_toggled"]
-[connection signal="pressed" from="ButtonContainer/ReturnButton" to="." method="_on_ReturnButton_pressed"]
-[connection signal="pressed" from="ButtonContainer/PlayLevelButton" to="." method="_on_PlayLevelButton_pressed"]
+[connection signal="toggled" from="LevelSelectorPanel/ScrollContainer/LevelContainer/Level1Button" to="." method="_on_Level1Button_toggled"]
+[connection signal="pressed" from="LevelSelectorPanel/ButtonPanel/ButtonContainer/ReturnButton" to="." method="_on_ReturnButton_pressed"]
+[connection signal="pressed" from="LevelSelectorPanel/ButtonPanel/ButtonContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
+[connection signal="pressed" from="LevelSelectorPanel/ButtonPanel/ButtonContainer/ContinueGameButton" to="." method="_on_ContinueGameButton_pressed"]

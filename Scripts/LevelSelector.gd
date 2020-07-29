@@ -12,10 +12,18 @@ func _on_Level1Button_toggled(button_pressed):
 		level_selected = null
 
 
-func _on_PlayLevelButton_pressed():
-	get_tree().change_scene(level_selected)
-
-
 func _on_ReturnButton_pressed():
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+
+
+func _on_NewGameButton_pressed():
+	if level_selected:
+		get_tree().change_scene(level_selected)
+
+
+func _on_ContinueGameButton_pressed():
+	if level_selected:
+		SaveManager.load_game()
+		if SaveManager.load_done:
+			get_tree().change_scene(level_selected)
 
