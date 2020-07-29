@@ -9,11 +9,19 @@ var value : int
 
 var popup_damage = preload("res://Scenes/PopupDamage.tscn")
 
+var anims_setup = false
+
+var hurt_anim
+var walk_anim
+
 signal hurt
 
 
 func _ready():
 	yield(get_tree(), "idle_frame")
+	hurt_anim = get_node("CreepHurtAnimation")
+	walk_anim = get_node("CreepWalkAnimation")
+	anims_setup = true
 	
 	if Global.healthbar_enabled:
 		get_node("HealthBar").set_max_health(max_hitpoints)
@@ -29,6 +37,8 @@ func _physics_process(delta):
 
 func creep_move(delta):
 	offset += speed * delta
+	if anims_setup:
+		creep_walk_anim()
 
 
 func check_unit_offset():
@@ -48,11 +58,14 @@ func check_hitpoints():
 		queue_free()
 
 
+func creep_walk_anim():
+	if Global.animations and hurt_anim.is_playing() == false:
+		walk_anim.play("creep_walk")
+
+
 func creep_hurt_anim():
 	if Global.animations:
-		get_node("AnimationPlayer").play("creep_hurt")
-	else:
-		pass
+		hurt_anim.play("creep_hurt")
 
 
 func create_popup_damage(dmg, color, size):
@@ -63,15 +76,11 @@ func create_popup_damage(dmg, color, size):
 		popup_instance.scale = size
 		popup_instance.position = get_global_transform().origin
 		popup_instance.popup_damage(dmg)
-	else:
-		pass
 
 
 func call_healthbar():
 	if Global.healthbar_enabled:
 		emit_signal("hurt", hitpoints)
-	else:
-		pass
 
 
 func _on_damage(dmg):

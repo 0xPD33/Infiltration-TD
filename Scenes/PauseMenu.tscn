@@ -3,33 +3,33 @@
 [ext_resource path="res://Assets/Font/Gontserrat-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Scripts/PauseMenu.gd" type="Script" id=2]
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 40.0
 content_margin_right = 40.0
 content_margin_top = 10.0
 content_margin_bottom = 10.0
 bg_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.705882 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=3]
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Theme" id=1]
-default_font = SubResource( 4 )
+[sub_resource type="Theme" id=4]
+default_font = SubResource( 3 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0.498039, 0.498039, 0.498039, 1 )
 Button/colors/font_color_hover = Color( 0.501961, 0.501961, 0.501961, 0.784314 )
 Button/colors/font_color_pressed = Color( 1, 1, 1, 0.745098 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
-Button/styles/disabled = SubResource( 2 )
-Button/styles/focus = SubResource( 2 )
-Button/styles/hover = SubResource( 2 )
-Button/styles/normal = SubResource( 2 )
-Button/styles/pressed = SubResource( 2 )
+Button/styles/disabled = SubResource( 1 )
+Button/styles/focus = SubResource( 1 )
+Button/styles/hover = SubResource( 1 )
+Button/styles/normal = SubResource( 1 )
+Button/styles/pressed = SubResource( 1 )
 CheckBox/colors/font_color = Color( 0, 0, 0, 1 )
 CheckBox/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 CheckBox/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -230,7 +230,7 @@ OptionButton/styles/focus = null
 OptionButton/styles/hover = null
 OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
-Panel/styles/panel = SubResource( 3 )
+Panel/styles/panel = SubResource( 2 )
 PanelContainer/styles/panel = null
 PopupDialog/styles/panel = null
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
@@ -454,8 +454,8 @@ margin_left = -150.0
 margin_top = -200.0
 margin_right = 150.0
 margin_bottom = 200.0
-rect_min_size = Vector2( 300, 400 )
-theme = SubResource( 1 )
+rect_min_size = Vector2( 300, 450 )
+theme = SubResource( 4 )
 popup_exclusive = true
 script = ExtResource( 2 )
 __meta__ = {
@@ -475,9 +475,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -125.0
-margin_top = -175.0
+margin_top = -200.0
 margin_right = 125.0
-margin_bottom = 175.0
+margin_bottom = 200.0
 custom_constants/separation = 25
 __meta__ = {
 "_edit_use_anchors_": false

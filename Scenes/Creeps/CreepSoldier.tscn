@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Scripts/Creeps/CreepSoldier.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=2]
@@ -35,6 +35,24 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 0.607843, 0.607843, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
+[sub_resource type="Animation" id=3]
+resource_name = "creep_walk"
+length = 0.8
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Area2D/Sprite:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 3.5, 3.5, -3.5, -3.5 ]
+}
+
 [node name="CreepSoldier" type="PathFollow2D"]
 scale = Vector2( 0.9, 0.9 )
 loop = false
@@ -60,6 +78,11 @@ shape = SubResource( 1 )
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]
 scale = Vector2( 0.7, 0.7 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="CreepHurtAnimation" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
 anims/creep_hurt = SubResource( 2 )
+
+[node name="CreepWalkAnimation" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/creep_walk = SubResource( 3 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

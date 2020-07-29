@@ -105,8 +105,8 @@ Button/styles/pressed = null
 CheckBox/colors/font_color = Color( 1, 1, 1, 1 )
 CheckBox/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 CheckBox/colors/font_color_hover = Color( 0.784314, 0.784314, 0.784314, 0.784314 )
-CheckBox/colors/font_color_hover_pressed = Color( 0.784314, 0.784314, 0.784314, 0.784314 )
-CheckBox/colors/font_color_pressed = Color( 0.784314, 0.784314, 0.784314, 0.784314 )
+CheckBox/colors/font_color_hover_pressed = Color( 0.784314, 0.784314, 0.784314, 1 )
+CheckBox/colors/font_color_pressed = Color( 0.588235, 0.588235, 0.588235, 0.784314 )
 CheckBox/constants/check_vadjust = 0
 CheckBox/constants/hseparation = 4
 CheckBox/fonts/font = null
@@ -576,9 +576,9 @@ __meta__ = {
 }
 
 [node name="AnimationsContainer" type="HBoxContainer" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer"]
-margin_top = 106.0
+margin_top = 90.0
 margin_right = 396.0
-margin_bottom = 137.0
+margin_bottom = 121.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -589,6 +589,7 @@ margin_left = 123.0
 margin_top = 5.0
 margin_right = 211.0
 margin_bottom = 26.0
+mouse_filter = 1
 text = "Animations"
 
 [node name="AnimationsOptionButton" type="OptionButton" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/AnimationsContainer"]
@@ -602,22 +603,31 @@ items = [ "On", null, false, 0, null, "Off", null, false, 1, null ]
 selected = 0
 
 [node name="CheckBoxContainer" type="VBoxContainer" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer"]
-margin_top = 142.0
+margin_top = 126.0
 margin_right = 396.0
-margin_bottom = 204.0
+margin_bottom = 221.0
 
-[node name="HealthBarCheckBox" type="CheckBox" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer"]
+[node name="ScreenShakesCheckBox" type="CheckBox" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer"]
 margin_right = 396.0
 margin_bottom = 29.0
+focus_mode = 0
+enabled_focus_mode = 0
+text = "Enable Screenshakes"
+align = 1
+
+[node name="HealthBarCheckBox" type="CheckBox" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer"]
+margin_top = 33.0
+margin_right = 396.0
+margin_bottom = 62.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Show Healthbar"
 align = 1
 
 [node name="DamageNumbersCheckBox" type="CheckBox" parent="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer"]
-margin_top = 33.0
+margin_top = 66.0
 margin_right = 396.0
-margin_bottom = 62.0
+margin_bottom = 95.0
 focus_mode = 0
 enabled_focus_mode = 0
 text = "Show Damage Numbers"
@@ -655,8 +665,17 @@ texture_normal = ExtResource( 5 )
 __meta__ = {
 "_editor_description_": ""
 }
+[connection signal="mouse_entered" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/AnimationsContainer/AnimationsLabel" to="." method="_on_AnimationsLabel_mouse_entered"]
+[connection signal="mouse_exited" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/AnimationsContainer/AnimationsLabel" to="." method="_on_AnimationsLabel_mouse_exited"]
 [connection signal="item_selected" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/AnimationsContainer/AnimationsOptionButton" to="." method="_on_AnimationsOptionButton_item_selected"]
+[connection signal="mouse_entered" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/ScreenShakesCheckBox" to="." method="_on_ScreenShakesCheckBox_mouse_entered"]
+[connection signal="mouse_exited" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/ScreenShakesCheckBox" to="." method="_on_ScreenShakesCheckBox_mouse_exited"]
+[connection signal="toggled" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/ScreenShakesCheckBox" to="." method="_on_ScreenShakesCheckBox_toggled"]
+[connection signal="mouse_entered" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/HealthBarCheckBox" to="." method="_on_HealthBarCheckBox_mouse_entered"]
+[connection signal="mouse_exited" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/HealthBarCheckBox" to="." method="_on_HealthBarCheckBox_mouse_exited"]
 [connection signal="toggled" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/HealthBarCheckBox" to="." method="_on_HealthBarCheckBox_toggled"]
+[connection signal="mouse_entered" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/DamageNumbersCheckBox" to="." method="_on_DamageNumbersCheckBox_mouse_entered"]
+[connection signal="mouse_exited" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/DamageNumbersCheckBox" to="." method="_on_DamageNumbersCheckBox_mouse_exited"]
 [connection signal="toggled" from="MainContainer/SettingsTabContainer/Graphics/GraphicsContainer/CheckBoxContainer/DamageNumbersCheckBox" to="." method="_on_DamageNumbersCheckBox_toggled"]
 [connection signal="pressed" from="MainContainer/ButtonContainer/CancelButton" to="." method="_on_CancelButton_pressed"]
 [connection signal="pressed" from="MainContainer/ButtonContainer/ApplyButton" to="." method="_on_ApplyButton_pressed"]
