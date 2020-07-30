@@ -106,10 +106,13 @@ position = Vector2( -32.2161, -33.1793 )
 curve = SubResource( 3 )
 script = ExtResource( 2 )
 
+[node name="CreepSoldierTimer" type="Timer" parent="Path2D"]
+process_mode = 0
+
 [node name="CreepUndeadSoldierTimer" type="Timer" parent="Path2D"]
 process_mode = 0
 
-[node name="CreepSoldierTimer" type="Timer" parent="Path2D"]
+[node name="CreepGreenTankTimer" type="Timer" parent="Path2D"]
 process_mode = 0
 
 [node name="WaveTimer" type="Timer" parent="Path2D"]
@@ -133,6 +136,7 @@ mouse_filter = 2
 visible = false
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 8 )]
-[connection signal="timeout" from="Path2D/CreepUndeadSoldierTimer" to="Path2D" method="_on_CreepUndeadSoldierTimer_timeout"]
 [connection signal="timeout" from="Path2D/CreepSoldierTimer" to="Path2D" method="_on_CreepSoldierTimer_timeout"]
+[connection signal="timeout" from="Path2D/CreepUndeadSoldierTimer" to="Path2D" method="_on_CreepUndeadSoldierTimer_timeout"]
+[connection signal="timeout" from="Path2D/CreepGreenTankTimer" to="Path2D" method="_on_CreepGreenTankTimer_timeout"]
 [connection signal="timeout" from="Path2D/WaveTimer" to="Path2D" method="_on_WaveTimer_timeout"]

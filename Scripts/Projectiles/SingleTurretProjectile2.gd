@@ -2,6 +2,7 @@ extends "res://Scripts/Projectiles/TurretProjectile.gd"
 
 
 func _ready():
-	damage = 2
+	randomize()
+	damage = stepify(rand_range(1.8, 2.3), 0.01)
 	speed = 325
 

@@ -18,12 +18,12 @@ func _on_ReturnButton_pressed():
 
 func _on_NewGameButton_pressed():
 	if level_selected:
+		Global.reset()
 		get_tree().change_scene(level_selected)
 
 
 func _on_ContinueGameButton_pressed():
 	if level_selected:
-		SaveManager.load_game()
-		if SaveManager.load_done:
-			get_tree().change_scene(level_selected)
+		SaveManager.just_loaded = true
+		get_tree().change_scene(level_selected)
 

@@ -1,0 +1,59 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Creeps/CreepGreenTank.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 28.6382, 19.1321 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "creep_tank_hurt"
+length = 0.45
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Area2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -1, 1 ), Vector2( 0, 0 ) ]
+}
+
+[node name="CreepGreenTank" type="PathFollow2D"]
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"Enemy",
+]]
+collision_layer = 8
+collision_mask = 5
+
+[node name="MainSprite" type="Sprite" parent="Area2D"]
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 966, 717, 52, 38 )
+
+[node name="GunSprite" type="Sprite" parent="Area2D"]
+position = Vector2( 8.08495, 0 )
+scale = Vector2( 1, 1.1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 975, 790, 47, 20 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+position = Vector2( 2.43247, 0 )
+shape = SubResource( 2 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 3 )]
+position = Vector2( 0, -6 )
+scale = Vector2( 0.7, 0.6 )
+
+[node name="CreepTankHurtAnimation" type="AnimationPlayer" parent="."]
+anims/creep_tank_hurt = SubResource( 3 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

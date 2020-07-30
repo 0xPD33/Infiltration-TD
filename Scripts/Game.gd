@@ -19,13 +19,13 @@ var wave_started = false
 
 var cash_per_wave : int
 
-var in_pause_menu = false
-
 onready var pause_menu = get_node("CanvasLayer/PauseMenu")
 onready var dev_console = get_node("CanvasLayer/DevConsole")
 
 
 func _ready():
+	if SaveManager.just_loaded:
+		SaveManager.load_game()
 	add_to_group("Game")
 	$MidPosition.global_transform.origin = $LevelCamera.get_camera_screen_center()
 	yield(get_tree(), "idle_frame")
@@ -161,9 +161,13 @@ func end_wave():
 # need to save the towers too lmao
 func save_progress():
 	var save_dict = {
-		"Cash": Global.cash,
-		"Wave": Global.wave,
-		"Lives": Global.lives,
+		"cash": Global.cash,
+		"wave": Global.wave,
+		"lives": Global.lives,
+		"single_turret_towers": single_turret_towers,
+		"light_bomber_towers": light_bomber_towers,
+		"sniper_towers": sniper_towers,
+		"double_turret_towers": double_turret_towers
 	}
 	return save_dict
 

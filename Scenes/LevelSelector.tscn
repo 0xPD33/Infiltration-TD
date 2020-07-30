@@ -8,7 +8,7 @@
 [ext_resource path="res://Assets/UI/exitLeft.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Font/Gontserrat-Light.ttf" type="DynamicFontData" id=8]
 
-[sub_resource type="StyleBoxFlat" id=15]
+[sub_resource type="StyleBoxFlat" id=1]
 draw_center = false
 border_width_left = 2
 border_width_top = 2
@@ -23,30 +23,30 @@ corner_radius_bottom_left = 4
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.490196, 0.490196, 0.490196, 1 )
 
-[sub_resource type="StyleBoxFlat" id=9]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
-[sub_resource type="StyleBoxFlat" id=10]
+[sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0.392157, 0.392157, 0.392157, 0.870588 )
 
-[sub_resource type="StyleBoxFlat" id=12]
+[sub_resource type="StyleBoxFlat" id=5]
 content_margin_left = 0.0
 content_margin_right = 0.0
 content_margin_top = 5.0
 content_margin_bottom = 5.0
 bg_color = Color( 0, 0, 0, 0.392157 )
 
-[sub_resource type="StyleBoxFlat" id=11]
+[sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_blend = true
 
-[sub_resource type="DynamicFont" id=8]
+[sub_resource type="DynamicFont" id=7]
 size = 24
 use_filter = true
 font_data = ExtResource( 8 )
 
-[sub_resource type="Theme" id=7]
-default_font = SubResource( 8 )
+[sub_resource type="Theme" id=8]
+default_font = SubResource( 7 )
 Button/colors/font_color = Color( 0, 0, 0, 1 )
 Button/colors/font_color_disabled = Color( 0, 0, 0, 1 )
 Button/colors/font_color_hover = Color( 0, 0, 0, 1 )
@@ -54,7 +54,7 @@ Button/colors/font_color_pressed = Color( 0, 0, 0, 1 )
 Button/constants/hseparation = 2
 Button/fonts/font = null
 Button/styles/disabled = null
-Button/styles/focus = SubResource( 15 )
+Button/styles/focus = SubResource( 1 )
 Button/styles/hover = null
 Button/styles/normal = null
 Button/styles/pressed = null
@@ -170,9 +170,9 @@ HScrollBar/icons/decrement_highlight = null
 HScrollBar/icons/increment = null
 HScrollBar/icons/increment_highlight = null
 HScrollBar/styles/grabber = SubResource( 2 )
-HScrollBar/styles/grabber_highlight = SubResource( 9 )
-HScrollBar/styles/grabber_pressed = SubResource( 10 )
-HScrollBar/styles/scroll = SubResource( 12 )
+HScrollBar/styles/grabber_highlight = SubResource( 3 )
+HScrollBar/styles/grabber_pressed = SubResource( 4 )
+HScrollBar/styles/scroll = SubResource( 5 )
 HScrollBar/styles/scroll_focus = null
 HSeparator/constants/separation = 4
 HSeparator/styles/separator = null
@@ -258,7 +258,7 @@ OptionButton/styles/focus = null
 OptionButton/styles/hover = null
 OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
-Panel/styles/panel = SubResource( 11 )
+Panel/styles/panel = SubResource( 6 )
 PanelContainer/styles/panel = null
 PopupDialog/styles/panel = null
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
@@ -467,12 +467,12 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=9]
 size = 72
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="StyleBoxFlat" id=13]
+[sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_width_left = 3
 border_width_top = 3
@@ -480,7 +480,7 @@ border_width_right = 3
 border_color = Color( 0.568627, 0.568627, 0.568627, 1 )
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=14]
+[sub_resource type="StyleBoxFlat" id=11]
 bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_width_left = 3
 border_width_right = 3
@@ -491,7 +491,7 @@ border_blend = true
 [node name="LevelSelector" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-theme = SubResource( 7 )
+theme = SubResource( 8 )
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -504,7 +504,7 @@ margin_left = -225.0
 margin_top = 100.0
 margin_right = 225.0
 margin_bottom = 89.0
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 9 )
 custom_colors/font_color = Color( 0.568627, 0.568627, 0.568627, 1 )
 text = "Select Level:"
 align = 1
@@ -518,11 +518,11 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -425.0
+margin_left = -412.5
 margin_top = -160.0
-margin_right = 425.0
+margin_right = 412.5
 margin_bottom = 160.0
-custom_styles/panel = SubResource( 13 )
+custom_styles/panel = SubResource( 10 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -602,10 +602,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -425.0
-margin_right = 425.0
+margin_left = -412.0
+margin_right = 414.0
 margin_bottom = 50.0
-custom_styles/panel = SubResource( 14 )
+custom_styles/panel = SubResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

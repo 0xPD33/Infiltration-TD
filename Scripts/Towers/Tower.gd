@@ -20,6 +20,7 @@ var current_tile
 # SHOOTING VARS
 
 var enemy_array = []
+var sniper_enemy_array = []
 var current_target = null
 var target_position
 var distance_to_target
@@ -90,7 +91,10 @@ func _physics_process(delta: float):
 				$TurretTowerGun.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
 		if current_target == null:
-			current_target = choose_target()
+			if not "SniperTower" in name:
+				current_target = choose_target(enemy_array)
+			else:
+				current_target = choose_target(sniper_enemy_array)
 			
 			if current_target:
 				$ShootTimer.start()
@@ -107,6 +111,19 @@ func _unhandled_input(event: InputEvent):
 		set_selected(true)
 	elif event.is_action_pressed("left_click") and !can_select and !building:
 		set_selected(false)
+
+
+func save_progress():
+	var save_dict = {
+		"filename": get_filename(),
+		"parent": get_parent().get_path(),
+		"pos_x": position.x,
+		"pos_y": position.y,
+		"projectile": projectile,
+		"fire_rate": fire_rate,
+		"fire_range": fire_range
+	}
+	return save_dict
 
 
 func set_stats(upgraded):
@@ -164,9 +181,9 @@ func set_tower_menu_pos(pos):
 		tower_menu.rect_position.y = pos.y - 125
 
 
-func choose_target():
+func choose_target(array):
 	var pos = get_global_transform().origin
-	for enemy in enemy_array:
+	for enemy in array:
 		if current_fire_mode == fire_mode.FIRE_MODE_FIRST:
 			if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
 				if (current_target == null or enemy.get_global_transform().origin >
@@ -175,7 +192,7 @@ func choose_target():
 		
 		elif current_fire_mode == fire_mode.FIRE_MODE_LAST:
 			if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
-				current_target = enemy_array.back()
+				current_target = array.back()
 		
 		elif current_fire_mode == fire_mode.FIRE_MODE_FAR:
 			if pos.distance_to(enemy.get_global_transform().origin) >= fire_range:
@@ -214,15 +231,25 @@ func hide_range_circle():
 
 
 func _on_AggroRange_area_entered(area: Area2D):
-	if area.is_in_group("Enemy"):
-		enemy_array.append(area.get_parent())
+	if not "SniperTower" in name:
+		if area.is_in_group("Enemy"):
+			enemy_array.append(area.get_parent())
+	else:
+		if area.is_in_group("Enemy"):
+			sniper_enemy_array.append(area.get_parent())
 
 
 func _on_AggroRange_area_exited(area: Area2D):
-	if area.is_in_group("Enemy"):
-		enemy_array.erase(area.get_parent())
-		if area.get_parent() == current_target:
-			current_target = null
+	if not "SniperTower" in name:
+		if area.is_in_group("Enemy"):
+			enemy_array.erase(area.get_parent())
+			if area.get_parent() == current_target:
+				current_target = null
+	else:
+		if area.is_in_group("Enemy"):
+			sniper_enemy_array.erase(area.get_parent())
+			if area.get_parent() == current_target:
+				current_target = null
 
 
 func _on_ShootTimer_timeout():
