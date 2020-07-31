@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scripts/Path2D.gd" type="Script" id=1]
+
+[sub_resource type="Curve2D" id=1]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 123.763, 1058.54, 0.267579, 54.3332, -0.267579, -54.3332, 123.185, 794.947, -47.9458, 0.749154, 47.9458, -0.749154, 219.695, 707.521, 0, 0, 0, 0, 1206.45, 706.607, -1.82957, 90.6255, 1.82957, -90.6255, 1290.84, 617.418, -0.0687295, 63.5915, 0.0687295, -63.5915, 1291.67, 521.992, 0, 0, 0, 0, 1203.48, 451.437, 0, 0, 0, 0, 207.837, 451.754, -0.527859, 51.9548, 0.527859, -51.9548, 132.435, 391.168, -1.12246, 55.4958, 1.12246, -55.4958, 132.988, 268.125, 0, 0, 0, 0, 212.363, 196.31, 0, 0, 0, 0, 1803.33, 195.78 )
+}
+
+[node name="Path2D" type="Path2D"]
+position = Vector2( -32.2161, -33.1793 )
+curve = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="CreepSoldierTimer" type="Timer" parent="."]
+process_mode = 0
+
+[node name="CreepUndeadSoldierTimer" type="Timer" parent="."]
+process_mode = 0
+
+[node name="CreepGreenTankTimer" type="Timer" parent="."]
+process_mode = 0
+
+[node name="WaveTimer" type="Timer" parent="."]
+[connection signal="timeout" from="CreepSoldierTimer" to="." method="_on_CreepSoldierTimer_timeout"]
+[connection signal="timeout" from="CreepUndeadSoldierTimer" to="." method="_on_CreepUndeadSoldierTimer_timeout"]
+[connection signal="timeout" from="CreepGreenTankTimer" to="." method="_on_CreepGreenTankTimer_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_WaveTimer_timeout"]

@@ -2,6 +2,7 @@ extends "res://Scripts/Projectiles/BomberProjectile.gd"
 
 
 func _ready():
+	randomize()
 	damage = 3
 
 	explosion_damage = stepify(rand_range(17, 20.5), 0.01)

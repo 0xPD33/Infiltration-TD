@@ -3,6 +3,7 @@ extends Path2D
 var creep_soldier = load("res://Scenes/Creeps/CreepSoldier.tscn")
 var creep_undead_soldier = load("res://Scenes/Creeps/CreepUndeadSoldier.tscn")
 var creep_green_tank = load("res://Scenes/Creeps/CreepGreenTank.tscn")
+var creep_beige_tank = load("res://Scenes/Creeps/CreepBeigeTank.tscn")
 
 var instance
 
@@ -19,8 +20,12 @@ var creep_undead_soldiers_per_wave = [0, 0, 0, 1, 3, 5, 7, 9, 10, 11, 12, 14, 16
 var creep_undead_soldiers_wait_time_per_wave = [0.0, 0.0, 0.0, 3.0, 2.5, 2.2, 1.9, 1.6, 1.3, 1.0, 0.99, 0.98, 0.97, 0.96, 0.95, 0.94]
 
 var creep_green_tanks_spawned = 0
-var creep_green_tanks_per_wave = [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 7, 8, 9, 10, 10]
-var creep_green_tanks_wait_time_per_wave = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 4.0, 3.5, 3.0, 2.5, 2.0, 1.99, 1.98, 1.97, 1.96, 1.95]
+var creep_green_tanks_per_wave = [0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+var creep_green_tanks_wait_time_per_wave = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 3.0, 2.5, 2.0, 1.99, 1.98, 1.97, 1.96, 1.95, 1.94, 1.93]
+
+var creep_beige_tanks_spawned = 0
+var creep_beige_tanks_per_wave = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 5]
+var creep_beige_tanks_wait_time_per_wave = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 10.0, 9.5, 9.0, 8.5, 8.0]
 
 
 func _ready():
@@ -32,7 +37,7 @@ func start_wave():
 
 
 func _on_WaveTimer_timeout():
-	if (Global.wave > 0):
+	if Global.wave > 0:
 		$CreepSoldierTimer.start(creep_soldiers_wait_time_per_wave[Global.wave])
 		
 		if Global.wave >= 3:
@@ -40,6 +45,9 @@ func _on_WaveTimer_timeout():
 		
 		if Global.wave >= 6:
 			$CreepGreenTankTimer.start(creep_green_tanks_wait_time_per_wave[Global.wave])
+		
+		if Global.wave >= 11:
+			$CreepBeigeTankTimer.start(creep_beige_tanks_wait_time_per_wave[Global.wave])
 		
 		$WaveTimer.stop()
 
@@ -65,22 +73,35 @@ func _on_CreepGreenTankTimer_timeout():
 		$CreepGreenTankTimer.stop()
 
 
+func _on_CreepBeigeTankTimer_timeout():
+	if creep_beige_tanks_spawned < creep_beige_tanks_per_wave[Global.wave]:
+		creep_beige_tank_spawn()
+	else:
+		$CreepBeigeTankTimer.stop()
+
+
 func creep_soldier_spawn():
+	creep_soldiers_spawned += 1
 	instance = creep_soldier.instance()
 	add_child(instance)
-	creep_soldiers_spawned += 1
 
 
 func creep_undead_soldier_spawn():
+	creep_undead_soldiers_spawned += 1
 	instance = creep_undead_soldier.instance()
 	add_child(instance)
-	creep_undead_soldiers_spawned += 1
 
 
 func creep_green_tank_spawn():
+	creep_green_tanks_spawned += 1
 	instance = creep_green_tank.instance()
 	add_child(instance)
-	creep_green_tanks_spawned += 1
+
+
+func creep_beige_tank_spawn():
+	creep_beige_tanks_spawned += 1
+	instance = creep_beige_tank.instance()
+	add_child(instance)
 
 
 func creep_dead():
@@ -94,10 +115,13 @@ func creep_dead():
 #		creep_undead_soldiers_spawned = 0
 #		creep_green_tanks_spawned = 0
 #		get_tree().call_group("Game", "end_wave")
+	
+	# temporary solution:
 	if creeps_alive <= 1:
 		yield(get_tree().create_timer(2.0), "timeout")
 		creep_soldiers_spawned = 0
 		creep_undead_soldiers_spawned = 0
 		creep_green_tanks_spawned = 0
 		get_tree().call_group("Game", "end_wave")
+
 

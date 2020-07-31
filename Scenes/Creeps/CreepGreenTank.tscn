@@ -4,10 +4,10 @@
 [ext_resource path="res://Scripts/Creeps/CreepGreenTank.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=3]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 28.6382, 19.1321 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=2]
 resource_name = "creep_tank_hurt"
 length = 0.45
 step = 0.05
@@ -48,12 +48,12 @@ region_rect = Rect2( 975, 790, 47, 20 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 visible = false
 position = Vector2( 2.43247, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( 0, -6 )
 scale = Vector2( 0.7, 0.6 )
 
 [node name="CreepTankHurtAnimation" type="AnimationPlayer" parent="."]
-anims/creep_tank_hurt = SubResource( 3 )
+anims/creep_tank_hurt = SubResource( 2 )
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

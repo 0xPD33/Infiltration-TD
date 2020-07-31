@@ -9,7 +9,7 @@
 [ext_resource path="res://Scenes/Effects/ScreenShake.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Scenes/PauseMenu.tscn" type="PackedScene" id=8]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="TileSet" id=2]
 0/name = "towerDefense_tilesheet.png 0"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -57,7 +57,7 @@
 1/shapes = [  ]
 1/z_index = 0
 
-[sub_resource type="TileSet" id=2]
+[sub_resource type="TileSet" id=3]
 0/name = "tower_base"
 0/texture = ExtResource( 1 )
 0/tex_offset = Vector2( 0, 0 )
@@ -73,7 +73,7 @@
 0/shapes = [  ]
 0/z_index = 0
 
-[sub_resource type="Curve2D" id=3]
+[sub_resource type="Curve2D" id=1]
 _data = {
 "points": PoolVector2Array( 0, 0, 0, 0, 123.763, 1058.54, 0.267579, 54.3332, -0.267579, -54.3332, 123.185, 794.947, -47.9458, 0.749154, 47.9458, -0.749154, 219.695, 707.521, 0, 0, 0, 0, 1206.45, 706.607, -1.82957, 90.6255, 1.82957, -90.6255, 1290.84, 617.418, -0.0687295, 63.5915, 0.0687295, -63.5915, 1291.67, 521.992, 0, 0, 0, 0, 1203.48, 451.437, 0, 0, 0, 0, 207.837, 451.754, -0.527859, 51.9548, 0.527859, -51.9548, 132.435, 391.168, -1.12246, 55.4958, 1.12246, -55.4958, 132.988, 268.125, 0, 0, 0, 0, 212.363, 196.31, 0, 0, 0, 0, 1803.33, 195.78 )
 }
@@ -82,7 +82,7 @@ _data = {
 script = ExtResource( 3 )
 
 [node name="TileMap" type="TileMap" parent="."]
-tile_set = SubResource( 1 )
+tile_set = SubResource( 2 )
 cell_y_sort = true
 collision_mask = 2
 format = 1
@@ -90,7 +90,7 @@ tile_data = PoolIntArray( 0, 1, 131076, 1, 1, 131076, 2, 1, 131076, 3, 1, 131076
 
 [node name="TowerBases" type="TileMap" parent="."]
 visible = false
-tile_set = SubResource( 2 )
+tile_set = SubResource( 3 )
 collision_layer = 2
 collision_mask = 5
 format = 1
@@ -103,7 +103,7 @@ position = Vector2( 640, 360 )
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2( -32.2161, -33.1793 )
-curve = SubResource( 3 )
+curve = SubResource( 1 )
 script = ExtResource( 2 )
 
 [node name="CreepSoldierTimer" type="Timer" parent="Path2D"]
@@ -113,6 +113,9 @@ process_mode = 0
 process_mode = 0
 
 [node name="CreepGreenTankTimer" type="Timer" parent="Path2D"]
+process_mode = 0
+
+[node name="CreepBeigeTankTimer" type="Timer" parent="Path2D"]
 process_mode = 0
 
 [node name="WaveTimer" type="Timer" parent="Path2D"]
@@ -139,4 +142,5 @@ visible = false
 [connection signal="timeout" from="Path2D/CreepSoldierTimer" to="Path2D" method="_on_CreepSoldierTimer_timeout"]
 [connection signal="timeout" from="Path2D/CreepUndeadSoldierTimer" to="Path2D" method="_on_CreepUndeadSoldierTimer_timeout"]
 [connection signal="timeout" from="Path2D/CreepGreenTankTimer" to="Path2D" method="_on_CreepGreenTankTimer_timeout"]
+[connection signal="timeout" from="Path2D/CreepBeigeTankTimer" to="Path2D" method="_on_CreepBeigeTankTimer_timeout"]
 [connection signal="timeout" from="Path2D/WaveTimer" to="Path2D" method="_on_WaveTimer_timeout"]

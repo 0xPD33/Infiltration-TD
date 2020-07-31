@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Creeps/CreepGreenTank.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scripts/Creeps/CreepBeigeTank.gd" type="Script" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 34.1357, 21.7818 )
+
+[node name="CreepBeigeTank" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+
+[node name="MainSprite" parent="Area2D" index="0"]
+scale = Vector2( 1.2, 1.2 )
+region_rect = Rect2( 1030, 717, 54, 37 )
+
+[node name="GunSprite" parent="Area2D" index="1"]
+scale = Vector2( 1.1, 1.2 )
+region_rect = Rect2( 1035, 790, 50, 20 )
+
+[node name="CollisionShape2D" parent="Area2D" index="2"]
+position = Vector2( 1.7643, 0 )
+shape = SubResource( 1 )
+
+[node name="HealthBar" parent="." index="1"]
+position = Vector2( 0, -8 )
