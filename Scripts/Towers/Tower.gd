@@ -1,5 +1,11 @@
 extends Area2D
 
+# TODO:
+# make a script for every tower and make different upgrade scripts
+# because a shared script doesn't seem to work
+# i have to do this because the fucking sniper tower is still bugged
+# and makes other towers shoot beyond their range and I FUCKING HATE IT
+
 # BUILDING VARS
 
 var tower_cost
@@ -111,19 +117,6 @@ func _unhandled_input(event: InputEvent):
 		set_selected(true)
 	elif event.is_action_pressed("left_click") and !can_select and !building:
 		set_selected(false)
-
-
-func save_progress():
-	var save_dict = {
-		"filename": get_filename(),
-		"parent": get_parent().get_path(),
-		"pos_x": position.x,
-		"pos_y": position.y,
-		"projectile": projectile,
-		"fire_rate": fire_rate,
-		"fire_range": fire_range
-	}
-	return save_dict
 
 
 func set_stats(upgraded):

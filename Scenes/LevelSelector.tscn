@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Assets/Font/Gontserrat-SemiBold.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/forward.png" type="Texture" id=2]
 [ext_resource path="res://Assets/LevelImages/level1.png" type="Texture" id=3]
 [ext_resource path="res://Scripts/LevelSelector.gd" type="Script" id=5]
-[ext_resource path="res://Assets/UI/plus.png" type="Texture" id=6]
 [ext_resource path="res://Assets/UI/exitLeft.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Font/Gontserrat-Light.ttf" type="DynamicFontData" id=8]
 
@@ -612,13 +611,12 @@ __meta__ = {
 
 [node name="ButtonContainer" type="HBoxContainer" parent="LevelSelectorPanel/ButtonPanel"]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -79.0
-margin_top = -25.0
-margin_right = 79.0
-margin_bottom = 25.0
+anchor_bottom = 1.0
+margin_left = -52.0
+margin_top = -50.0
+margin_right = 52.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -630,20 +628,9 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 texture_normal = ExtResource( 7 )
 
-[node name="NewGameButton" type="TextureButton" parent="LevelSelectorPanel/ButtonPanel/ButtonContainer"]
+[node name="PlayButton" type="TextureButton" parent="LevelSelectorPanel/ButtonPanel/ButtonContainer"]
 margin_left = 54.0
 margin_right = 104.0
-margin_bottom = 50.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-texture_normal = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="ContinueGameButton" type="TextureButton" parent="LevelSelectorPanel/ButtonPanel/ButtonContainer"]
-margin_left = 108.0
-margin_right = 158.0
 margin_bottom = 50.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -653,5 +640,4 @@ __meta__ = {
 }
 [connection signal="toggled" from="LevelSelectorPanel/ScrollContainer/LevelContainer/Level1Button" to="." method="_on_Level1Button_toggled"]
 [connection signal="pressed" from="LevelSelectorPanel/ButtonPanel/ButtonContainer/ReturnButton" to="." method="_on_ReturnButton_pressed"]
-[connection signal="pressed" from="LevelSelectorPanel/ButtonPanel/ButtonContainer/NewGameButton" to="." method="_on_NewGameButton_pressed"]
-[connection signal="pressed" from="LevelSelectorPanel/ButtonPanel/ButtonContainer/ContinueGameButton" to="." method="_on_ContinueGameButton_pressed"]
+[connection signal="pressed" from="LevelSelectorPanel/ButtonPanel/ButtonContainer/PlayButton" to="." method="_on_PlayButton_pressed"]

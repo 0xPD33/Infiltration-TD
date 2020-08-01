@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PNG/Retina/towerDefense_tile249.png" type="Texture" id=2]
@@ -9,12 +9,22 @@
 [ext_resource path="res://Assets/TowerIcons/SniperTowerIcon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/PNG/Retina/towerDefense_tile250.png" type="Texture" id=8]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.0980392, 0.0980392, 0.0980392, 0.870588 )
-border_width_left = 2
-border_width_top = 2
-border_width_bottom = 2
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_blend = true
+corner_radius_top_left = 4
+corner_radius_top_right = 4
 
 [node name="HUD" type="Control"]
 anchor_left = 0.5
@@ -27,17 +37,6 @@ margin_right = 640.0
 margin_bottom = 360.0
 mouse_filter = 1
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Tooltips" type="Control" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -768.0
-margin_top = 32.0
-margin_right = -512.0
-margin_bottom = 72.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -75,33 +74,40 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuyRect" type="NinePatchRect" parent="."]
+[node name="BuyTooltips" type="Control" parent="."]
 anchor_left = 1.0
-anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -256.0
-margin_top = -256.0
-margin_bottom = 256.0
+margin_left = -768.0
+margin_top = 32.0
+margin_right = -512.0
+margin_bottom = 72.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuyPanel" type="Panel" parent="BuyRect"]
+[node name="BuyPanel" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
+margin_left = 384.0
 margin_top = -256.0
-margin_right = 128.0
+margin_right = 640.0
 margin_bottom = 256.0
-custom_styles/panel = SubResource( 1 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuyButton1" type="TextureButton" parent="BuyRect/BuyPanel"]
+[node name="GridContainer" type="GridContainer" parent="BuyPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyButton1" type="TextureButton" parent="BuyPanel/GridContainer"]
 margin_right = 128.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
@@ -111,39 +117,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BuyButton2" type="TextureButton" parent="BuyRect/BuyPanel"]
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_left = -128.0
-margin_top = -104.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 128, 128 )
-texture_normal = ExtResource( 6 )
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BuyButton3" type="TextureButton" parent="BuyRect/BuyPanel"]
-self_modulate = Color( 1.75, 1.75, 1.75, 1 )
-anchor_top = 0.5
-anchor_bottom = 0.5
-margin_top = -116.0
-margin_right = 128.0
-margin_bottom = 12.0
-rect_min_size = Vector2( 128, 128 )
-texture_normal = ExtResource( 7 )
-stretch_mode = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BuyButton4" type="TextureButton" parent="BuyRect/BuyPanel"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -128.0
+[node name="BuyButton4" type="TextureButton" parent="BuyPanel/GridContainer"]
+margin_left = 132.0
+margin_right = 260.0
 margin_bottom = 128.0
 rect_min_size = Vector2( 128, 128 )
 texture_normal = ExtResource( 8 )
@@ -152,51 +128,81 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="BuyRect/BuyPanel"]
+[node name="BuyButton3" type="TextureButton" parent="BuyPanel/GridContainer"]
+self_modulate = Color( 1.75, 1.75, 1.75, 1 )
+margin_top = 132.0
+margin_right = 128.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 128, 128 )
+texture_normal = ExtResource( 7 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuyButton2" type="TextureButton" parent="BuyPanel/GridContainer"]
+margin_left = 132.0
+margin_top = 132.0
+margin_right = 260.0
+margin_bottom = 260.0
+rect_min_size = Vector2( 128, 128 )
+texture_normal = ExtResource( 6 )
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ButtonPanel" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -64.0
-margin_top = -96.0
-margin_right = 64.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+margin_left = -50.0
+margin_top = -50.0
+margin_right = 62.0
+rect_min_size = Vector2( 112, 50 )
+custom_styles/panel = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ButtonPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 110, 50 )
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="StartWaveButton" type="TextureButton" parent="BuyRect/BuyPanel/HBoxContainer"]
-margin_left = 12.0
-margin_top = 23.0
-margin_right = 62.0
-margin_bottom = 73.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[node name="StartWaveButton" type="TextureButton" parent="ButtonPanel/HBoxContainer"]
+margin_right = 50.0
+margin_bottom = 50.0
+size_flags_horizontal = 5
 texture_normal = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="FastForwardButton" type="TextureButton" parent="BuyRect/BuyPanel/HBoxContainer"]
-margin_left = 66.0
-margin_top = 23.0
-margin_right = 116.0
-margin_bottom = 73.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+[node name="FastForwardButton" type="TextureButton" parent="ButtonPanel/HBoxContainer"]
+margin_left = 54.0
+margin_right = 112.0
+margin_bottom = 50.0
+size_flags_horizontal = 3
 toggle_mode = true
 texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
-[connection signal="mouse_entered" from="BuyRect/BuyPanel/BuyButton1" to="." method="_on_BuyButton1_mouse_entered"]
-[connection signal="mouse_exited" from="BuyRect/BuyPanel/BuyButton1" to="." method="_on_BuyButton1_mouse_exited"]
-[connection signal="pressed" from="BuyRect/BuyPanel/BuyButton1" to="." method="_on_BuyButton1_pressed"]
-[connection signal="mouse_entered" from="BuyRect/BuyPanel/BuyButton2" to="." method="_on_BuyButton2_mouse_entered"]
-[connection signal="mouse_exited" from="BuyRect/BuyPanel/BuyButton2" to="." method="_on_BuyButton2_mouse_exited"]
-[connection signal="pressed" from="BuyRect/BuyPanel/BuyButton2" to="." method="_on_BuyButton2_pressed"]
-[connection signal="mouse_entered" from="BuyRect/BuyPanel/BuyButton3" to="." method="_on_BuyButton3_mouse_entered"]
-[connection signal="mouse_exited" from="BuyRect/BuyPanel/BuyButton3" to="." method="_on_BuyButton3_mouse_exited"]
-[connection signal="pressed" from="BuyRect/BuyPanel/BuyButton3" to="." method="_on_BuyButton3_pressed"]
-[connection signal="mouse_entered" from="BuyRect/BuyPanel/BuyButton4" to="." method="_on_BuyButton4_mouse_entered"]
-[connection signal="mouse_exited" from="BuyRect/BuyPanel/BuyButton4" to="." method="_on_BuyButton4_mouse_exited"]
-[connection signal="pressed" from="BuyRect/BuyPanel/BuyButton4" to="." method="_on_BuyButton4_pressed"]
-[connection signal="pressed" from="BuyRect/BuyPanel/HBoxContainer/StartWaveButton" to="." method="_on_StartWaveButton_pressed"]
-[connection signal="toggled" from="BuyRect/BuyPanel/HBoxContainer/FastForwardButton" to="." method="_on_FastForwardButton_toggled"]
+[connection signal="mouse_entered" from="BuyPanel/GridContainer/BuyButton1" to="." method="_on_BuyButton1_mouse_entered"]
+[connection signal="mouse_exited" from="BuyPanel/GridContainer/BuyButton1" to="." method="_on_BuyButton1_mouse_exited"]
+[connection signal="pressed" from="BuyPanel/GridContainer/BuyButton1" to="." method="_on_BuyButton1_pressed"]
+[connection signal="mouse_entered" from="BuyPanel/GridContainer/BuyButton4" to="." method="_on_BuyButton4_mouse_entered"]
+[connection signal="mouse_exited" from="BuyPanel/GridContainer/BuyButton4" to="." method="_on_BuyButton4_mouse_exited"]
+[connection signal="pressed" from="BuyPanel/GridContainer/BuyButton4" to="." method="_on_BuyButton4_pressed"]
+[connection signal="mouse_entered" from="BuyPanel/GridContainer/BuyButton3" to="." method="_on_BuyButton3_mouse_entered"]
+[connection signal="mouse_exited" from="BuyPanel/GridContainer/BuyButton3" to="." method="_on_BuyButton3_mouse_exited"]
+[connection signal="pressed" from="BuyPanel/GridContainer/BuyButton3" to="." method="_on_BuyButton3_pressed"]
+[connection signal="mouse_entered" from="BuyPanel/GridContainer/BuyButton2" to="." method="_on_BuyButton2_mouse_entered"]
+[connection signal="mouse_exited" from="BuyPanel/GridContainer/BuyButton2" to="." method="_on_BuyButton2_mouse_exited"]
+[connection signal="pressed" from="BuyPanel/GridContainer/BuyButton2" to="." method="_on_BuyButton2_pressed"]
+[connection signal="pressed" from="ButtonPanel/HBoxContainer/StartWaveButton" to="." method="_on_StartWaveButton_pressed"]
+[connection signal="toggled" from="ButtonPanel/HBoxContainer/FastForwardButton" to="." method="_on_FastForwardButton_toggled"]

@@ -11,12 +11,18 @@ func unpause_game():
 	hide()
 
 
-func save_prompt():
-	$SaveGameDialog.popup_centered()
+func quit_prompt():
+	$QuitDialog.popup_centered()
 
 
 func _on_ContinueButton_pressed():
 	unpause_game()
+
+
+func _on_RestartButton_pressed():
+	unpause_game()
+	get_tree().reload_current_scene()
+	Global.reset()
 
 
 func _on_SettingsButton_pressed():
@@ -25,18 +31,17 @@ func _on_SettingsButton_pressed():
 
 
 func _on_QuitButton_pressed():
-	save_prompt()
+	quit_prompt()
 	hide()
 
 
 func _on_NoButton_pressed():
-	unpause_game()
-	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	$QuitDialog.hide()
+	show()
 
 
 func _on_YesButton_pressed():
-	SaveManager.save_game()
-	if SaveManager.save_done:
-		unpause_game()
-		get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	unpause_game()
+	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+
 

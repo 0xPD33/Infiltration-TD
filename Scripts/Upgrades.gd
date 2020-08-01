@@ -49,8 +49,8 @@ var upgrades = {"single_turret_tower":
 	"fire_range":
 		{
 			"levels": [0, 1, 2, 3, 4, 5],
-			"range_of_fire": [200, 250, 300, 350, 420, 550],
-			"cost": [45, 90, 150, 275, 550, "---"]
+			"range_of_fire": [200, 225, 250, 300, 375, 450],
+			"cost": [45, 90, 180, 325, 650, "---"]
 		},
 	"projectiles":
 		{
@@ -70,8 +70,8 @@ var upgrades = {"single_turret_tower":
 	"fire_range":
 		{
 			"levels": [0, 1, 2, 3, 4],
-			"range_of_fire": [275, 300, 350, 425, 550],
-			"cost": [50, 120, 240, 450, "---"]
+			"range_of_fire": [275, 300, 350, 425, 525],
+			"cost": [50, 120, 250, 450, "---"]
 		},
 	"projectiles":
 		{
@@ -92,7 +92,7 @@ var upgrades = {"single_turret_tower":
 		{
 			"levels": [0, 1, 2, 3],
 			"range_of_fire": [650, 700, 750, 900],
-			"cost": [50, 100, 250, "---"]
+			"cost": [50, 150, 400, "---"]
 		},
 		"projectiles":
 		{
@@ -112,7 +112,7 @@ var upgrades = {"single_turret_tower":
 		"fire_range":
 		{
 			"levels": [0, 1, 2, 3],
-			"range_of_fire": [300, 350, 400, 550],
+			"range_of_fire": [300, 350, 400, 500],
 			"cost": [50, 100, 250, "---"]
 		},
 		"projectiles":
@@ -142,8 +142,6 @@ func setup_vars():
 	elif "DoubleTurretTower" in get_parent().name:
 		parent_tower_string = "double_turret_tower"
 		offensive_tower = true
-	else:
-		offensive_tower = false
 	
 	if offensive_tower:
 		fire_rate_value = upgrades[parent_tower_string]["fire_rate"]["rate_of_fire"][0]
@@ -196,5 +194,5 @@ func level_up(stat):
 				get_tree().call_group("Game", "subtract_cash", projectile_upgrade_cost)
 				projectile_lvl += 1
 				set_projectile(parent_tower_string, projectile_lvl)
-				get_parent().set_stats(true)	
+				get_parent().set_stats(true)
 

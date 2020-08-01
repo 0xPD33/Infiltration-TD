@@ -16,14 +16,8 @@ func _on_ReturnButton_pressed():
 	get_tree().change_scene("res://Scenes/MainMenu.tscn")
 
 
-func _on_NewGameButton_pressed():
+func _on_PlayButton_pressed():
 	if level_selected:
 		Global.reset()
-		get_tree().change_scene(level_selected)
-
-
-func _on_ContinueGameButton_pressed():
-	if level_selected:
-		SaveManager.just_loaded = true
 		get_tree().change_scene(level_selected)
 

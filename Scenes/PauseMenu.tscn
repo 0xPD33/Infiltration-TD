@@ -15,19 +15,19 @@ bg_color = Color( 0.117647, 0.117647, 0.117647, 1 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.705882 )
 
-[sub_resource type="StyleBoxFlat" id=6]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.137255, 0.137255, 0.137255, 0.705882 )
 expand_margin_left = 5.0
 expand_margin_right = 5.0
 expand_margin_top = 5.0
 expand_margin_bottom = 5.0
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 use_filter = true
 font_data = ExtResource( 1 )
 
-[sub_resource type="Theme" id=4]
-default_font = SubResource( 3 )
+[sub_resource type="Theme" id=5]
+default_font = SubResource( 4 )
 Button/colors/font_color = Color( 1, 1, 1, 1 )
 Button/colors/font_color_disabled = Color( 0.498039, 0.498039, 0.498039, 1 )
 Button/colors/font_color_hover = Color( 0.501961, 0.501961, 0.501961, 0.784314 )
@@ -241,7 +241,7 @@ OptionButton/styles/normal = null
 OptionButton/styles/pressed = null
 Panel/styles/panel = SubResource( 2 )
 PanelContainer/styles/panel = null
-PopupDialog/styles/panel = SubResource( 6 )
+PopupDialog/styles/panel = SubResource( 3 )
 PopupMenu/colors/font_color = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_accel = Color( 0, 0, 0, 1 )
 PopupMenu/colors/font_color_disabled = Color( 0, 0, 0, 1 )
@@ -448,13 +448,14 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = null
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=6]
 size = 24
 use_filter = true
 font_data = ExtResource( 1 )
 
 [node name="PauseMenu" type="Popup"]
 pause_mode = 2
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -464,7 +465,7 @@ margin_top = -200.0
 margin_right = 150.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 300, 450 )
-theme = SubResource( 4 )
+theme = SubResource( 5 )
 popup_exclusive = true
 script = ExtResource( 2 )
 __meta__ = {
@@ -495,7 +496,7 @@ __meta__ = {
 [node name="Label" type="Label" parent="Panel/MenuContainer"]
 margin_right = 250.0
 margin_bottom = 31.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "GAME PAUSED"
 align = 1
 valign = 1
@@ -509,19 +510,25 @@ margin_right = 250.0
 margin_bottom = 97.0
 text = "CONTINUE"
 
-[node name="SettingsButton" type="Button" parent="Panel/MenuContainer"]
+[node name="RestartButton" type="Button" parent="Panel/MenuContainer"]
 margin_top = 122.0
 margin_right = 250.0
 margin_bottom = 163.0
-text = "SETTINGS"
+text = "RESTART"
 
-[node name="QuitButton" type="Button" parent="Panel/MenuContainer"]
+[node name="SettingsButton" type="Button" parent="Panel/MenuContainer"]
 margin_top = 188.0
 margin_right = 250.0
 margin_bottom = 229.0
+text = "SETTINGS"
+
+[node name="QuitButton" type="Button" parent="Panel/MenuContainer"]
+margin_top = 254.0
+margin_right = 250.0
+margin_bottom = 295.0
 text = "QUIT TO MENU"
 
-[node name="SaveGameDialog" type="PopupDialog" parent="."]
+[node name="QuitDialog" type="PopupDialog" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -535,13 +542,13 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="SaveGameLabel" type="Label" parent="SaveGameDialog"]
+[node name="QuitLabel" type="Label" parent="QuitDialog"]
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -100.0
 margin_right = 100.0
 margin_bottom = 50.0
-text = "Save game before exiting to Menu?"
+text = "Are you sure you want to Quit?"
 align = 1
 valign = 1
 autowrap = true
@@ -549,7 +556,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ButtonContainer" type="HBoxContainer" parent="SaveGameDialog"]
+[node name="ButtonContainer" type="HBoxContainer" parent="QuitDialog"]
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
@@ -563,7 +570,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NoButton" type="TextureButton" parent="SaveGameDialog/ButtonContainer"]
+[node name="NoButton" type="TextureButton" parent="QuitDialog/ButtonContainer"]
 margin_left = 45.0
 margin_right = 95.0
 margin_bottom = 50.0
@@ -573,7 +580,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="YesButton" type="TextureButton" parent="SaveGameDialog/ButtonContainer"]
+[node name="YesButton" type="TextureButton" parent="QuitDialog/ButtonContainer"]
 margin_left = 105.0
 margin_right = 155.0
 margin_bottom = 50.0
@@ -583,7 +590,8 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="Panel/MenuContainer/ContinueButton" to="." method="_on_ContinueButton_pressed"]
+[connection signal="pressed" from="Panel/MenuContainer/RestartButton" to="." method="_on_RestartButton_pressed"]
 [connection signal="pressed" from="Panel/MenuContainer/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="Panel/MenuContainer/QuitButton" to="." method="_on_QuitButton_pressed"]
-[connection signal="pressed" from="SaveGameDialog/ButtonContainer/NoButton" to="." method="_on_NoButton_pressed"]
-[connection signal="pressed" from="SaveGameDialog/ButtonContainer/YesButton" to="." method="_on_YesButton_pressed"]
+[connection signal="pressed" from="QuitDialog/ButtonContainer/NoButton" to="." method="_on_NoButton_pressed"]
+[connection signal="pressed" from="QuitDialog/ButtonContainer/YesButton" to="." method="_on_YesButton_pressed"]
