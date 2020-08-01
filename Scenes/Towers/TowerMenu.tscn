@@ -159,13 +159,6 @@ margin_bottom = 20.0
 toggle_mode = true
 text = "2"
 
-[node name="FireMode3Btn" type="Button" parent="MarginContainer/MainContainer/SettingsContainer/FireModeContainer"]
-margin_left = 120.0
-margin_right = 140.0
-margin_bottom = 20.0
-toggle_mode = true
-text = "3"
-
 [node name="SellTowerBtn" type="Button" parent="MarginContainer/MainContainer/SettingsContainer"]
 margin_top = 44.0
 margin_right = 275.0
@@ -209,6 +202,5 @@ __meta__ = {
 [connection signal="pressed" from="MarginContainer/MainContainer/StatsContainer/ProjectileContainer/ProjectileBtn" to="." method="_on_ProjectileBtn_pressed"]
 [connection signal="toggled" from="MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode1Btn" to="." method="_on_FireMode1Btn_toggled"]
 [connection signal="toggled" from="MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode2Btn" to="." method="_on_FireMode2Btn_toggled"]
-[connection signal="toggled" from="MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode3Btn" to="." method="_on_FireMode3Btn_toggled"]
 [connection signal="pressed" from="MarginContainer/MainContainer/SettingsContainer/SellTowerBtn" to="." method="_on_SellTowerBtn_pressed"]
 [connection signal="pressed" from="CloseButton" to="." method="_on_CloseButton_pressed"]

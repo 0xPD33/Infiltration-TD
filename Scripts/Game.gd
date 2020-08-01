@@ -33,6 +33,7 @@ func _input(event: InputEvent):
 	if Input.is_action_just_pressed ("ui_cancel"):
 		show_pause_menu()
 	
+	# tab key to open the console
 	if Input.is_action_just_pressed("dev_console"):
 		toggle_dev_console()
 
@@ -91,6 +92,11 @@ func tower_built(tower, cost):
 			subtract_cash(cost)
 		"DoubleTurretTower":
 			subtract_cash(cost)
+
+
+# BUY BUTTON CODE
+# if you click on one of the buy buttons an instance of the tower is instantly added to the game,
+# and the tower's code starts running. cash is subtracted only after placing the tower (check function above)
 
 
 func buy_button_1():

@@ -1,5 +1,8 @@
 extends Control
 
+# dev console script
+# I made this for quickly testing towers and waves and also to make in-game screenshots of new towers I add
+
 const DEV_COMMANDS = ["help", "cash", "wave", "hud"]
 
 var cash_amount

@@ -1,5 +1,7 @@
 extends Path2D
 
+# spawner script
+
 var creep_soldier = load("res://Scenes/Creeps/CreepSoldier.tscn")
 var creep_undead_soldier = load("res://Scenes/Creeps/CreepUndeadSoldier.tscn")
 var creep_green_tank = load("res://Scenes/Creeps/CreepGreenTank.tscn")
@@ -104,6 +106,12 @@ func creep_beige_tank_spawn():
 	add_child(instance)
 
 
+func reset_creeps_spawned():
+	creep_soldiers_spawned = 0
+	creep_undead_soldiers_spawned = 0
+	creep_green_tanks_spawned = 0
+
+
 func creep_dead():
 	creeps_alive = get_tree().get_nodes_in_group("Enemy").size()
 	
@@ -119,9 +127,7 @@ func creep_dead():
 	# temporary solution:
 	if creeps_alive <= 1:
 		yield(get_tree().create_timer(2.0), "timeout")
-		creep_soldiers_spawned = 0
-		creep_undead_soldiers_spawned = 0
-		creep_green_tanks_spawned = 0
+		reset_creeps_spawned()
 		get_tree().call_group("Game", "end_wave")
 
 

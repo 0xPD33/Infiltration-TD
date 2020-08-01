@@ -16,7 +16,6 @@ onready var projectile_btn = $MarginContainer/MainContainer/StatsContainer/Proje
 
 onready var fire_mode_1_button = $MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode1Btn
 onready var fire_mode_2_button = $MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode2Btn
-onready var fire_mode_3_button = $MarginContainer/MainContainer/SettingsContainer/FireModeContainer/FireMode3Btn
 
 onready var sell_tower_button = $MarginContainer/MainContainer/SettingsContainer/SellTowerBtn
 
@@ -106,21 +105,12 @@ func _on_FireMode1Btn_toggled(button_pressed):
 	if button_pressed:
 		get_parent().set_fire_mode(1)
 		fire_mode_2_button.pressed = false
-		fire_mode_3_button.pressed = false
 
 
 func _on_FireMode2Btn_toggled(button_pressed):
 	if button_pressed:
 		get_parent().set_fire_mode(2)
 		fire_mode_1_button.pressed = false
-		fire_mode_3_button.pressed = false
-
-
-func _on_FireMode3Btn_toggled(button_pressed):
-	if button_pressed:
-		get_parent().set_fire_mode(3)
-		fire_mode_1_button.pressed = false
-		fire_mode_2_button.pressed = false
 
 
 func _on_CloseButton_pressed():

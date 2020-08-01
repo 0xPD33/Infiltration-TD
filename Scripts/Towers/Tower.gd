@@ -1,22 +1,22 @@
 extends Area2D
 
-# TODO:
-# make a script for every tower and make different upgrade scripts
-# because a shared script doesn't seem to work
-# i have to do this because the fucking sniper tower is still bugged
-# and makes other towers shoot beyond their range and I FUCKING HATE IT
+# All towers are handled in this script
 
 # BUILDING VARS
 
 var tower_cost
 
+# currently building?
 var building = true
+
 var selected = false setget set_selected
+
+# colliding with another tower?
 var colliding = false
+
 var can_build = false
 var can_select = false
 
-var tower_space
 var tilemap
 var cell_size
 var cell_position
@@ -25,8 +25,13 @@ var current_tile
 
 # SHOOTING VARS
 
+# enemies in tower range will be added to this array
 var enemy_array = []
+
+# the sniper tower has it's own enemy array
+# (my plan is to add enemies only the sniper tower can see)
 var sniper_enemy_array = []
+
 var current_target = null
 var target_position
 var distance_to_target
@@ -38,9 +43,7 @@ var shooting = false
 var fire_rate
 var fire_range
 
-# fire modes don't work as expected as of right now
-
-enum fire_mode {FIRE_MODE_FIRST, FIRE_MODE_LAST, FIRE_MODE_FAR}
+enum fire_mode {FIRE_MODE_FIRST, FIRE_MODE_LAST}
 var current_fire_mode
 
 onready var upgrades = $Upgrades
@@ -56,27 +59,42 @@ func set_selected(value):
 
 func _ready():
 	add_to_group("Tower")
+	
+	# set the starting fire range equal to the radius of the AggroRange's CollisionShape2D node
 	fire_range = $AggroRange/CollisionShape2D.get_shape().radius
 	yield(get_tree(), "idle_frame")
+	
+	# get the TowerBases tilemap node from the level scene
 	tilemap = get_parent().get_parent().get_node("TowerBases")
 	cell_size = tilemap.cell_size
 
 
 func _physics_process(delta: float):
+	# towers start out in building mode once they are instantiated
 	if building:
 		_follow_mouse()
+		
+		# show the tower range while building
 		show_range_circle(upgrades.fire_range_value)
 		
+		# change modulate values of the tower
 		if can_build:
+			# change colors to green
 			$TurretTowerBase.modulate = Color(0.0, 1.0, 0.0, 0.7)
 			$TurretTowerGun.modulate = Color(0.0, 1.0, 0.0, 0.7)
 		else:
+			# change colors to red
 			$TurretTowerBase.modulate = Color(1.0, 0.0, 0.0, 0.7)
 			$TurretTowerGun.modulate = Color(1.0, 0.0, 0.0, 0.7)
 		
 		if Input.is_action_just_pressed("left_click"):
 			if can_build:
+				# place the tower
 				building = false
+				
+				# check for nodes name and depending on that set the tower cost
+				# and call the function "tower_built" in the "Game" group (Game.gd),
+				# passing the name and tower cost
 				if "SingleTurretTower" in name:
 					tower_cost = 150
 					get_tree().call_group("Game", "tower_built", "SingleTurretTower", tower_cost)
@@ -91,8 +109,12 @@ func _physics_process(delta: float):
 					get_tree().call_group("Game", "tower_built", "DoubleTurretTower", tower_cost)
 				
 				tower_menu.set_sell_value(tower_cost)
+				
+				# set stats (not upgraded)
 				set_stats(false)
 				hide_range_circle()
+				
+				# reset tower modulate values
 				$TurretTowerBase.modulate = Color(1.0, 1.0, 1.0, 1.0)
 				$TurretTowerGun.modulate = Color(1.0, 1.0, 1.0, 1.0)
 	else:
@@ -108,10 +130,15 @@ func _physics_process(delta: float):
 			if current_target == null:
 				$ShootTimer.stop()
 			else:
+				# keep track of the target_position
 				target_position = current_target.get_global_transform().origin
+				
+				# rotate the tower's gun
 				$TurretTowerGun.rotation = (target_position - position).angle() - deg2rad(-90)
 
 
+# the only input function that works for selecting towers.
+# _input() and _input_event() functions did not work
 func _unhandled_input(event: InputEvent):
 	if event.is_action_pressed("left_click") and can_select and !building:
 		set_selected(true)
@@ -120,6 +147,7 @@ func _unhandled_input(event: InputEvent):
 
 
 func set_stats(upgraded):
+	# set the towers stats to the values from the Upgrades node and it's script (Upgrades.gd)
 	projectile = upgrades.projectile
 	fire_rate = upgrades.fire_rate_value
 	fire_range = upgrades.fire_range_value
@@ -127,12 +155,14 @@ func set_stats(upgraded):
 	$AggroRange/CollisionShape2D.get_shape().radius = fire_range
 	
 	if upgraded:
+		# hide and show the tower's range when the tower was just upgraded
 		hide_range_circle()
 		show_range_circle(fire_range)
 	elif !upgraded:
 		set_fire_mode(1)
 
 
+# set the fire mode, which controls which enemy the tower targets
 func set_fire_mode(mode):
 	match mode:
 		1:
@@ -141,9 +171,6 @@ func set_fire_mode(mode):
 		2:
 			current_fire_mode = fire_mode.FIRE_MODE_LAST
 			tower_menu.fire_mode_2_button.pressed = true
-		3:
-			current_fire_mode = fire_mode.FIRE_MODE_FAR
-			tower_menu.fire_mode_3_button.pressed = true
 
 
 func tower_select_state():
@@ -166,6 +193,9 @@ func deselect_tower():
 
 
 func set_tower_menu_pos(pos):
+	# MidPosition is a node in the level scene with the position always set to the center of the screen
+	# depending on where you click the tower menu's position changes
+	# this is to prevent the tower menu from going off screen
 	if get_global_transform().origin.x < get_parent().get_parent().get_node("MidPosition").global_transform.origin.x:
 		tower_menu.rect_position.x = pos.x + 50
 		tower_menu.rect_position.y = pos.y - 125
@@ -174,36 +204,40 @@ func set_tower_menu_pos(pos):
 		tower_menu.rect_position.y = pos.y - 125
 
 
+# code for choosing a target for the tower
 func choose_target(array):
 	var pos = get_global_transform().origin
+	distance_to_target = fire_range
 	for enemy in array:
 		if current_fire_mode == fire_mode.FIRE_MODE_FIRST:
-			if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
-				if (current_target == null or enemy.get_global_transform().origin >
-					current_target.get_global_transform().origin):
-						current_target = enemy
+			if (position - enemy.get_global_transform().origin).length() <= distance_to_target:
+				current_target = enemy
+				target_position = enemy.get_global_transform().origin
+				distance_to_target = (position - target_position).length()
 		
 		elif current_fire_mode == fire_mode.FIRE_MODE_LAST:
 			if pos.distance_to(enemy.get_global_transform().origin) <= fire_range:
 				current_target = array.back()
-		
-		elif current_fire_mode == fire_mode.FIRE_MODE_FAR:
-			if pos.distance_to(enemy.get_global_transform().origin) >= fire_range:
-				if (current_target == null or enemy.get_global_transform().origin >
-					current_target.get_global_transform().origin):
-						current_target = enemy
 	
 	return current_target
 
 
+# I don't fully understand the following code. It was taken from a tower defense tutorial by LegionGames on YT.
 func _follow_mouse():
+	# wait for a very short period of time before running this code
+	# not doing this crashed the game, unsure why
 	yield(get_tree().create_timer(0.03), "timeout")
+	
+	# make the tower follow the mouse
 	position = get_global_mouse_position()
 	
 	cell_position = Vector2(floor(position.x / cell_size.x),
 							floor(position.y / cell_size.y))
 	cell_id = tilemap.get_cellv(cell_position)
 	
+	# the TowerBases tilemap node has only one tile which has it's name set to tower_base
+	# the following code checks if the current tile you are hovering over is such a tile
+	# and if so sets can_build to true
 	if cell_id != -1 && !colliding:
 		current_tile = tilemap.tile_set.tile_get_name(cell_id)
 		if current_tile == "tower_base":
@@ -245,9 +279,14 @@ func _on_AggroRange_area_exited(area: Area2D):
 				current_target = null
 
 
+# the actual code responsible for shooting and spawning projectiles
 func _on_ShootTimer_timeout():
 	if current_target:
 		if "DoubleTurretTower" in name:
+			
+			# need to find another solution of shooting two projectiles at once (with a small delay)
+			# because this is really bad: 
+			
 			projectile_instance = projectile.instance()
 			projectile_instance.set_target(current_target)
 			projectile_instance.position = $TurretTowerGun/ShotPosition.get_global_transform().origin

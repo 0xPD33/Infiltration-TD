@@ -1,0 +1,3 @@
+- pressing the back button in the settings scene always throws you back into the main menu, even if you go to the settings through the pause menu. if you want to change settings, do it in the main menu.
+- sniper towers fuck with other towers range (hopefully fixed now, need to do more testing)
+- towers randomly stop shooting (it doesn't happen often and I don't know why it happens)
