@@ -1,6 +1,14 @@
 extends Node2D
 
-# need a better solution for this whole script but it works fine for now
+# need a better solution for this whole script but it works fine for now 
+# but is not that scalable.
+
+# the plan is to make the upgrade system more like in the bloons series
+# with different paths you can take and towers changing appearance i.e.
+# the bomber tower will look different with every upgrade and will
+# eventually shoot rockets. still need an idea on how to implement this.
+# the tower menu should also be more adaptable (right now it's pretty hard-coded)
+# or should be completely replaced.
 
 var parent_tower_string
 
@@ -14,6 +22,10 @@ var fire_rate_upgrade_cost = 0
 var fire_range_value : int = 0 
 var fire_range_lvl : int = 0
 var fire_range_upgrade_cost = 0
+
+var projectile = null
+var projectile_lvl : int = 0
+var projectile_upgrade_cost = 0
 
 var single_turret_projectile_1 = load("res://Scenes/Projectiles/SingleTurretProjectile1.tscn")
 var single_turret_projectile_2 = load("res://Scenes/Projectiles/SingleTurretProjectile2.tscn")
@@ -33,10 +45,6 @@ var double_turret_projectile_1 = load("res://Scenes/Projectiles/DoubleTurretProj
 var double_turret_projectile_2 = load("res://Scenes/Projectiles/DoubleTurretProjectile2.tscn")
 var double_turret_projectile_3 = load("res://Scenes/Projectiles/DoubleTurretProjectile3.tscn")
 
-var projectile = null
-var projectile_dmg
-var projectile_lvl : int = 0
-var projectile_upgrade_cost = 0
 
 var upgrades = {"single_turret_tower":
 	{

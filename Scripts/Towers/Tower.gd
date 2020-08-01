@@ -258,23 +258,30 @@ func hide_range_circle():
 
 
 func _on_AggroRange_area_entered(area: Area2D):
-	if not "SniperTower" in name:
-		if area.is_in_group("Enemy"):
-			enemy_array.append(area.get_parent())
-	else:
+	if "SniperTower" in name:
+		if area.is_in_group("HiddenEnemy"):
+			sniper_enemy_array.append(area.get_parent())
 		if area.is_in_group("Enemy"):
 			sniper_enemy_array.append(area.get_parent())
+	else:
+		if area.is_in_group("Enemy"):
+			enemy_array.append(area.get_parent())
+
 
 
 func _on_AggroRange_area_exited(area: Area2D):
-	if not "SniperTower" in name:
+	if "SniperTower" in name:
+		if area.is_in_group("HiddenEnemy"):
+			sniper_enemy_array.erase(area.get_parent())
+			if area.get_parent() == current_target:
+				current_target = null
 		if area.is_in_group("Enemy"):
-			enemy_array.erase(area.get_parent())
+			sniper_enemy_array.erase(area.get_parent())
 			if area.get_parent() == current_target:
 				current_target = null
 	else:
 		if area.is_in_group("Enemy"):
-			sniper_enemy_array.erase(area.get_parent())
+			enemy_array.erase(area.get_parent())
 			if area.get_parent() == current_target:
 				current_target = null
 

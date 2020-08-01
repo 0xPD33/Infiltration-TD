@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Tilesheet/towerDefense_tilesheet.png" type="Texture" id=1]
+[ext_resource path="res://Scripts/Creeps/CreepHiddenSoldier.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Animations/creep_hurt.tres" type="Animation" id=3]
+[ext_resource path="res://Assets/Animations/creep_walk.tres" type="Animation" id=4]
+[ext_resource path="res://Scenes/HealthBar.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 9.414, 14.1024 )
+
+[node name="CreepHiddenSoldier" type="PathFollow2D"]
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="." groups=[
+"HiddenEnemy",
+]]
+collision_layer = 8
+collision_mask = 5
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+modulate = Color( 0.501961, 0.368627, 0.572549, 1 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 1172, 658, 24, 28 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 5 )]
+
+[node name="CreepHurtAnimation" type="AnimationPlayer" parent="."]
+playback_process_mode = 0
+anims/creep_hurt = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="CreepWalkAnimation" type="AnimationPlayer" parent="."]
+anims/creep_walk = ExtResource( 4 )
+[connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
