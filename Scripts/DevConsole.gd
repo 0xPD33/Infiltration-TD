@@ -15,7 +15,7 @@ var value_entered
 
 var opened = false
 
-onready var console_log = $ConsolePanel/VBoxContainer/ConsoleLog
+onready var console_log = $ConsolePanel/ConsoleLog
 onready var command_line = $ConsolePanel/CommandLine
 
 
