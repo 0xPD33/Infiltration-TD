@@ -76,7 +76,7 @@ func lose_live():
 		Global.lives -= 1
 		get_tree().call_group("HUD", "sync_lives_label")
 	elif Global.lives <= 0:
-		end_game()
+		print("You lost!")
 
 
 func tower_built(tower, cost):
@@ -165,8 +165,4 @@ func end_wave():
 func reload_game():
 	Global.reset()
 	get_tree().reload_current_scene()
-
-
-func end_game():
-	get_tree().quit()
 

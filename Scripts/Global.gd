@@ -1,5 +1,9 @@
 extends Node
 
+# Global scene variables
+
+var current_scene_name
+
 # Global game variables
 
 var cash : int = 300

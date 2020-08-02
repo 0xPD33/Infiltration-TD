@@ -1,5 +1,7 @@
 extends Control
 
+var coming_from_level = false
+
 var animations
 var screen_shakes
 var healthbar_enabled
@@ -14,6 +16,11 @@ onready var damage_numbers_checkbox = $MainContainer/SettingsTabContainer/Graphi
 
 
 func _ready():
+	if Global.current_scene_name != null:
+		coming_from_level = true
+	else:
+		coming_from_level = false
+	
 	match_global_values()
 	create_tooltips()
 
@@ -95,13 +102,25 @@ func apply_settings():
 		Global.damage_numbers_enabled = false
 
 
+func change_to_level():
+	var format_path = "res://Scenes/{Level}.tscn"
+	var actual_path = format_path.format({"Level": Global.current_scene_name}) 
+	get_tree().change_scene(actual_path)
+
+
 func _on_ApplyButton_pressed():
 	apply_settings()
-	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	if !coming_from_level:
+		get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	else:
+		change_to_level()
 
 
 func _on_CancelButton_pressed():
-	get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	if !coming_from_level:
+		get_tree().change_scene("res://Scenes/MainMenu.tscn")
+	else:
+		change_to_level()
 
 
 func _on_AnimationsOptionButton_item_selected(index):
