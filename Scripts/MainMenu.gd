@@ -15,7 +15,7 @@ func _on_SettingsButton_pressed():
 
 
 func _on_CreditsButton_pressed():
-	pass # go to credits screen
+	get_tree().change_scene("res://Scenes/Credits.tscn")
 
 
 func _on_QuitButton_pressed():
