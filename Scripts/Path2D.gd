@@ -50,8 +50,8 @@ func _on_WaveTimer_timeout():
 		if Global.wave >= 3:
 			$CreepUndeadSoldierTimer.start(creep_undead_soldiers_wait_time_per_wave[Global.wave])
 		
-		if Global.wave >= 4:
-			$CreepHiddenSoldierTimer.start(creep_hidden_soldiers_wait_time_per_wave[Global.wave])
+#		if Global.wave >= 4:
+#			$CreepHiddenSoldierTimer.start(creep_hidden_soldiers_wait_time_per_wave[Global.wave])
 		
 		if Global.wave >= 6:
 			$CreepGreenTankTimer.start(creep_green_tanks_wait_time_per_wave[Global.wave])

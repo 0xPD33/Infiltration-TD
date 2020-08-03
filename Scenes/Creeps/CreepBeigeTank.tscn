@@ -7,6 +7,7 @@
 extents = Vector2( 34.1357, 21.7818 )
 
 [node name="CreepBeigeTank" instance=ExtResource( 1 )]
+loop = false
 script = ExtResource( 2 )
 
 [node name="MainSprite" parent="Area2D" index="0"]
