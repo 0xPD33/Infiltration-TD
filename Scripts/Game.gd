@@ -16,6 +16,7 @@ var instance
 
 var building = false
 var wave_started = false
+var game_ended = false
 
 var cash_per_wave : int
 
@@ -157,6 +158,9 @@ func end_wave():
 		if Global.wave > 0:
 			add_cash_per_wave()
 		
+		if Global.wave == 15:
+			end_game()
+		
 		wave_started = false
 		fast_forward(false)
 		get_tree().call_group("HUD", "toggle_fast_forward_button")
@@ -165,4 +169,11 @@ func end_wave():
 func reload_game():
 	Global.reset()
 	get_tree().reload_current_scene()
+
+
+func end_game():
+	game_ended = true
+	get_tree().call_group("HUD", "show_won_label")
+	yield(get_tree().create_timer(3.0), "timeout")
+	get_tree().change_scene("res://Scenes/LevelSelector.tscn")
 

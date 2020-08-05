@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Scripts/HUD.gd" type="Script" id=1]
 [ext_resource path="res://Assets/PNG/Retina/towerDefense_tile249.png" type="Texture" id=2]
@@ -8,8 +8,14 @@
 [ext_resource path="res://Assets/PNG/Retina/towerDefense_tile226.png" type="Texture" id=6]
 [ext_resource path="res://Assets/TowerIcons/SniperTowerIcon.png" type="Texture" id=7]
 [ext_resource path="res://Assets/PNG/Retina/towerDefense_tile250.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Font/Gontserrat-Light.ttf" type="DynamicFontData" id=9]
 
-[sub_resource type="StyleBoxFlat" id=3]
+[sub_resource type="DynamicFont" id=1]
+size = 24
+use_filter = true
+font_data = ExtResource( 9 )
+
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_width_left = 3
 border_width_top = 3
@@ -17,7 +23,7 @@ border_width_right = 3
 border_width_bottom = 3
 border_blend = true
 
-[sub_resource type="StyleBoxFlat" id=2]
+[sub_resource type="StyleBoxFlat" id=3]
 bg_color = Color( 0.282353, 0.282353, 0.282353, 1 )
 border_width_left = 3
 border_width_top = 3
@@ -74,6 +80,24 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="WonLabel" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -54.5
+margin_top = -15.5
+margin_right = 54.5
+margin_bottom = 15.5
+custom_fonts/font = SubResource( 1 )
+text = "You won!"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="BuyTooltips" type="Control" parent="."]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -94,7 +118,7 @@ margin_left = 384.0
 margin_top = -256.0
 margin_right = 640.0
 margin_bottom = 256.0
-custom_styles/panel = SubResource( 3 )
+custom_styles/panel = SubResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -157,11 +181,11 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -50.0
+margin_left = -56.0
 margin_top = -50.0
-margin_right = 62.0
+margin_right = 56.0
 rect_min_size = Vector2( 112, 50 )
-custom_styles/panel = SubResource( 2 )
+custom_styles/panel = SubResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

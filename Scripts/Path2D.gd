@@ -40,7 +40,10 @@ func _ready():
 
 
 func start_wave():
-	$WaveTimer.start()
+	if Global.wave <= 15:
+		$WaveTimer.start()
+	else:
+		pass
 
 
 func _on_WaveTimer_timeout():

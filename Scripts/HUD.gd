@@ -64,6 +64,10 @@ func hud_toggle(is_visible):
 		visible = false
 
 
+func show_won_label():
+	$WonLabel.visible = true
+
+
 func _on_BuyButton1_pressed():
 	if Global.cash >= 150:
 		get_tree().call_group("Game", "buy_button_1")
